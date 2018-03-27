@@ -3851,11 +3851,13 @@ tbody.collapse.show {
 
 .nav-link {
   display: block;
+  font-style: italic;
   padding: 0.5rem 1rem;
 }
 
 .nav-link:hover, .nav-link:focus {
-  text-decoration: none;
+  /* text-decoration: none; */
+  text-decoration: underline
 }
 
 .nav-link.disabled {
