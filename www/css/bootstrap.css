@@ -3852,7 +3852,7 @@ tbody.collapse.show {
 .nav-link {
   display: block;
   font-style: italic;
-  padding: 0.5rem 1rem;
+  padding: 0.1rem .5rem;
 }
 
 .nav-link:hover, .nav-link:focus {

@@ -11,8 +11,7 @@ html {
 }
 
 body {
-  margin-top: 2%;
-  margin-bottom: 60px; /* Margin bottom by footer height */
+  margin-bottom: 40px; /* Margin bottom by footer height */
   background-image: url(../img/bg_index.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -21,12 +20,30 @@ body {
   font: 13/18px "Helvetica Neue", Helvetica, Arial, sans-serif
 }
 
+#index-logo {
+  width:90%;
+  height:90%;
+  /* padding-top: 85%; */
+}
+
+index-logo-c {
+  display: table-cell;
+  vertical-align: bottom;
+  bottom: 0;
+  float: none;
+}
+
 left {
   float: left;
 }
 
-right {
+.right {
   float: right;
+  background-color: var(--gray-light);
+  background-repeat: repeat-x;
+  background-size:contain;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .footer {
@@ -93,5 +110,5 @@ right {
   background-color: #fff;
   border-color: var(--green);
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(103, 152, 77, 0.25);
 }
