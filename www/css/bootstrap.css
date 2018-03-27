@@ -3857,7 +3857,7 @@ tbody.collapse.show {
 
 .nav-link:hover, .nav-link:focus {
   /* text-decoration: none; */
-  text-decoration: underline
+  text-decoration: underline;
 }
 
 .nav-link.disabled {
@@ -8890,7 +8890,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .text-muted {
-  color: #6c757d !important;
+  color: #5b5b5b !important;
 }
 
 .text-hide {
