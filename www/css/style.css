@@ -1,0 +1,68 @@
+:root {
+  --green: #67984d;
+  --gray-dark: #5b5b5b;
+  --white: #ffffff;
+  --gray-light: #b7b7b7;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.login !important{
+  position: absolute;
+    right: 0px;
+}
+
+body {
+  margin-bottom: 60px; /* Margin bottom by footer height */
+  background-image: url(../img/bg_index.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font: 13/18px "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px; /* Set the fixed height of the footer here */
+  line-height: 30px; /* Vertically center the text there */
+  background-color: var(--gray-light);
+}
+
+.btn-outline-login {
+  color: var(--green);
+  background-color: transparent;
+  background-image: none;
+  border-color: var(--green);
+}
+
+.btn-outline-login:hover {
+  color: #fff;
+  background-color: var(--green);
+  border-color: var(--green);
+}
+
+.btn-outline-login:focus, .btn-outline-login.focus {
+  box-shadow: 0 0 0 0.2rem rgba(103, 152, 77, 0.5);
+}
+
+.btn-outline-login.disabled, .btn-outline-login:disabled {
+  color: --green;
+  background-color: transparent;
+}
+
+.btn-outline-login:not(:disabled):not(.disabled):active, .btn-outline-login:not(:disabled):not(.disabled).active,
+.show > .btn-outline-login.dropdown-toggle {
+  color: #fff;
+  background-color: var(--green);
+  border-color: var(--green);
+}
+
+.btn-outline-login:not(:disabled):not(.disabled):active:focus, .btn-outline-login:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-login.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(103, 152, 77, 0.5);
+}
