@@ -1,0 +1,135 @@
+:root {
+  --green: #67984d;
+  --gray-dark: #5b5b5b;
+  --white: #ffffff;
+  --gray-light: #b7b7b7;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  max-height: 100%;
+}
+
+body {
+  margin-bottom: 40px; /* Margin bottom by footer height */
+  background-image: url(../img/index/bg_index.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font: 13/18px "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+
+#index-logo {
+  width:90%;
+  height:90%;
+  /* padding-top: 85%; */
+}
+
+#index-benefit {
+  width:100%;
+  height:100%;
+}
+
+/* #index-muscle {
+  width: %80;
+  height: auto;
+} */
+
+.info-index {
+  position: relative;
+  text-align: center;
+}
+
+.info-index-text {
+  position: relative;
+  text-align: center;
+  margin-right: 50%;
+}
+
+.index-logo-c {
+  vertical-align: bottom;
+  bottom: 0;
+  float: none;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+  background-color: var(--gray-light);
+  background-repeat: repeat-x;
+  background-size:contain;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.footer {
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  height: 40px; /* Set the fixed height of the footer here */
+  line-height: 40px; /* Vertically center the text there */
+  background-color: var(--gray-light);
+  color: var(--gray-dark);
+  font-size: 20px;
+}
+
+.btn-outline-login {
+  color: var(--green);
+  background-color: transparent;
+  background-image: none;
+  border-color: var(--green);
+}
+
+.btn-outline-login:hover {
+  color: #fff;
+  background-color: var(--green);
+  border-color: var(--green);
+}
+
+.btn-outline-login:focus, .btn-outline-login.focus {
+  box-shadow: 0 0 0 0.2rem rgba(103, 152, 77, 0.5);
+}
+
+.btn-outline-login.disabled, .btn-outline-login:disabled {
+  color: --green;
+  background-color: transparent;
+}
+
+.btn-outline-login:not(:disabled):not(.disabled):active, .btn-outline-login:not(:disabled):not(.disabled).active,
+.show > .btn-outline-login.dropdown-toggle {
+  color: #fff;
+  background-color: var(--green);
+  border-color: var(--green);
+}
+
+.btn-outline-login:not(:disabled):not(.disabled):active:focus, .btn-outline-login:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-login.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(103, 152, 77, 0.5);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--gray-dark);
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid var(--green);
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.form-control:focus {
+  color: var(--gray-dark);
+  background-color: #fff;
+  border-color: var(--green);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(103, 152, 77, 0.25);
+}

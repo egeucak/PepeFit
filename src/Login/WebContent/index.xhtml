@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>PepeFit Login</title>
+	<link rel="stylesheet" type="text/css" href="resource/css/style.css" />
+</h:head>
+<h:body>
+	<div id="login-panel">
+		<h:form>
+			<table>
+				<tr>
+					<td>Username :</td>
+					<td>
+						<h:inputText id="username" value="#{loginBean.username}" required="true" requiredMessage="*required" />
+						<h:message for="username" style="color:red" />
+					</td>
+				</tr>
+				<tr>
+					<td>Password :</td>
+					<td>
+						<h:inputSecret id="password" value="#{loginBean.password}" required="true" requiredMessage="*required"/>
+						<h:message for="password" style="color:red" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<h:commandButton value="Log in" action="admin/inner.xhtml" /> <!-- LoginBeandeki bilgileri database den kontrol edip kullanıcı türüne göre admin panele yönlendirecek sonra. Bean sınıfının içinde redirect yap. Action kısmına o bean içindeki yönlendirme methodunu at -->
+					</td>
+				</tr>
+			</table>
+		</h:form>
+	</div>
+</h:body>
+</html>
