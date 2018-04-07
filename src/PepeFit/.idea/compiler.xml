@@ -9,5 +9,8 @@
         <module name="PepeFit" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="PepeFit" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
 </project>
