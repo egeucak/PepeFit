@@ -13,7 +13,7 @@ html {
 
 body {
   margin-bottom: 40px; /* Margin bottom by footer height */
-  background-image: url(../img/index/bg_index.jpg);
+  background-image: url("../img/index/bg_index.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -97,7 +97,7 @@ body {
 }
 
 .btn-outline-login.disabled, .btn-outline-login:disabled {
-  color: --green;
+  color: var(--green);
   background-color: transparent;
 }
 

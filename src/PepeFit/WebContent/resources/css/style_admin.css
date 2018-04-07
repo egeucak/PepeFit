@@ -12,26 +12,36 @@ html {
 }
 
 body {
-    margin-bottom: 40px;
-    background:url('../img/bg.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center;
-    font: 13/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-bottom: 40px;
+  background:url('../img/bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font: 13/18px, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#gear {
+  content: url('../img/gear1.png');
+  width:40px;
+}
+
+#gear:hover{
+  content: url('../img/gear2.png');
 }
 
 #bartext{
- color: var(--white);
- margin-right: 30px;
- padding-right: 15px;
- font-size: 24px;
- position: relative;
- /*left: 30px;*/
+  color: var(--white);
+  margin-right: 30px;
+  padding-right: 15px;
+  font-size: 24px;
+  position: relative;
+  /*left: 30px;*/
 }
 
-.navbar-nav a:hover{
-	color:var(--green) !important;
+#bartext:hover {
+  color:var(--green) !important;
+  text-decoration: none;
 }
 
 .navbar-brand{
@@ -40,15 +50,10 @@ body {
   margin-left: -25px
 }
 
-.dropdown-toggle{
-  position: absolute;
-  left: 90%;
-}
-
 #dropdown{
-  position: fixed;
+  position: sticky;
   left: 90%;
-  top: 10%;
+  top: 3%;
   background-color: var(--gray-light);
 }
 
