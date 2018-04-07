@@ -1,0 +1,78 @@
+:root {
+  --green: #67984d;
+  --gray-dark: #5b5b5b;
+  --white: #ffffff;
+  --gray-light: #b7b7b7;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  max-height: 100%;
+}
+
+body {
+    margin-bottom: 40px;
+    background:url('../img/bg.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+    font: 13/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#bartext{
+ color: var(--white);
+ margin-right: 30px;
+ padding-right: 15px;
+ font-size: 24px;
+ position: relative;
+ /*left: 30px;*/
+}
+
+.navbar-nav a:hover{
+	color:var(--green) !important;
+}
+
+.navbar-brand{
+  position: absolute;
+  left: 50%;
+  margin-left: -25px
+}
+
+.dropdown-toggle{
+  position: absolute;
+  left: 90%;
+}
+
+#dropdown{
+  position: fixed;
+  left: 90%;
+  top: 50px;
+  background-color: var(--gray-light);
+}
+
+#dropdown-text{
+  position: relative;
+  color: var(--white);
+  left: 5px;
+}
+
+#bar{
+  padding: 0px 15%;
+  width: 100%;
+  height: 120%;
+  background-color: var(--gray-light);
+}
+
+.footer {
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  height: 40px; /* Set the fixed height of the footer here */
+  line-height: 40px; /* Vertically center the text there */
+  background-color: var(--gray-light);
+  color: var(--gray-dark);
+  font-size: 20px;
+}
