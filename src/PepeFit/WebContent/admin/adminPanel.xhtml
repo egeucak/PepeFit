@@ -11,15 +11,15 @@
 <h:body>
 	<h:form id="admin_panel_page">
 		<h:panelGrid columns="3">
-			<h:commandButton value="Add Member" action="addMember.xhtml" />
-			<h:commandButton value="Update Member" action="updateMember.xhtml" />
-			<h:commandButton value="Delete Member" action="deleteMember.xhtml" />
+			<h:commandButton value="Add Member" action="#{adminPanelBean.redirectAddMember()}" />
+			<h:commandButton value="Update Member" action="#{adminPanelBean.redirectUpdateMember()}" />
+			<h:commandButton value="Delete Member" action="#{adminPanelBean.redirectDeleteMember()}" />
 		</h:panelGrid>
 		<br />
 		<h:panelGrid columns="3">
-			<h:commandButton value="Add Trainer" action="addTrainer.xhtml" />
-			<h:commandButton value="Update Trainer" action="updateTrainer.xhtml" />
-			<h:commandButton value="Delete Trainer" action="deleteTrainer.xhtml" />
+			<h:commandButton value="Add Trainer" action="#{adminPanelBean.redirectAddTrainer()}" />
+			<h:commandButton value="Update Trainer" action="#{adminPanelBean.redirectUpdateTrainer()}" />
+			<h:commandButton value="Delete Trainer" action="#{adminPanelBean.redirectDeleteTrainer()}" />
 		</h:panelGrid>						
 	</h:form>
 </h:body>
