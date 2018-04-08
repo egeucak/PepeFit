@@ -65,7 +65,7 @@
 					</div>
 
 					<div class="col-auto">
-						<h:commandButton class="btn btn-outline-login" value="Log in" action="admin/inner.xhtml" /> <!-- Bu butona basılınca normalde DB'e gidip usarname'e göre sayfa yönlendirmesi yapması lazım -->
+						<h:commandButton class="btn btn-outline-login" value="Log in" action="#{loginBean.redirect()}" /> <!-- Bu butona basılınca normalde DB'e gidip usarname'e göre sayfa yönlendirmesi yapması lazım, şimdilik herhangi bir username ve password girse bile admin sayfasına yönlendiriyor -->
 					</div>
 				</div>
 			</h:form>
