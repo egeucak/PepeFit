@@ -4,8 +4,8 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class LoginBean {
-	
-	String username,password,accountType;
+
+	String username, password, accountType;
 
 	public String getUsername() {
 		return username;
@@ -30,9 +30,12 @@ public class LoginBean {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
-	
-	public String redirect() { /* bu kisma sonra if statements eklenerek accountType'a gore yonlendirme yapilacak */
-		
+
+	public String redirect() { /*
+								 * bu kisma sonra if statements eklenerek accountType'a gore yonlendirme
+								 * yapilacak
+								 */
+
 		return "admin/admin.xhtml?faces-redirect=true";
 	}
 }
