@@ -23,7 +23,7 @@ public class LoginBean {
 		this.password = password;
 	}
 
-	public String getAccountType() { /* DB'den gelen account type a göre sayfa yönlendirmesi yapmasý lazým */
+	public String getAccountType() { /* DB'den gelen account type a gï¿½re sayfa yï¿½nlendirmesi yapmasï¿½ lazï¿½m */
 		return accountType;
 	}
 
@@ -31,7 +31,7 @@ public class LoginBean {
 		this.accountType = accountType;
 	}
 	
-	public String redirect() { /* bu kýsýma sonra if statements eklenerek accountType'a göre yönlendirme yapýlacak */
+	public String redirect() { /* bu kisma sonra if statements eklenerek accountType'a gore yonlendirme yapilacak */
 		
 		return "admin/admin.xhtml?faces-redirect=true";
 	}
