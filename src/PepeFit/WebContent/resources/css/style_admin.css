@@ -47,7 +47,7 @@ body {
   /*left: 30px;*/
 }
 
-#bartext:hover {
+#bartext:hover, #bartext.active {
   border-bottom: 3px solid var(--green);
   color:var(--green) !important;
   text-decoration: none;
@@ -93,32 +93,67 @@ body {
   width: 50%;
 }
 .column {
-  
+
     padding: 10px;
 }
 
-.vertical-menu {
-  padding-top: 50%;
-  position: relative;
-  width: auto; /* Set a width if you like */
-  max-width: 60%;
-  min-height: 20rem;
+/*.vertical-menu {*/
+  /*padding-top: 50%;*/
+  /*position: relative;*/
+  /*width: auto; !* Set a width if you like *!*/
+  /*max-width: 60%;*/
+  /*min-height: 20rem;*/
+/*}*/
+
+/*.vertical-menu a {*/
+  /*background-color: var(--gray-light); !* Grey background color *!*/
+  /*color: white; !* Black text color *!*/
+  /*display: block; !* Make the links appear below each other *!*/
+  /*padding: 8% 12%; !* Add some padding *!*/
+  /*text-decoration: none; !* Remove underline from links *!*/
+/*}*/
+
+/*.vertical-menu a:hover,active {*/
+  /*color:var(--green) !important;*/
+  /*text-decoration: underline;*/
+/*}*/
+
+/*.vertical-menu a.active {*/
+  /*color:var(--green) !important;*/
+  /*text-decoration: underline;*/
+/*}*/
+
+.grey-bg {
+    background-color: var(--gray-light);
 }
 
-.vertical-menu a {
-  background-color: var(--gray-light); /* Grey background color */
-  color: white; /* Black text color */
-  display: block; /* Make the links appear below each other */
-  padding: 8% 12%; /* Add some padding */
-  text-decoration: none; /* Remove underline from links */
+.left-menu {
+    border-radius: 0px 20px 20px 0px;
+    width: 220%;
+    padding-top: 25%;
+    position: relative;
+    /*left: -400px;*/
+    min-height: 250%;
+    color: var(--white) !important; /* White text color */
+    font-size: 20px;
+    padding-right: 80%;
 }
 
-.vertical-menu a:hover,active {
-  color:var(--green) !important;
-  text-decoration: underline;
+.left-menu a, .left-menu ul {
+    color: var(--white) !important; /* White text color */
 }
 
-.vertical-menu a.active {
-  color:var(--green) !important;
-  text-decoration: underline;
+.left-menu li.active{
+    color:var(--green) !important;
+    text-decoration: underline;
+}
+
+.left-menu li:hover {
+    color:var(--green) !important;
+    text-decoration: underline;
+}
+
+.left-menu ul {
+    padding-left: 10%;
+    padding-top: 10%;
 }
