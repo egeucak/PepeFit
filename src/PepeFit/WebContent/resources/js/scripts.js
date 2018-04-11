@@ -21,13 +21,21 @@ function showDate() {
 }
 
 function changeContainer(clickedOn) {
-    var containerArray = ["addMember", "updateMember", "addTrainer", "updateTrainer"];
-    for (var i = 0; i< containerArray.length; i++){
-        console.log(containerArray[i]);
-        document.getElementById(containerArray[i].concat("List")).classList.remove("active");
-        document.getElementById(containerArray[i]).style.display = "none";
+    var containerArrayAdd = ["addMember", "addTrainer"];
+    var containerArrayUpdate = ["updateMember", "updateTrainer"];
+    for (var i = 0; i< containerArrayAdd.length; i++){
+        // console.log(containerArray[i]);
+        document.getElementById(containerArrayAdd[i].concat("List")).classList.remove("active");
+        document.getElementById(containerArrayAdd[i]).style.display = "none";
+        document.getElementById(containerArrayUpdate[i].concat("List")).classList.remove("active");
+        document.getElementById(containerArrayUpdate[i]).style.display = "none";
+        document.getElementById(containerArrayUpdate[i].concat("Form")).style.display = "none";
     }
     document.getElementById(clickedOn).style.display = "contents";
     document.getElementById(clickedOn.concat("List")).classList.add("active");
     console.log(clickedOn);
+}
+
+function updateSearch(idUpdate) {
+    document.getElementById(idUpdate).style.display = "contents";
 }
