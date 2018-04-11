@@ -47,7 +47,7 @@ body {
   /*left: 30px;*/
 }
 
-@media (max-width: 900px) {
+/*@media (max-width: 900px) {
   #bartext:hover, #bartext.active {
     padding-bottom: 5%;
   }
@@ -63,7 +63,7 @@ body {
   #bartext:hover, #bartext.active {
     padding-bottom: 10%;
   }
-}
+}*/
 
 #bartext:hover, #bartext.active {
   border-bottom: 3px solid var(--green);
@@ -141,7 +141,7 @@ body {
   /*text-decoration: underline;*/
 /*}*/
 
-.container-fluid { 
+.container-fluid, .container { 
   padding: 0px;
 }
 
@@ -154,7 +154,7 @@ body {
     max-width: 130%;
     position: relative;
     /*left: -400px;*/
-    min-height: 320%;
+    min-height: 100%;
     color: var(--white) !important; /* White text color */
     font-size: 20px;
     text-decoration: none;
@@ -162,10 +162,14 @@ body {
 
 .left-menu a, .left-menu ul{
     color: var(--white) !important; /* White text color */
-    /*text-decoration: none !important;*/
 }
 
-.left-menu a:hover, .left-menu a.active{
+.left-menu a.active{
+    color:var(--green) !important;
+    text-decoration: underline;
+}
+
+.left-menu a:hover {
     color:var(--green) !important;
     text-decoration: underline;
 }
@@ -184,12 +188,13 @@ body {
 
 .btn-group-sm{
   padding:0  !important;
+  max-width: 100% !important
 }
 
 .btn {
   background-color: white;
   font-size: 0.875rem;
-  line-height: 1.4rem;
+  line-height: 1.4;
   border-radius: 0.4rem;
   border-color: var(--green);
   white-space:pre-wrap !important;
@@ -205,10 +210,11 @@ body {
 #gender-button  {
   color: var(--gray-dark);
   font-size: 10px;
+  line-height: 140%;
 }
 
 #gender-button.active{
-  background-color: var(--green)!important;
+  background-color: var(--green) !important;
 }
 
 #func-button{
