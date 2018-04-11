@@ -222,7 +222,18 @@
                 <a id="block-func">Update Trainer</a>
                 <a class="col-1" style="padding-left: 8%; color:var(--gray-dark);">Registration Date: <script type="text/javascript">showDate();</script></a>
             </div>
-            <h:form id="updateTrainerForm">
+            <h:form>
+                <div class="form-row">
+                    <div class="col-3" style="padding-top: 2%; padding-bottom: 2%;">
+                        <input type="text" class="form-control" placeholder="ID Number" required="required"></input>
+                    </div>
+
+                    <div class="col-3" style="padding-top: 2%; padding-bottom: 2%;">
+                        <button type="" class="btn" id="func-button" onclick="updateSearch('updateTrainerForm')" style="font-size: 15px; margin-top: 1%;">Search Member</button>
+                    </div>
+                </div>
+            </h:form>
+            <h:form id="updateTrainerForm" style="display: none">
                 <div class="form-row" style="padding-top: 5%; padding-bottom: 3%;">
                     <div class="col-3">
                         <input type="text" class="form-control" placeholder="First name" required="required"></input>

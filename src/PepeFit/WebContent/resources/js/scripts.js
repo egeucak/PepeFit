@@ -32,6 +32,7 @@ function changeContainer(clickedOn) {
         document.getElementById(containerArrayUpdate[i].concat("Form")).style.display = "none";
     }
     document.getElementById(clickedOn).style.display = "contents";
+    if (clickedOn )
     document.getElementById(clickedOn.concat("List")).classList.add("active");
     console.log(clickedOn);
 }
