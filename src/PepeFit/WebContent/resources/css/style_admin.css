@@ -123,23 +123,26 @@ body {
   /*text-decoration: underline;*/
 /*}*/
 
+.container-fluid { 
+  padding: 0px;
+}
+
 .grey-bg {
     background-color: var(--gray-light);
 }
 
 .left-menu {
-    border-radius: 0px 20px 20px 0px;
-    width: 220%;
-    padding-top: 25%;
+    border-radius: 0px 20px 20px 0px; /* top, right, bottom, left */
+    max-width: 130%;
     position: relative;
     /*left: -400px;*/
-    min-height: 250%;
+    min-height: 320%;
     color: var(--white) !important; /* White text color */
     font-size: 20px;
-    padding-right: 80%;
+   
 }
 
-.left-menu a, .left-menu ul {
+.left-menu a, .left-menu ul{
     color: var(--white) !important; /* White text color */
 }
 
@@ -156,4 +159,52 @@ body {
 .left-menu ul {
     padding-left: 10%;
     padding-top: 10%;
+}
+
+#block-func{
+  padding-right: 20%;
+  font-size: 20px;
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.btn-group-sm{
+  padding:0  !important;
+}
+
+.btn {
+  background-color: white;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  border-radius: 0.4rem;
+  border-color: var(--green);
+  white-space:pre-wrap !important;
+  word-break: keep-all;
+}
+
+.btn:active, .btn:focus {
+  background-color: var(--green) !important;
+  outline: none !important;
+  box-shadow: none;
+}
+
+#gender-button  {
+  color: var(--gray-dark);
+  font-size: 10px;
+  line-height: 140%;
+}
+
+#gender-button.active{
+  background-color: var(--green);
+}
+
+#func-button{
+  background-color: var(--green);
+  color: white;
+  line-height: 1.4;
+  border-radius: 0.4rem;
+  border-color: var(--green);
+  white-space:pre-wrap !important;
+  word-break: keep-all;
+  width: 100%;
 }
