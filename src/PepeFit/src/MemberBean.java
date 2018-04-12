@@ -1,4 +1,6 @@
 import java.sql.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -7,8 +9,9 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class MemberBean {
 	
-	String firstName, lastName, eMail, phoneNumber, address, idNumber, gender;
-	Date birthDate;
+	private String firstName, lastName, eMail, phoneNumber, address, idNumber, gender;
+	private Date birthDate;
+	private static Map<String,Object> genders = new LinkedHashMap<String, Object>();
 
 	public String getFirstName() {
 		return firstName;
@@ -84,6 +87,27 @@ public class MemberBean {
 		else if(gender.endsWith("NotSpecified")) {
 			setGender("NotSpecified");
 		}
+	}
+	
+	static {
+		genders.put("Male", "Male");
+		genders.put("Female", "Female");
+		genders.put("NotSpecified", "NotSpecified");
+	}
+	
+	public Map<String,Object> fillGender() {
+		return genders;
+	}
+	
+	public void printAll() {
+		System.out.println(this.firstName);
+		System.out.println(this.lastName);
+		System.out.println(this.eMail);
+		System.out.println(this.phoneNumber);
+		System.out.println(this.address);
+		System.out.println(this.idNumber);
+		System.out.println(this.gender);
+		
 	}
 
 }
