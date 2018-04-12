@@ -153,10 +153,11 @@
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-3">
 <!--                                     <input type="text" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"/> -->
-                                    <h:inputText type="number" class="form-control" a:placeholder="ID Number" required="required" value="#{memberBean.idNumber}" />
+                                    <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="required" value="#{memberBean.idNumber}" />
                                 </div>
                                 <div class="col-3">
-                                    <button type="button" class="btn" id="func-button" onclick="updateSearch('updateMemberForm')" style="font-size: 15px; margin-top: 1%;">Search Member</button>
+<!--                                     <button type="button" class="btn" id="func-button" onclick="updateSearch('updateMemberForm')" style="font-size: 15px; margin-top: 1%;">Search Member</button> -->
+									<h:commandButton value="Search Member" type="button" styleClass="btn func-button" id="func-button" onclick="updateSearch('updateMemberForm')" />
                                 </div>
                             </div>
                         </h:form>
