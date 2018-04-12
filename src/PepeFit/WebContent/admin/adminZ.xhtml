@@ -78,19 +78,24 @@
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-3">
 <!--                                 	<input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
-                                	<h:inputText type="text" class="form-control" a:placeholder="First name" required="required" value="#{memberBean.firstName}" />
+                                	<h:inputText type="text" class="form-control" a:placeholder="First name" required="true" id="firstName" value="#{memberBean.firstName}" requiredMessage="* Value is required"/>
+                                	<h:message for="firstName" style="color:red"/>
                                 </div>
                                 <div class="col-3">
 <!--                                 	<input type="text" class="form-control" placeholder="Last name" required="required" value="#{memberBean.lastName}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="Last name" required="required" value="#{memberBean.lastName}" />
+                                    <h:inputText type="text" class="form-control" a:placeholder="Last name" required="true" id="lastName" value="#{memberBean.lastName}" requiredMessage="* Value is required"/>
+                                	<h:message for="lastName" style="color:red"/>
                                 </div>
                                 <div class="col-3">
-<!--                                 	<input type="text" class="form-control" placeholder="Email" required="required" value="#{memberBean.eMail}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="Email" required="required" value="#{memberBean.eMail}" />
+<!--                                 	<input type="text" class="form-control" placeholder="Email" required="true" value="#{memberBean.eMail}"/> -->
+                                    <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail" value="#{memberBean.eMail}" requiredMessage="* Value is required"/>
+                                	<h:message for="eMail" style="color:red"/>
                                 </div>
                                 <div class="col-3">
 <!--                                 	<input type="text" class="form-control bfh-phone" value="#{memberBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required" /> -->
-                                    <h:inputText type="text" class="form-control bfh-phone" value="#{memberBean.phoneNumber}" a:data-format="(ddd) ddd-dddd" required="required" />
+                                    <h:inputText type="text" class="form-control bfh-phone" a:data-format="(ddd) ddd-dddd" required="true" id="phoneNumber" value="#{memberBean.phoneNumber}" requiredMessage="* Value is required" />
+                                	<!-- buranın .js sinden direkt ( dolu olarak geliyor hiçbir zaman boş olmuyor  -->
+                                	<h:message for="phoneNumber" style="color:red"/>
                                 </div>
                             </div>
 
@@ -98,16 +103,20 @@
                                 <div class="col-6">
                                     <div class="input-group">
 <!--                                     	<textarea cols="" class="form-control" rows="3" placeholder="Address" required="required" value="#{memberBean.address}"/> -->
-                                        <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="required" value="#{memberBean.address}" />
+                                        <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address" value="#{memberBean.address}" requiredMessage="* Value is required"/>
+                                    	<!-- buranın * Value is required kısmı yanda gözüküyor alta alınması gerek -->
+                                    	<h:message for="address" style="color:red" />
                                     </div>
                                 </div>
                                 <div class="col-3">
 <!--                                     <input type="number" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"/> -->
 <!--                                     <button type="submit" class="btn" id="func-button" style="font-size: 15px; margin-top: 10%;">Add Member</button>                                 -->                               
-                                    <h:inputText type="number" class="form-control" a:placeholder="ID Number" required="required" value="#{memberBean.idNumber}" />
+                                    <h:inputText type="number" class="form-control" a:placeholder="ID Number" required="true" id="idNumber" value="#{memberBean.idNumber}" requiredMessage="* Value is required"/>
+                                    <h:message for="idNumber" style="color:red"/>
+                                    
                                     <div style="font-size: 15px; margin-top: 10%;">
                                     	<!-- Add Member rengi yeşil olmuyor -->
-                                    	<h:commandButton value="Add Member" type="submit" styleClass="btn func-button" /> <!--  add action later this button -->
+                                    	<h:commandButton value="Add Member" styleClass="btn func-button" /> <!--  add action later this button -->
                                     </div>
                                     <h:outputText value="#{memberBean.printAll()}" />
                                 </div>
@@ -115,9 +124,10 @@
                                     <div >
                                     <!-- Radio button görünümü sorun çıkardı h:selectOneRadio için -->
 <!--                                        <label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male<input type="radio" name="options"></input></label><label class="btn active" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified<input type="radio" name="options"></input></label><label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female<input type="radio" name="options"></input></label> -->
-                                    	<h:selectOneRadio value="#{memberBean.gender}">
+                                    	<h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender" requiredMessage="* Value is required">
                                     		<f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
-                                    	</h:selectOneRadio>                                    	
+                                    	</h:selectOneRadio> 
+                                    	<h:message for="gender" style="color:red"/>                                   	
                                     </div>
                                 </div>
                             </div>

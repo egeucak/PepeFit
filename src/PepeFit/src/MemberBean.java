@@ -100,13 +100,13 @@ public class MemberBean {
 	}
 	
 	public void printAll() {
-		System.out.println(this.firstName);
-		System.out.println(this.lastName);
-		System.out.println(this.eMail);
-		System.out.println(this.phoneNumber);
-		System.out.println(this.address);
-		System.out.println(this.idNumber);
-		System.out.println(this.gender);
+		System.out.println(getFirstName());
+		System.out.println(getLastName());
+		System.out.println(geteMail());
+		System.out.println(getPhoneNumber());
+		System.out.println(getAddress());
+		System.out.println(getIdNumber());
+		System.out.println(getGender());
 		
 	}
 
