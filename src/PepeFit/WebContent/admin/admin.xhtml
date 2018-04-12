@@ -100,10 +100,8 @@
                                     <button type="submit" class="btn" id="func-button" style="font-size: 15px; margin-top: 10%;">Add Member</button>
                                 </div>
                                 <div class="col-3">
-                                    <div class="btn-group btn-group-sm" role="group" style="background-color: var(--gray-light)">
-                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male</button>
-                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified</button>
-                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female</button>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                       <label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male<input type="radio" name="options"></input></label><label class="btn active" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified<input type="radio" name="options"></input></label><label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female<input type="radio" name="options"></input></label>
                                     </div>
                                 </div>
                             </div>
@@ -162,10 +160,8 @@
                                     <button type="submit" class="btn" id="func-button" style="font-size: 15px; margin-top: 10%;">Update Member</button>
                                 </div>
                                 <div class="col-3">
-                                    <div class="btn-group btn-group-sm" role="group" style="background-color: var(--gray-light)">
-                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male</button>
-                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified</button>
-                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female</button>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                       <label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male<input type="radio" name="options"></input></label><label class="btn active" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified<input type="radio" name="options"></input></label><label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female<input type="radio" name="options"></input></label>
                                     </div>
                                 </div>
                             </div>
@@ -213,10 +209,8 @@
                                     <button type="submit" class="btn" id="func-button" style="font-size: 15px; margin-top: 10%;">Add Trainer</button>
                                 </div>
                                 <div class="col-3">
-                                    <div class="btn-group btn-group-sm" role="group" style="background-color: var(--gray-light)">
-                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Male)}">Male</button>
-                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(NotSpecified)}">Not Specified</button>
-                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Female)}">Female</button>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                       <label class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Male)}">Male<input type="radio" name="options"></input></label><label class="btn active" id="gender-button" onclick="#{trainerBean.editActionGender(NotSpecified)}">Not Specified<input type="radio" name="options"></input></label><label class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Female)}">Female<input type="radio" name="options"></input></label>
                                     </div>
                                 </div>
                             </div>
@@ -274,10 +268,8 @@
                                     <button type="submit" class="btn" id="func-button" style="font-size: 15px; margin-top: 10%;">Update Trainer</button>
                                 </div>
                                 <div class="col-3">
-                                    <div class="btn-group btn-group-sm" role="group" style="background-color: var(--gray-light)">
-                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Male)}">Male</button>
-                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(NotSpecified)}">Not Specified</button>
-                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Female)}">Female</button>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                       <label class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Male)}">Male<input type="radio" name="options"></input></label><label class="btn active" id="gender-button" onclick="#{trainerBean.editActionGender(NotSpecified)}">Not Specified<input type="radio" name="options"></input></label><label class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Female)}">Female<input type="radio" name="options"></input></label>
                                     </div>
                                 </div>
                             </div>
