@@ -215,6 +215,9 @@ body {
 }
 
 #gender-button  {
+  white-space:pre-wrap !important;
+  word-break: keep-all !important;
+  border-radius: 0%;
   color: var(--gray-dark);
   font-size: 10px;
   line-height: 140%;
@@ -226,7 +229,7 @@ body {
   box-shadow: none;
 }
 
-#func-button{
+.btn.func-button{ /* changed from #func-button for jsf */
   background-color: var(--green);
   color: white;
   line-height: 1.4;
