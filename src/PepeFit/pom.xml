@@ -55,6 +55,14 @@
             <artifactId>mysql-socket-factory</artifactId>
             <version>1.0.5</version>
         </dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.0</version>
+		</dependency>
 	<!-- ______________________________________________________ -->
 	  <!--<properties>-->
         <!--&lt;!&ndash; INSTANCE_CONNECTION_NAME from Cloud Console > SQL > Instance Details > Properties-->

@@ -29,7 +29,7 @@ function changeContainer(clickedOn) {
         document.getElementById(containerArrayAdd[i]).style.display = "none";
         document.getElementById(containerArrayUpdate[i].concat("List")).classList.remove("active");
         document.getElementById(containerArrayUpdate[i]).style.display = "none";
-        document.getElementById(containerArrayUpdate[i].concat("Form")).style.display = "none";
+        // document.getElementById(containerArrayUpdate[i].concat("Form")).style.display = "none";
     }
     document.getElementById(clickedOn).style.display = "contents";
     if (clickedOn )

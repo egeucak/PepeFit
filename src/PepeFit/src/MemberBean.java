@@ -1,3 +1,7 @@
+
+
+import org.primefaces.context.RequestContext;
+
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -147,7 +151,7 @@ public class MemberBean {
 			try {
 				DatabaseBean database = new DatabaseBean();
 				ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select * from Member where tc=?",-1,this.idNumber);
-				if(results == null){
+				if(results.size()==0){
 					System.out.println("THERE IS NO PERSON WITH ID : "+ this.idNumber);
 				}else{
 					setFirstName(results.get(0).get("NAME").toString());
@@ -161,6 +165,8 @@ public class MemberBean {
 			System.out.println("FUCKK");
 		}
 
+		setNull();
+		RequestContext.getCurrentInstance().execute("updateSearch('updateMember')");
 	return "a";
 
 	}
