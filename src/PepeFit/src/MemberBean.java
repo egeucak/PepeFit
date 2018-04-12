@@ -11,13 +11,14 @@ import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.xml.stream.events.StartDocument;
 
 @ManagedBean
 @RequestScoped
 public class MemberBean {
 
 	private String firstName, lastName, eMail, phoneNumber, address, idNumber, gender;
-	private Date birthDate;
+	private Date birthDate,registirationDate;
 	private static Map<String,Object> genders = new LinkedHashMap<String, Object>();
 
 	public String getFirstName() {
@@ -46,6 +47,10 @@ public class MemberBean {
 
 	public String getPhoneNumber() {
 		return phoneNumber;
+	}
+
+	public Date getRegistirationDate(){
+		return this.registirationDate;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
@@ -82,6 +87,10 @@ public class MemberBean {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public void setRegistirationDate(Date registirationDate){
+		this.registirationDate = registirationDate;
 	}
 
 	public void editActionGender(String gender) {
@@ -144,7 +153,7 @@ public class MemberBean {
 
 	}
 
-	public String updateMemberDB() {
+	public String showMemberDB() {
 
 		if(this.idNumber != null){
 			System.out.println(this.idNumber + " YESSSSS");
@@ -155,20 +164,39 @@ public class MemberBean {
 					System.out.println("THERE IS NO PERSON WITH ID : "+ this.idNumber);
 				}else{
 					setFirstName(results.get(0).get("NAME").toString());
+					setLastName(results.get(0).get("SURNAME").toString());
+					setGender(results.get(0).get("GENDER").toString());
+					setPhoneNumber(results.get(0).get("PHONE").toString());
+					setBirthDate((Date)results.get(0).get("BDATE"));
+					seteMail(results.get(0).get("EMAIL").toString());
+					setAddress(results.get(0).get("ADRESS").toString());
+					setRegistirationDate((Date)results.get(0).get("RDATE"));
 				}
 
 			} catch (SQLException e) {
-				System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
+				System.out.println("ERROR OCCURED WHILE SHOWING MEMBER " + e.getMessage());
 
 			}
 		}else{
 			System.out.println("FUCKK");
 		}
 
-		setNull();
+
 		RequestContext.getCurrentInstance().execute("updateSearch('updateMember')");
-	return "a";
+		return "a";
 
 	}
 
+	public void updateMemberDB(){
+
+
+
+		try{
+			DatabaseBean database = new DatabaseBean();
+			database.execute("UPDATE Member SET name=?,surname=?,gender=?,phone=?,bDate=?,email=?,adress=?,rDate=? where tc=?",1,
+					this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
+		}catch(SQLException e){
+			System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
+		}
+	}
 }

@@ -158,8 +158,8 @@
                                 </div>
                                 <div class="col-3">
 <!--                                     <button type="button" class="btn" id="func-button" onclick="updateSearch('updateMemberForm')" style="font-size: 15px; margin-top: 1%;">Search Member</button> -->
-                                    <h:commandButton value="Search Member"  styleClass="btn func-button" id="func-button" actionListener="#{memberBean.updateMemberDB()}" >
-                                        <f:ajax execute="@form" render="@none"  onevent="updateSearch('updateMemberForm')"  />
+                                    <h:commandButton value="Search Member"  styleClass="btn func-button" id="func-button" actionListener="#{memberBean.showMemberDB()}" >
+                                        <!--<f:ajax execute="@form" render="@none"  onevent="updateSearch('updateMemberForm')"  />-->
                                     </h:commandButton>
 
                                 </div>
@@ -199,7 +199,7 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <h:inputText type="number" class="form-control" a:placeholder="ID Number" required="true" id="idNumber_2" value="#{memberBean.idNumber}" requiredMessage="* Value is required"/>
+                                    <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber_2" value="#{memberBean.idNumber}" requiredMessage="* Value is required"/>
                                     <h:message for="idNumber_2" style="color:red"/>
                                     <div style="font-size: 15px; margin-top: 10%;">
                                         <!-- Add Member rengi yeşil olmuyor -->
