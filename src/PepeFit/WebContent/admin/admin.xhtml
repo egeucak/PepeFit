@@ -178,9 +178,13 @@
                 <div class="row">
                     <!--<div class="col-3"></div>-->
                     <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
-                        <div id="main-block-title"  style="padding-top: 2.5%;">
-                            <a id="block-func">Add Trainer</a>
-                            <a class="col-1" style="padding-left: 8%; color:var(--gray-dark);">Registration Date: <script type="text/javascript">showDate();</script></a>
+                        <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
+                            <div class="col-4">
+                                <a id="block-func">Add Trainer</a>
+                            </div>
+                            <div class="col-4">
+                                <a class="col-1" style="color:var(--gray-dark);">Registration Date: <script type="text/javascript">showDate();</script></a>
+                            </div>
                         </div>
                         <h:form>
                             <div class="form-row" style="padding-bottom: 3%;">
@@ -239,7 +243,7 @@
                                     <input type="text" class="form-control" placeholder="ID Number" required="required"></input>
                                 </div>
                                 <div class="col-3">
-                                    <button type="" class="btn" id="func-button" onclick="updateSearch('updateTrainerForm')" style="font-size: 15px; margin-top: 1%;">Update Trainer</button>
+                                    <button type="" class="btn" id="func-button" onclick="updateSearch('updateTrainerForm')" style="font-size: 15px; margin-top: 1%;">Search Trainer</button>
                                 </div>
                             </div>
                         </h:form>
