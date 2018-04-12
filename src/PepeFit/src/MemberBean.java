@@ -91,8 +91,8 @@ public class MemberBean {
 	
 	static {
 		genders.put("Male", "Male");
-		genders.put("Female", "Female");
 		genders.put("NotSpecified", "NotSpecified");
+		genders.put("Female", "Female");
 	}
 	
 	public Map<String,Object> fillGender() {
