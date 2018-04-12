@@ -243,3 +243,8 @@ body {
 .form-control{
   width:100% !important;
 }
+
+.form-control:disabled{
+  background-color: var(--gray-dark) !important;
+  color: white !important;
+}

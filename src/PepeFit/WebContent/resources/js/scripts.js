@@ -23,6 +23,7 @@ function showDate() {
 function changeContainer(clickedOn) {
     var containerArrayAdd = ["addMember", "addTrainer"];
     var containerArrayUpdate = ["updateMember", "updateTrainer"];
+    var containerArrayDelete = ["delete"];
     for (var i = 0; i< containerArrayAdd.length; i++){
         // console.log(containerArray[i]);
         document.getElementById(containerArrayAdd[i].concat("List")).classList.remove("active");
@@ -31,6 +32,8 @@ function changeContainer(clickedOn) {
         document.getElementById(containerArrayUpdate[i]).style.display = "none";
         // document.getElementById(containerArrayUpdate[i].concat("Form")).style.display = "none";
     }
+    document.getElementById(containerArrayDelete[0].concat("List")).classList.remove("active");
+    document.getElementById(containerArrayDelete[0]).style.display = "none";
     document.getElementById(clickedOn).style.display = "contents";
     if (clickedOn )
     document.getElementById(clickedOn.concat("List")).classList.add("active");
