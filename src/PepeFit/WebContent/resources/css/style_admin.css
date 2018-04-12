@@ -245,6 +245,6 @@ body {
 }
 
 .form-control:disabled{
-  background-color: var(--gray-dark) !important;
+  background-color: var(--gray-dark) !important; /*xd*/
   color: white !important;
 }

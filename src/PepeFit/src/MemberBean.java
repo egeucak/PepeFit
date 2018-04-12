@@ -182,7 +182,7 @@ public class MemberBean {
 		}
 
 
-		RequestContext.getCurrentInstance().execute("updateSearch('updateMember')");
+
 		return "a";
 
 	}
