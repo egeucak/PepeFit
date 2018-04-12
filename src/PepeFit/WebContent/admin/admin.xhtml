@@ -76,34 +76,34 @@
                         <h:form>
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="First name" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="Last name" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="Last name" required="required" value="#{memberBean.lastName}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="Email" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="Email" required="required" value="#{memberBean.eMail}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control bfh-phone" value="53" data-format="(ddd) ddd-dddd" required="required"/>
+                                    <input type="text" class="form-control bfh-phone" value="#{memberBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required" ></input>
                                 </div>
                             </div>
 
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-6">
                                     <div class="input-group">
-                                        <textarea class="form-control" rows="3" placeholder="Address" required="required"></textarea>
+                                        <textarea class="form-control" rows="3" placeholder="Address" required="required" value="#{memberBean.address}"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <input type="number" class="form-control" placeholder="ID Number" required="required"></input>
+                                    <input type="number" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"></input>
                                     <button type="submit" class="btn" id="func-button" style="font-size: 15px; margin-top: 10%;">Add Member</button>
                                 </div>
                                 <div class="col-3">
                                     <div class="btn-group btn-group-sm" role="group" style="background-color: var(--gray-light)">
-                                        <button type="button" class="btn" id="gender-button" >Male</button>
-                                        <button type="button" class="btn" id="gender-button" >Not Specified</button>
-                                        <button type="button" class="btn" id="gender-button" >Female</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female</button>
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                         <h:form>
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="ID Number" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"></input>
                                 </div>
                                 <div class="col-3">
                                     <button type="button" class="btn" id="func-button" onclick="updateSearch('updateMemberForm')" style="font-size: 15px; margin-top: 1%;">Search Member</button>
@@ -138,34 +138,34 @@
                         <h:form id="updateMemberForm" style="display: none">
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="First name" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="Last name" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="Last name" required="required" value="#{memberBean.lastName}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="Email" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="Email" required="required" value="#{memberBean.eMail}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control bfh-phone" value="53" data-format="(ddd) ddd-dddd" required="required"/>
+                                    <input type="text" class="form-control bfh-phone" value="#{memberBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required" ></input>
                                 </div>
                             </div>
 
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-6">
                                     <div class="input-group">
-                                        <textarea class="form-control" rows="3" placeholder="Address" required="required"></textarea>
+                                        <textarea class="form-control" rows="3" placeholder="Address" required="required" value="#{memberBean.address}"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <input type="number" class="form-control" placeholder="ID Number" required="required"></input>
+                                    <input type="number" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"></input>
                                     <button type="submit" class="btn" id="func-button" style="font-size: 15px; margin-top: 10%;">Update Member</button>
                                 </div>
                                 <div class="col-3">
                                     <div class="btn-group btn-group-sm" role="group" style="background-color: var(--gray-light)">
-                                        <button type="button" class="btn" id="gender-button" >Male</button>
-                                        <button type="button" class="btn" id="gender-button" >Not Specified</button>
-                                        <button type="button" class="btn" id="gender-button" >Female</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female</button>
                                     </div>
                                 </div>
                             </div>
@@ -189,34 +189,34 @@
                         <h:form>
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="First name" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="First name" required="required" value="#{trainerBean.firstName}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="Last name" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="Last name" required="required" value="#{trainerBean.lastName}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="Email" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="Email" required="required" value="#{trainerBean.eMail}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control bfh-phone" value="53" data-format="(ddd) ddd-dddd" required="required"/>
+                                    <input type="text" class="form-control bfh-phone" value="#{trainerBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required"></input>
                                 </div>
                             </div>
 
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-6">
                                     <div class="input-group">
-                                        <textarea class="form-control" rows="3" placeholder="Address" required="required"></textarea>
+                                        <textarea class="form-control" rows="3" placeholder="Address" required="required" value="#{trainerBean.address}"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <input type="number" class="form-control" placeholder="ID Number" required="required"></input>
+                                    <input type="number" class="form-control" placeholder="ID Number" required="required" value="#{trainerBean.idNumber}"></input>
                                     <button type="submit" class="btn" id="func-button" style="font-size: 15px; margin-top: 10%;">Add Trainer</button>
                                 </div>
                                 <div class="col-3">
                                     <div class="btn-group btn-group-sm" role="group" style="background-color: var(--gray-light)">
-                                        <button type="button" class="btn" id="gender-button" >Male</button>
-                                        <button type="button" class="btn" id="gender-button" >Not Specified</button>
-                                        <button type="button" class="btn" id="gender-button" >Female</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Male)}">Male</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(NotSpecified)}">Not Specified</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Female)}">Female</button>
                                     </div>
                                 </div>
                             </div>
@@ -240,7 +240,7 @@
                         <h:form>
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="ID Number" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="ID Number" required="required" value="#{trainerBean.idNumber}"></input>
                                 </div>
                                 <div class="col-3">
                                     <button type="button" class="btn" id="func-button" onclick="updateSearch('updateTrainerForm')" style="font-size: 15px; margin-top: 1%;">Search Trainer</button>
@@ -250,34 +250,34 @@
                         <h:form id="updateTrainerForm" style="display: none">
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="First name" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="First name" required="required" value="#{trainerBean.firstName}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="Last name" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="Last name" required="required" value="#{trainerBean.lastName}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control" placeholder="Email" required="required"></input>
+                                    <input type="text" class="form-control" placeholder="Email" required="required" value="#{trainerBean.eMail}"></input>
                                 </div>
                                 <div class="col-3">
-                                    <input type="text" class="form-control bfh-phone" value="53" data-format="(ddd) ddd-dddd" required="required"/>
+                                    <input type="text" class="form-control bfh-phone" value="#{trainerBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required"/>
                                 </div>
                             </div>
 
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-6">
                                     <div class="input-group">
-                                        <textarea class="form-control" rows="3" placeholder="Address" required="required"></textarea>
+                                        <textarea class="form-control" rows="3" placeholder="Address" required="required" value="#{trainerBean.address}"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <input type="number" class="form-control" placeholder="ID Number" required="required"></input>
+                                    <input type="number" class="form-control" placeholder="ID Number" required="required" value="#{trainerBean.idNumber}"></input>
                                     <button type="submit" class="btn" id="func-button" style="font-size: 15px; margin-top: 10%;">Update Trainer</button>
                                 </div>
                                 <div class="col-3">
                                     <div class="btn-group btn-group-sm" role="group" style="background-color: var(--gray-light)">
-                                        <button type="button" class="btn" id="gender-button" >Male</button>
-                                        <button type="button" class="btn" id="gender-button" >Not Specified</button>
-                                        <button type="button" class="btn" id="gender-button" >Female</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Male)}">Male</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(NotSpecified)}">Not Specified</button>
+                                        <button type="button" class="btn" id="gender-button" onclick="#{trainerBean.editActionGender(Female)}">Female</button>
                                     </div>
                                 </div>
                             </div>
