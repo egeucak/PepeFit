@@ -48,9 +48,9 @@ public class DatabaseBean {
 		dbConnection = dbConnection();
 		dbConnection.setAutoCommit(false);
 		if (dbConnection == null) {
-			System.out.println("SALAK MISIN AQ BAĞLANMADI AUTH YOK AUTH KASAR");
+			System.out.println("Cannot connect to database (Maybe from Auth )");
 		} else {
-			System.out.println("FUCK YESH");
+			System.out.println("Connected to the DATABASE");
 		}
 	}
 

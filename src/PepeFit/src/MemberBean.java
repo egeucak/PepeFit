@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.sound.midi.SysexMessage;
 import javax.xml.stream.events.StartDocument;
 
 @ManagedBean
@@ -116,12 +117,12 @@ public class MemberBean {
 	}
 
 	public void printAll() {
+		System.out.println(this.idNumber);
 		System.out.println(this.firstName);
 		System.out.println(this.lastName);
 		System.out.println(this.eMail);
 		System.out.println(this.phoneNumber);
 		System.out.println(this.address);
-		System.out.println(this.idNumber);
 		System.out.println(this.gender);
 
 	}
@@ -153,7 +154,13 @@ public class MemberBean {
 
 	}
 
-	public String showMemberDB() {
+	public String resultShow = null;
+
+	public String getResult(){
+		return resultShow;
+	}
+
+	public void showMemberDB() {
 
 		if(this.idNumber != null){
 			System.out.println(this.idNumber + " YESSSSS");
@@ -162,6 +169,8 @@ public class MemberBean {
 				ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select * from Member where tc=?",-1,this.idNumber);
 				if(results.size()==0){
 					System.out.println("THERE IS NO PERSON WITH ID : "+ this.idNumber);
+					resultShow = "There is no person with ID : "+ this.idNumber;
+
 				}else{
 					setFirstName(results.get(0).get("NAME").toString());
 					setLastName(results.get(0).get("SURNAME").toString());
@@ -171,32 +180,49 @@ public class MemberBean {
 					seteMail(results.get(0).get("EMAIL").toString());
 					setAddress(results.get(0).get("ADRESS").toString());
 					setRegistirationDate((Date)results.get(0).get("RDATE"));
+					resultShow = null;
 				}
+				database.destruct_connection();
 
 			} catch (SQLException e) {
 				System.out.println("ERROR OCCURED WHILE SHOWING MEMBER " + e.getMessage());
 
 			}
 		}else{
-			System.out.println("FUCKK");
+			System.out.println("ID NUMBER IS NULL IN SHOW NUMBER");
 		}
 
 
 
-		return "a";
+
 
 	}
 
+
 	public void updateMemberDB(){
 
-
+		printAll();
 
 		try{
+				DatabaseBean database = new DatabaseBean();
+				database.execute("UPDATE Member SET name=?,surname=?,gender=?,phone=?,bDate=?,email=?,adress=?,rDate=? where tc=?",1,
+						this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
+			}catch(SQLException e){
+				System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
+			}
+	}
+
+	/**
+	 * 	KENDIME NOT. SONRADAN KONTROL ET EĞER DATANASE != NULL DEĞİLSE OLUŞTURMA
+	 */
+
+	public void deleteMemberDB(){
+		try{
 			DatabaseBean database = new DatabaseBean();
-			database.execute("UPDATE Member SET name=?,surname=?,gender=?,phone=?,bDate=?,email=?,adress=?,rDate=? where tc=?",1,
-					this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
+			database.execute("DELETE FROM Member WHERE TC=?",1,this.idNumber);
+			database.destruct_connection();
 		}catch(SQLException e){
-			System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
+			System.out.println("ERROR OCCURED WHILE DELETING MEMBER " + e.getMessage());
 		}
 	}
 }
