@@ -1,13 +1,13 @@
 function showDate() {
     var d = new Date();
-    var day = d.getDay();
+    var day = d.getDate();
     if (day<10) {
         day = "0".concat(day.toString());
     }
     else {
         day = day.toString();
     }
-    var month = d.getMonth().toString();
+    var month = (d.getMonth()+1).toString();
     if (month<10) {
         month = "0".concat(month.toString());
     }
