@@ -140,21 +140,28 @@ public class MemberBean {
 
 	}
 
-	public String updateMemberDB(){
+	public String updateMemberDB() {
 
-		System.out.println("FUCKKKDSFSJDNFŞKSJM");
-//	    try{
-//            DatabaseBean database = new DatabaseBean();
-//            ArrayList<LinkedHashMap<String,Object>> results = null;
-//            if(results == null){
-//                System.out.println("FUCKKK");
-//            }
-//        }catch(SQLException e){
-//	        System.out.println("ERROR OCCURED WHILE UPDATING MEMBER "+e.getMessage());
-//        }
+		if(this.idNumber != null){
+			System.out.println(this.idNumber + " YESSSSS");
+			try {
+				DatabaseBean database = new DatabaseBean();
+				ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select * from Member where tc=?",-1,this.idNumber);
+				if(results == null){
+					System.out.println("THERE IS NO PERSON WITH ID : "+ this.idNumber);
+				}else{
+					setFirstName(results.get(0).get("NAME").toString());
+				}
 
+			} catch (SQLException e) {
+				System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
 
-		return "a";
+			}
+		}else{
+			System.out.println("FUCKK");
+		}
+
+	return "a";
 
 	}
 

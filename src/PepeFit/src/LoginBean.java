@@ -36,6 +36,6 @@ public class LoginBean {
 								 * yapilacak
 								 */
 
-		return "admin/admin.xhtml?faces-redirect=true";
+		return "admin/adminZ.xhtml?faces-redirect=true";
 	}
 }

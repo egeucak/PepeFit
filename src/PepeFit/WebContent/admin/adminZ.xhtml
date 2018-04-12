@@ -118,7 +118,7 @@
                                     	<!-- Add Member rengi yeşil olmuyor -->
                                         <h:commandButton value="Add Member" type="submit" styleClass="btn func-button" actionListener="#{memberBean.addMemberDB()}"/> <!--  add action later this button -->
                                     </div>
-                                    <h:outputText value="#{memberBean.printAll()}" />
+
                                 </div>
                                 <div class="col-3">
                                     <div >
@@ -157,7 +157,11 @@
                                 </div>
                                 <div class="col-3">
 <!--                                     <button type="button" class="btn" id="func-button" onclick="updateSearch('updateMemberForm')" style="font-size: 15px; margin-top: 1%;">Search Member</button> -->
-									<h:commandButton value="Search Member" type="button" styleClass="btn func-button" id="func-button" onclick="updateSearch('updateMemberForm')" />
+                                    <h:commandButton value="Search Member"  styleClass="btn func-button" id="func-button" actionListener="#{memberBean.updateMemberDB()}" >
+                                        <f:ajax execute="@form" render="@none"  onevent="updateSearch('updateMemberForm')"  />
+
+                                    </h:commandButton>
+
                                 </div>
                             </div>
                         </h:form>
