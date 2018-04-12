@@ -1,5 +1,5 @@
 
-public class trainer extends person {
+public class Trainer extends Person {
 	
 	
 	private String bio;

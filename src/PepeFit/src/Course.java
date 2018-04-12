@@ -1,6 +1,6 @@
 import java.util.Map;
 
-public class course {
+public class Course {
 		private String courseName;
 		private int courseId;
 		private Map [] trainers;

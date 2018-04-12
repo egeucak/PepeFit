@@ -1,18 +1,18 @@
 
-public class member extends person{
+public class Member extends Person {
 
 	private int [] Achievements;
 	
 
-	progress progress = new progress();
+	Progress progress = new Progress();
 	
 	
-	public progress  getProgress() {
+	public Progress  getProgress() {
 		
 		return progress;
 	}
 	
-	public void setProgress(progress progress) {
+	public void setProgress(Progress progress) {
 		
 		this.progress=progress;
 	}

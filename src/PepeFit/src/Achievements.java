@@ -1,6 +1,6 @@
 import java.util.Map;
 
-public class achievements {
+public class Achievements {
 
 	private Map [] achievements;
 	

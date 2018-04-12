@@ -1,5 +1,5 @@
 
-public class client {
+public class Client {
 
 	public void login() {
 		

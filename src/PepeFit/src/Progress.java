@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class progress {
+public class Progress {
 
 	private long height;		
 	private ArrayList<Long> weights;

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class courses {
+public class Courses {
 	private ArrayList<String [] > Course	;
 	
 	
@@ -24,7 +24,7 @@ public class courses {
 	
 	
 	
-	public void updateCourses(courses course[]) {
+	public void updateCourses(Course course[]) {
 		
 		
 	}

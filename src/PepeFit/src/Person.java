@@ -1,6 +1,6 @@
 import java.sql.Date;
 
-public class person  {
+public class Person {
 	
 	protected String email;
 	protected String name ;
