@@ -434,7 +434,7 @@
                                 </div>
                                 <div class="col-3">
                                     <div>
-                                        <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender2" requiredMessage="* Value is required">
+                                        <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender2" requiredMessage="* Value is required" disabled="true">
                                             <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
                                         </h:selectOneRadio> 
                                         <h:message for="gender2" style="color:red"/>   
