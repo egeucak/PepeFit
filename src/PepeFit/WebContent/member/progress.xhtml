@@ -5,11 +5,11 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      >
+>
 
 <h:head>
     <!-- Required meta tags -->
-    <title>Add Progress</title>
+    <title>Progress</title>
     <meta charset="utf-8" content=""/>
     <link href="../resources/img/favicon.ico" rel="icon" type="image"> </link>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
@@ -32,7 +32,7 @@
 <div class="navbar navbar-expand-sm navbar-light" id="bar">
     <ul class="navbar-nav">
         <li class="nav-item"><a class="" href="#" id="bartext">Courses</a></li>
-        <li class="nav-item"><a class="active" href="#" id="bartext">Members</a></li>
+        <li class="nav-item"><a class="active" href="#" id="bartext">Personal</a></li>
         <li class="nav-item" >
             <div class="" data-toggle="dropdown" style="position: absolute; left: 90%;">
                 <img src="../resources/img/gear1.png" id="gear" alt=""/>
@@ -52,11 +52,15 @@
 <div class="container-fluid">
     <div class="row" style="padding-top: 8%;">
         <div class="col-2">
-            <div class="grey-bg left-menu scrollbar" id="members">
+
+            <div class="grey-bg left-menu scrollbar" id="trainers">
                 <ul class="list-unstyled" style="margin-top: 0px">
-                    <li id="header"><h3 style="color: var(--green)">Students</h3></li>
-                    <c:forEach items="#{listMemberBean.getUserNames()}" var="user">
-                        <li><a href="#" class="" id="#{user.getId()}" onclick="showGraphAdd('#{user.getId()}')">#{user.getName()}</a></li>
+                    <li id="header"><h3 style="color: var(--green)">Private Trainers</h3></li>
+                    <c:forEach items="#{listTrainerBean.getTrainerNames()}" var="trainer">
+                        <li><a href="#" class="" id="#{trainer.getId()}" onclick="toggleTrainer('#{trainer.getId()}')">#{trainer.getName()}</a>
+                            <span style="display: none; border-bottom: 2px solid var(--gray-dark);font-size: 15px;"
+                                  id="#{trainer.getId()}p">#{trainer.getBio()}<br/></span>
+                        </li>
                     </c:forEach>
                 </ul>
             </div>
@@ -72,7 +76,7 @@
                                 <a class="col-1" style="color:var(--gray-dark);margin-left: 42%"><script type="text/javascript">showDate();</script></a>
                                 <h1 style="color: var(--green); margin-left: 40%">Progress</h1>
                                 <br/>
-                                <h2>Choose a member to add progress</h2>
+                                <h2>Your progress will be shown here</h2>
 
                                 <div class="graph" style="visibility: hidden">
 

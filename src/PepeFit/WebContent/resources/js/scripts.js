@@ -48,14 +48,26 @@ function showGraphAdd(clickedOn){
     var lis = document.getElementById("members").getElementsByTagName("li");
 
     for (var i=1; i<lis.length; i++){
+        console.log(lis[i].firstChild.classList);
         lis[i].firstChild.classList.remove("active");
         var memberdivid = lis[i].firstChild.id;
         if (memberdivid==clickedOn){
             lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
         }
-        // if (lis[i].firstChild.id){
-        //     lis[i].firstChild.classList.add("active");
-        // }
     }
-    // console.log(lis[1]);
+}
+
+function toggleTrainer(clickedOn) {
+    var lis = document.getElementById("trainers").getElementsByTagName("li");
+    for (var i=1; i<lis.length; i++){
+        lis[i].firstChild.classList.remove("active");
+        var trainerdivid = lis[i].firstChild.id;
+        var trainerpid = trainerdivid.concat("p");
+        document.getElementById(trainerpid).style.display = "none";
+        if (trainerdivid==clickedOn){
+            lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
+            document.getElementById(trainerpid).style.display = "block";
+            console.log(document.getElementById(trainerpid));
+        }
+    }
 }
