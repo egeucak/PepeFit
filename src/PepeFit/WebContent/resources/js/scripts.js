@@ -43,3 +43,19 @@ function changeContainer(clickedOn) {
 function updateSearch(idUpdate) {
     document.getElementById(idUpdate).style.display = "contents";
 }
+
+function showGraphAdd(clickedOn){
+    var lis = document.getElementById("members").getElementsByTagName("li");
+
+    for (var i=1; i<lis.length; i++){
+        lis[i].firstChild.classList.remove("active");
+        var memberdivid = lis[i].firstChild.id;
+        if (memberdivid==clickedOn){
+            lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
+        }
+        // if (lis[i].firstChild.id){
+        //     lis[i].firstChild.classList.add("active");
+        // }
+    }
+    // console.log(lis[1]);
+}

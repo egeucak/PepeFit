@@ -46,12 +46,12 @@ public class DatabaseBean {
 
 	public DatabaseBean() throws SQLException {
 		dbConnection = dbConnection();
-		dbConnection.setAutoCommit(false);
 		if (dbConnection == null) {
 			System.out.println("Cannot connect to database (Maybe from Auth )");
 		} else {
 			System.out.println("Connected to the DATABASE");
 		}
+		dbConnection.setAutoCommit(false);
 	}
 
 
@@ -93,19 +93,22 @@ public class DatabaseBean {
 		Connection con = null;
 
 		try {
-
+			System.out.println("Trying...");
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			System.out.println(DriverManager.getDrivers());
 			String jdbcUrl = String.format(
 					"jdbc:mysql://google/%s?cloudSqlInstance=%s&"
 							+ "socketFactory=com.google.cloud.sql.mysql.SocketFactory&relaxAutoCommit=true",
 					databaseName, instanceConnectionName);
+			System.out.println(jdbcUrl);
 
 			con = DriverManager.getConnection(jdbcUrl, username, password);
 			System.out.println("Connection completed.");
 
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
-
+			System.out.println("Error connecting the database, don't know why");
+			return null;
 
 		}
 		return con;
