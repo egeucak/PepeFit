@@ -59,15 +59,15 @@
                     Bu kısım döngü ile çağırılacak ve tıklayıp aktif/deaktif olmasını sağlayacak
                     genel olarak çalışacak bir çözüm bulmamız gerekiyor.
                     -->
-                    <!--<c:forEach items="#{listMemberBean.getUserNames()}" var="user">-->
-                        <!--<li><a href="#" class="active" id="#{user.getId()}" onclick="showGraphAdd('#{user.getId()}')">#{user.getName()}</a></li>-->
-                    <!--</c:forEach>-->
-                    <c:forEach items="#{listMemberBean.userNames}" var="user">
-                        #{user.name} <br></br>
+                    <c:forEach items="#{listMemberBean.getUserNames()}" var="user">
+                        <li><a href="#" class="" id="#{user.getId()}" onclick="showGraphAdd('#{user.getId()}')">#{user.getName()}</a></li>
                     </c:forEach>
-                    <li><a href="#" class="active" id="name1" onclick="showGraphAdd('name1')">Name1</a></li>
-                    <li><a href="#" id="name2" onclick="showGraphAdd('name2')">Name2</a></li>
-                    <li><a href="#" id="name3" onclick="showGraphAdd('name3')">Name3</a></li>
+                    <!--<c:forEach items="#{listMemberBean.userNames}" var="user">-->
+                        <!--#{user.name} <br></br>-->
+                    <!--</c:forEach>-->
+                    <!--<li><a href="#" class="active" id="name1" onclick="showGraphAdd('name1')">Name1</a></li>-->
+                    <!--<li><a href="#" id="name2" onclick="showGraphAdd('name2')">Name2</a></li>-->
+                    <!--<li><a href="#" id="name3" onclick="showGraphAdd('name3')">Name3</a></li>-->
                 </ul>
             </div>
         </div>

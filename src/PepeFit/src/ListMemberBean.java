@@ -23,7 +23,7 @@ public class ListMemberBean {
         userNames.add(new MemberTemp("Bahadır Adak", "baho"));
         userNames.add(new MemberTemp("Eyüpcan Bodur", "konyalı"));
         userNames.add(new MemberTemp("Berk Can Özen", "brkczn"));
-        userNames.add(new MemberTemp("Serhat Sağlık", "konyalı"));
+        userNames.add(new MemberTemp("Serhat Sağlık", "mavi"));
         return userNames;
     }
 
