@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.pepefit.maven</groupId>
+	<artifactId>PepeFit</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-api -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.2.9</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-impl -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.2.9</version>
+		</dependency>
+
+	<!--&lt;!&ndash; Driver injected at runtime by the use of <use-google-connector-j> in appengine-web.xml &ndash;&gt;-->
+	<!-- These are for Database Connection You have to add "Properties" for using with AppEngine don't forget -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.42</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.cloud.sql</groupId>
+            <artifactId>mysql-socket-factory</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.0</version>
+		</dependency>
+	<!-- ______________________________________________________ -->
+	  <!--<properties>-->
+        <!--&lt;!&ndash; INSTANCE_CONNECTION_NAME from Cloud Console > SQL > Instance Details > Properties-->
+             <!--or gcloud sql instances describe <instance>-->
+             <!--project:region:instance for Cloud SQL 2nd Generation or-->
+             <!--project:instance        for Cloud SQL 1st Generation-->
+        <!--&ndash;&gt;-->
+
+        <!--<INSTANCE_CONNECTION_NAME>pepefit-1:us-east1:pepefit-mysql-1</INSTANCE_CONNECTION_NAME>-->
+        <!--<user>root</user>-->
+        <!--<password>pepefithacettepe12345</password>-->
+        <!--<database>pepefit</database>-->
+
+        <!--<maven.compiler.target>1.8</maven.compiler.target>-->
+        <!--<maven.compiler.source>1.8</maven.compiler.source>-->
+    <!--</properties>-->
+
+	</dependencies>
+
+</project>
