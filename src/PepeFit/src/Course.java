@@ -1,6 +1,7 @@
 import java.util.Map;
 
 public class Course {
+
     private String courseName;
     private int courseId;
     private String courseTime;
@@ -64,6 +65,5 @@ public class Course {
         setCourseTime(courseTime);
         setCourseDate(courseDate);
     }
-
 
 }
