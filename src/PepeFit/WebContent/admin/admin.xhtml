@@ -3,7 +3,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <!-- Required meta tags -->
@@ -32,12 +33,22 @@
         <li class="nav-item"><a class="active" href="../admin/admin.xhtml" id="bartext">Admin</a></li>
         <li class="nav-item"><a class="" href="../courses/courses_trainer.xhtml" id="bartext">Courses</a></li>
         <li class="nav-item"><a class="" href="#" id="bartext">Student</a></li>
+        <li><h:outputLink value="/PepeFit/logout">OutputLink İle Çıkış</h:outputLink></li>
+        <li><a href="/PepeFit/logout">a href İle Çıkış</a></li>
+        <h:form>
+        	<h:commandButton value="Çıkş Yapmak İçin Tıklayın" action="#{shiroAuthenticationClass.logout()}"/>
+        </h:form>
         <li class="nav-item" >
             <div class="" data-toggle="dropdown" style="position: absolute; left: 90%;">
                 <img src="../resources/img/gear1.png" id="gear" alt=""/>
                 <ul class="dropdown-menu" id="dropdown">
                     <li><a href="#" id="dropdown-text">Settings</a></li>
                     <li><a href="index.xhtml" id="dropdown-text">Logout</a></li>
+                    <li><a href="/PepeFit/logout">a href İle Çıkış</a></li>
+                    <li><h:outputLink value="/PepeFit/logout">OutputLink İle Çıkış</h:outputLink></li>
+                    <h:form>
+                    	<h:commandButton value="Çıkş Yapmak İçin Tıklayın" action="#{shiroAuthenticationClass.logout()}"/>
+                    </h:form>
                 </ul>
             </div>
         </li>
