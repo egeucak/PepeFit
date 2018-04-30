@@ -9,6 +9,7 @@ html {
   position: relative;
   min-height: 100%;
   max-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -253,6 +254,7 @@ body {
   color: white !important;
 }
 
+/*<<<<<<< serhat_develop*/
 table{
   width: 25% !important;
 }
@@ -290,4 +292,8 @@ table input[type="radio"]:hover + label{
 .scrollbar{
   height: 20rem;
   overflow-y:scroll;
+/*
+.scrollbar {
+  height: 90px;
+  overflow-y: scroll;*/
 }
