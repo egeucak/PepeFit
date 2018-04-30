@@ -195,7 +195,7 @@ public class DatabaseBean {
 			prepStmt = (PreparedStatement) dbConnection.prepareStatement(sql_query);
 
 			// Sıkıntı cıkarsa prepStmt = bindvars(prepStmt,vars) dene
-			if (vars[0] != null){
+			if (vars != null){
 				bindvars(prepStmt, vars);
 			}
 
@@ -210,7 +210,7 @@ public class DatabaseBean {
 			} else if (exec_type == 1) {
 				// INSERT, UPDATE OR DELETE . We don't have any returns
 				prepStmt.executeUpdate();
-				dbConnection.commit();
+//				dbConnection.commit();
 			}
 
 		} catch (SQLException e) {
@@ -249,11 +249,11 @@ public class DatabaseBean {
 			}
 			query_results.add(row);
 		}
-		int p = 0;
-
-		while(p < query_results.size()){
-			System.out.println(query_results.get(p++));
-		}
+//		int p = 0;
+//
+//		while(p < query_results.size()){
+//			System.out.println(query_results.get(p++));
+//		}
 
 
 		return query_results;

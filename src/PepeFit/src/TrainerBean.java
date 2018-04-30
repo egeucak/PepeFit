@@ -1,4 +1,7 @@
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -85,6 +88,31 @@ public class TrainerBean {
 			setGender("NotSpecified");
 		}
 	}
-	
+
+
+    public void addCourse(String courseName, String courseTime,String courseDate,String trainerID) {
+        try {
+            DatabaseBean database = new DatabaseBean();
+            database.execute("CALL insert_course(?,?,?)", 1,courseName.toUpperCase(),courseTime,courseDate);
+            database.execute("INSERT INTO GeneralSchedule VALUES(?,?,?,?)",1,courseName.toUpperCase(),courseTime,courseDate,trainerID);
+            database.commit_trans();
+            database.destruct_connection();
+        } catch (SQLException e) {
+            System.out.println("ERROR OCCURED WHILE ADDING COURSE " + e.getMessage());
+        }
+    }
+
+    public void deneme() {
+
+        Courses courses = new Courses();
+        courses.loadCourses();
+        int len = courses.courses.size();
+        int x = 0;
+        while(x < len){
+            System.out.print(courses.courses.get(x++).getCourseName() + "\n");
+        }
+
+
+    }
 	
 }
