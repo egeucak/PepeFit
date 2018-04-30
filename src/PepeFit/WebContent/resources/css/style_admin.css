@@ -9,6 +9,7 @@ html {
   position: relative;
   min-height: 100%;
   max-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -251,4 +252,9 @@ body {
 .form-control:disabled{
   background-color: var(--gray-dark) !important; /*xd*/
   color: white !important;
+}
+
+.scrollbar {
+  height: 90px;
+  overflow-y: scroll;
 }
