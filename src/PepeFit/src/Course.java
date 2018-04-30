@@ -5,8 +5,6 @@ public class Course {
 		private int courseId;
 		private Map [] trainers;
 		
-		
-		
 		public String getCourseName() {
 			return courseName;
 		}
