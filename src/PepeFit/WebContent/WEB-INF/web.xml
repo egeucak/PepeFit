@@ -46,31 +46,25 @@
         <servlet-class>com.google.apphosting.utils.remoteapi.RemoteApiServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>RemoteApiServlet</servlet-name>
-        <url-pattern>/remote_api</url-pattern>
-    </servlet-mapping>
-    
-	<servlet>
+   
+  <servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>/faces/*</url-pattern>
-		<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping>
-	
-    <session-config>
+  <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+  
+      <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
-    <error-page>
+  
+      <error-page>
         <error-code>404</error-code>
         <location>/error/error404.jsp</location>
     </error-page>
@@ -82,4 +76,28 @@
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
+
+    <servlet>
+        <display-name>Remote API Servlet</display-name>
+        <servlet-name>RemoteApiServlet</servlet-name>
+        <servlet-class>com.google.apphosting.utils.remoteapi.RemoteApiServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoteApiServlet</servlet-name>
+        <url-pattern>/remote_api</url-pattern>
+    </servlet-mapping>
+
+    <context-param>
+        <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>client</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>resources.application</param-value>
+    </context-param>
+    <listener>
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+    </listener>
 </web-app>

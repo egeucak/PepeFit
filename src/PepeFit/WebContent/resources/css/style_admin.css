@@ -9,6 +9,7 @@ html {
   position: relative;
   min-height: 100%;
   max-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -251,4 +252,48 @@ body {
 .form-control:disabled{
   background-color: var(--gray-dark) !important; /*xd*/
   color: white !important;
+}
+
+/*<<<<<<< serhat_develop*/
+table{
+  width: 25% !important;
+}
+
+table label:hover{
+  background-color: var(--green);
+  color: white !important;}
+
+table input[type="radio"]{
+ position: absolute;
+ opacity: 0;
+}
+
+table input[type="radio"] + label{
+  margin-bottom:0%;
+  border-radius: 0.4rem;
+  border: 1px solid var(--green);  
+  color: var(--green);
+  padding: 0% 0.2rem 0% 0.2rem;
+  max-width:100% !important;
+  white-space: nowrap;
+  background-color: white;
+}
+
+table input[type="radio"]:checked + label{
+  background-color: var(--green);
+  color: white;
+}
+
+table input[type="radio"]:hover + label{
+  background-color: var(--green);
+  color: white;
+}
+
+.scrollbar{
+  height: 20rem;
+  overflow-y:scroll;
+/*
+.scrollbar {
+  height: 90px;
+  overflow-y: scroll;*/
 }

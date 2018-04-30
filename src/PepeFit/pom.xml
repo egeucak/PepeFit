@@ -65,14 +65,36 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.appengine.tools</groupId>
+			<artifactId>appengine-gcs-client</artifactId>
+			<version>0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-remote-api</artifactId>
+			<version>1.9.63</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+			<version>1.9.63</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 		<!-- ______________________________________________________ -->
-		<!--<properties> -->
-		<!--&lt;!&ndash; INSTANCE_CONNECTION_NAME from Cloud Console > SQL > Instance 
-			Details > Properties -->
-		<!--or gcloud sql instances describe <instance> -->
-		<!--project:region:instance for Cloud SQL 2nd Generation or -->
-		<!--project:instance for Cloud SQL 1st Generation -->
-		<!--&ndash;&gt; -->
+	  <!--<properties>-->
+        <!--&lt;!&ndash; INSTANCE_CONNECTION_NAME from Cloud Console > SQL > Instance Details > Properties-->
+             <!--or gcloud sql instances describe <instance>-->
+             <!--project:region:instance for Cloud SQL 2nd Generation or-->
+             <!--project:instance        for Cloud SQL 1st Generation-->
+        <!--&ndash;&gt;-->
 
 		<!--<INSTANCE_CONNECTION_NAME>pepefit-1:us-east1:pepefit-mysql-1</INSTANCE_CONNECTION_NAME> -->
 		<!--<user>root</user> -->
