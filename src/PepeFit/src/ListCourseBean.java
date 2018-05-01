@@ -16,20 +16,23 @@ import javax.xml.stream.events.StartDocument;
 @RequestScoped
 
 public class ListCourseBean {
-    //private ArrayList<CourseTemp> courseNames = new ArrayList<CourseTemp>();
+    private ArrayList<CourseTemp> courseNames = new ArrayList<CourseTemp>();
 
     // Creating and Object for Courses Class. Because loadCourses() function is in there.
     private Courses courses = new Courses();
 
-    public ArrayList<Course> getCourseNames() {
+    public ArrayList<CourseTemp> getCourseNames() {
+        courseNames.add(new CourseTemp("Sokuş", "sokus", "Sikiş sokuş mala vuruş"));
+        courseNames.add(new CourseTemp("Boko", "Moko", "Totonoto moto"));
+
         return courseNames;
     }
+//
+//    public void setCourseNames(ArrayList<Course> courseNames) {
+//        this.courseNames = courseNames;
+//    }
 
-    public void setCourseNames(ArrayList<Course> courseNames) {
-        this.courseNames = courseNames;
-    }
-
-    private ArrayList<Course> courseNames = courses.loadCourses();
+//    private ArrayList<Course> courseNames = courses.loadCourses();
 
 //
 //    public ArrayList<CourseTemp> getCourseNames() {
