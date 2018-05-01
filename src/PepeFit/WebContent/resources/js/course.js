@@ -21,6 +21,7 @@ function toggleCourse(clickedOn) {
         if (coursedivid==clickedOn){
             lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
             document.getElementById(coursepid).style.display = "block";
+            //document.getElementById("course-form").reset();
             document.getElementById("block-func").textContent = coursedivid;
             console.log(document.getElementById(coursepid));
             document.getElementById("empty-container").style.display ="none";

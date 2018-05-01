@@ -256,7 +256,8 @@ body {
 
 /*<<<<<<< serhat_develop*/
 table{
-  width: 25% !important;
+  border-collapse: separate !important;
+  border-spacing: 0.3rem 0px;
 }
 
 table label:hover{
@@ -296,4 +297,15 @@ table input[type="radio"]:hover + label{
 .scrollbar {
   height: 90px;
   overflow-y: scroll;*/
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 0.4rem;
+  background-color: #4f964f40; 
+
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: var(--green);
 }
