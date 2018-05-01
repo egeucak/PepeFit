@@ -106,15 +106,6 @@
                             </div>
                             <div class="col-1"/>
                             <div class="col-3" style="padding-left: 5%;">
-                                <!-- <select style="width: 80%;padding: 0.175rem 0.65rem;">
-                                    <option>A şubesi</option>
-                                    <option>B şubesi</option>
-                                    <option>C şubesi</option>
-                                    <option>D şubesi</option>
-                                </select>
-                                <h:selectOneMenu style="width:80%;" value="#{classesBean.className}">
-                                    <f:selectItems value="#{classesBean.fillClasses()}" />
-                                </h:selectOneMenu> -->
                             </div>
                         </div>
                         <h:form id="course-form" value="#">
@@ -128,8 +119,7 @@
                                     <h:inputText style="width: 90%;" type="text" id="Capacity1"/>
                                 </div>
                                 <div class="col-2" style="font-size: 15px;">
-                                    <!-- Add Member rengi yeşil olmuyor -->
-                                    <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.denemeTest()}"/> <!--  add action later this button -->
+                                    <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.denemeTest()}"/>
                                 </div>
                             </div>
                         </h:form>
@@ -137,49 +127,29 @@
                         <h:form>
                         -->
                             <ul class="scrollbar list-unstyled" style="margin-top: 0px">
-                                <c:forEach id="courseTimeList" items='#{listTrainerBean.loadTrainers("1","02.02.2018")}' var="trainer" value="#">
-                                <li style="width: 99%;">
-                                    <div class="form-row" style="padding-bottom: 2%;">
-                                        <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                            <a>#{trainer.getTrainerName()}</a>
-                                            
+                                <c:forEach id="courseTimeList" items='#{listTrainerBean.loadTrainers("1")}' var="trainer" value="#">
+                                    <li style="width: 99%;">
+                                        <div class="form-row" style="padding-bottom: 2%;">
+                                            <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <a>#{trainer.getTrainerName()}</a>
+                                                
+                                            </div>
+                                            <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <ul class="list-unstyled" style="margin-top: 0px">
+                                                <c:forEach items="#{trainer.getCourseTime()}" var="coursetime" value="#">
+                                                    <li style="display: inline;"><a class="courseTimeLabel">#{coursetime}</a></li>
+                                                </c:forEach>
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                            <!-- <h:selectOneRadio id="xd" style="padding-right: 10%;" value="#">
-                                                <f:selectItem itemLabel="10.00-12.00" />
-                                                <f:selectItem itemLabel="12.00-14.00" />
-                                                <f:selectItem itemLabel="14.00-16.00" />
-                                                <f:selectItem itemLabel="16.00-18.00"/>
-                                            </h:selectOneRadio> -->
-                                            <ul class="list-unstyled" style="margin-top: 0px">
-                                            <c:forEach items="#{trainer.getCourseTime()}" var="coursetime" value="#">
-                                                <li style="display: inline;"><a class="mokar">#{coursetime}</a></li>
-                                            </c:forEach>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
                                 </c:forEach>
                             </ul>
-                        <!--
-                        </h:form>
-                        -->
-                        <!--<div class="form-row">
-                            <div class="col-6" style="background-color: var(white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                <a>XD</a>
-                            </div>
-                            <div class="col-6"  style="background-color: var(white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                <h:selectOneRadio  value="#{testBean.selectedColor}">
-                                    <f:selectItem itemValue="Red" itemLabel="10.00-12.00" />
-                                    <f:selectItem itemValue="Green" itemLabel="12.00-14.00" />
-                                    <f:selectItem itemValue="Blue" itemLabel="14.00-16.00" />
-                                    <f:selectItem itemValue="XD" itemLabel="16.00-18.00"/>
-                                </h:selectOneRadio>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </div>
+
+
 
         </div>
     </div>
