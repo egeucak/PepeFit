@@ -85,7 +85,7 @@ public class ShiroAuthenticationClass {
         	}
         	else if(currentUser.hasRole("trainer")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-                nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/trainer/trainer.xhtml?faces-redirect=true");
+                nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/trainer/progressadd.xhtml?faces-redirect=true");
         	}
 
         }
