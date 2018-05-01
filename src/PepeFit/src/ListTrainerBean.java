@@ -65,7 +65,13 @@ public class ListTrainerBean {
                 System.out.println((ArrayList<String>) times.get(2));
             }
         }
+        System.out.println("xd");
+        System.out.println(trainer_times);
+        for(Trainer trainer:trainers){
+            System.out.println(trainer.getTrainerName());
 
+        }
+        System.out.println("yd");
         return trainers;
     }
 

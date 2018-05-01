@@ -111,3 +111,18 @@ function toggleCourse(clickedOn) {
         }
     }
 }
+
+(function($, undefined) {
+
+    "use strict";
+
+    // When ready.
+    $(function() {
+        $.fn.formatter.addInptType('H', /[0-2]/);
+        $.fn.formatter.addInptType('M', /[0-5]/);
+        $("#course-form\\:Time1").formatter({
+            'pattern': '{{H9}}:{{M9}}-{{H9}}:{{M9}}',
+            'persistent': false
+        });
+    });
+})(jQuery);
