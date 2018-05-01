@@ -204,12 +204,12 @@ public class MemberBean {
 		printAll();
 
 		try{
-				DatabaseBean database = new DatabaseBean();
-				database.execute("UPDATE Member SET name=?,surname=?,gender=?,phone=?,bDate=?,email=?,adress=?,rDate=? where tc=?",1,
-						this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
-			}catch(SQLException e){
-				System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
-			}
+			DatabaseBean database = new DatabaseBean();
+			database.execute("UPDATE Member SET name=?,surname=?,gender=?,phone=?,bDate=?,email=?,adress=?,rDate=? where tc=?",1,
+					this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
+		}catch(SQLException e){
+			System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
+		}
 	}
 
 	/**

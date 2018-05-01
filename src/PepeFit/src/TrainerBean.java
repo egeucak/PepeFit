@@ -1,4 +1,8 @@
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -85,6 +89,49 @@ public class TrainerBean {
 			setGender("NotSpecified");
 		}
 	}
-	
+
+
+    public String addCourse(int courseId, String courseTime,String courseDate,String trainerID,int capacity) {
+        try {
+            DatabaseBean database = new DatabaseBean();
+//            database.execute("CALL insert_course(?,?,?)", 1,courseName.toUpperCase(),courseTime,courseDate);
+			// Checking trainer is already add that course with the same time and the same date into database !
+			ArrayList<LinkedHashMap<String,Object>> result = database.execute_fetch_all("SELECT * FROM GeneralSchedule WHERE C_ID = ? AND C_TIME = ? AND C_DATE = ? AND TRAINER_ID = ?",-1,courseId,courseTime,courseDate,trainerID);
+			// If result is empty, it means that we are good to go.
+			if(result.size() == 0){
+				database.execute("CALL insert_courseSchedule(?,?,?,?,?)",1,courseId,courseTime,courseDate,trainerID,capacity);
+				database.commit_trans();
+				System.out.println("SUCCESSFULLY ADDED INTO GENERALSCHEDULE! -> " + result + "\n");
+				database.destruct_connection();
+				return "Successfully Added !";
+
+			}else{
+				database.destruct_connection();
+				System.out.println("TRAINER: " + trainerID + " ALREADY OPEN THIS CLASS WITH THE SAME TIME AND DATE!\n");
+				return "TRAINER: " + trainerID + " ALREADY OPEN THIS CLASS WITH THE SAME TIME AND DATE!";
+
+			}
+
+
+        } catch (SQLException e) {
+			System.out.println("ERROR OCCURED WHILE ADDING COURSE " + e.getMessage());
+        	return "Cannot do this operation please try again later !";
+
+        }
+    }
+
+    public void deneme() {
+
+        Courses courses = new Courses();
+        courses.loadCourses();
+        int len = courses.courses.size();
+        int x = 0;
+        while(x < len){
+            System.out.print("CourseId: "+ courses.courses.get(x).getCourseId() + " CourseName: " + courses.courses.get(x).getCourseName() + " Description: " + courses.courses.get(x).getCourseDescription() + "\n");
+            x++;
+        }
+
+
+    }
 	
 }
