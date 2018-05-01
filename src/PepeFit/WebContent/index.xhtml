@@ -66,22 +66,24 @@
 					<h:form>
 						<div class="form-row justify-content-center">
 							<div class="col-auto">
-								<h:inputText class="form-control" type="text"
-									a:placeholder="Username"
-									value="#{shiroAuthenticationClass.userName}" />
+								<h:inputText class="form-control" type="email" id="username"
+									a:placeholder="Email" required="true"
+									value="#{shiroAuthenticationClass.userName}" requiredMessage="Email is required"/>
+								<h:message for="username" style="color:red"/>
 							</div>
 
 							<div class="col-auto">
-								<h:inputSecret class="form-control" aria-describedby="emailHelp"
-									type="password" a:placeholder="Password"
-									value="#{shiroAuthenticationClass.password}" />
+								<h:inputSecret class="form-control" aria-describedby="emailHelp" id="password"
+									type="password" a:placeholder="Password" required="true"
+									value="#{shiroAuthenticationClass.password}" requiredMessage="Password is required"/>
+								<h:message for="password" style="color:red"/>
 								<a class="small nav-link text-muted" href="" id="emailHelp">Forgot
 									your password?</a>
 							</div>
 
 							<div class="col-auto">
 								<h:commandButton class="btn btn-outline-login" value="Log in"
-									action="#{shiroAuthenticationClass.authenticateTheUser()}" />
+									action="#{shiroAuthenticationClass.authenticateTheUser()}" requiredMessage="Password is required"/>
 								<!-- Bu butona basılınca normalde DB'e gidip usarname'e göre sayfa yönlendirmesi yapması lazım, şimdilik herhangi bir username ve password girse bile admin sayfasına yönlendiriyor -->
 							</div>
 						</div>
