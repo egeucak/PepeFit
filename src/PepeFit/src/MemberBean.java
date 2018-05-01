@@ -143,7 +143,6 @@ public class MemberBean {
 		try{
 			DatabaseBean database = new DatabaseBean();
 			database.execute("Insert into Member values(?,?,?,?,?,\"1997-01-01\",?,?,\"1997-01-01\")", 1, this.idNumber, this.firstName, this.lastName, this.gender,this.phoneNumber,this.eMail, this.address);
-            database.commit_trans();
 			database.destruct_connection();
 		}catch (SQLException e){
 			System.out.println("ERROR OCCURED WHILE ADDING MEMBER "+e.getMessage());
@@ -205,14 +204,12 @@ public class MemberBean {
 		printAll();
 
 		try{
-				DatabaseBean database = new DatabaseBean();
-				database.execute("UPDATE Member SET name=?,surname=?,gender=?,phone=?,bDate=?,email=?,adress=?,rDate=? where tc=?",1,
-						this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
-				database.commit_trans();
-				database.destruct_connection();
-			}catch(SQLException e){
-				System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
-			}
+			DatabaseBean database = new DatabaseBean();
+			database.execute("UPDATE Member SET name=?,surname=?,gender=?,phone=?,bDate=?,email=?,adress=?,rDate=? where tc=?",1,
+					this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
+		}catch(SQLException e){
+			System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
+		}
 	}
 
 	/**
@@ -223,7 +220,6 @@ public class MemberBean {
 		try{
 			DatabaseBean database = new DatabaseBean();
 			database.execute("DELETE FROM Member WHERE TC=?",1,this.idNumber);
-			database.commit_trans();
 			database.destruct_connection();
 		}catch(SQLException e){
 			System.out.println("ERROR OCCURED WHILE DELETING MEMBER " + e.getMessage());

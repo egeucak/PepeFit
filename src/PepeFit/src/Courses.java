@@ -17,7 +17,7 @@ public class Courses {
             result = database.execute_fetch_all("SELECT * FROM Course",-1);
             database.destruct_connection();
         } catch (SQLException e) {
-            System.out.println("ERROR OCCURED WHILE SEXING" + e.getMessage());
+            System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
         }
 
         if(result == null){
@@ -27,7 +27,7 @@ public class Courses {
             int x = 0;
             while(x < len){
                 LinkedHashMap<String,Object> row = result.get(x);
-                Course course = new Course(row.get("C_NAME").toString(),row.get("C_TIME").toString(),row.get("C_DATE").toString());
+                Course course = new Course((Integer) row.get("C_ID"),row.get("C_NAME").toString(),row.get("C_DESCRIPTION").toString());
                 courses.add(course);
                 x++;
             }

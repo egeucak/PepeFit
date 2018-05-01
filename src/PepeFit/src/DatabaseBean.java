@@ -168,7 +168,7 @@ public class DatabaseBean {
 	 * @return ResultSet will use in execute_fetch_all() for taking tables from DB
 	 * @throws SQLException
 	 */
-	public ResultSet execute(String sql_query, int exec_type, Object... vars) throws SQLException {
+	public Object execute(String sql_query, int exec_type, Object... vars) throws SQLException {
 
 //        if(dbConnection != null){
 //            Statement statement = dbConnection.createStatement();
@@ -213,12 +213,16 @@ public class DatabaseBean {
 //				dbConnection.commit();
 			}
 
+
 		} catch (SQLException e) {
 
 			if (dbConnection != null) {
 				try {
-					System.err.print("Transaction is being rolled back ERROR " + e.getMessage());
+					System.err.print("Transaction is being rolled back ERROR " + e.getMessage() + "\n");
 					dbConnection.rollback();
+					// Returning message for controlling the errors for adding, deleting etc.
+					return(e.getMessage());
+
 				} catch (SQLException excep) {
 					System.out.println("Error occured while rollbacking ERROR " + excep.getMessage());
 				}
@@ -235,7 +239,7 @@ public class DatabaseBean {
 //
 //        TreeMap<String, HashMap<String, String>> selectResult =
 //                new TreeMap<String, HashMap<String, String>>();
-		ResultSet resultSet = execute(sql_query, exec_type, vars);
+		ResultSet resultSet = (ResultSet) execute(sql_query, exec_type, vars);
 
 		ResultSetMetaData rsmd = resultSet.getMetaData();
 		int returned_coloumn_count = rsmd.getColumnCount();

@@ -27,7 +27,8 @@
 </h:head>
 <body>
 
-<!--#{trainerBean.addCourse("EGENINGOTUX","13:20","2018-02-11","0001")}-->
+<!--####    {trainerBean.addCourse(2,"12:00-13:00","2018-01-01","1",20)}-->
+<!--###    {trainerBean.addCourse(2,"12:00-13:00","2018-01-01","1",20)}-->
 
 
 <!--    NAVIGATION MENU     -->
@@ -180,7 +181,7 @@
                                 </div>
                             </div>
                         </h:form>
-                        <h:form>    
+                        <h:form>
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-3">
                                     <!--                                 	<input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
@@ -226,8 +227,8 @@
                                     <div>
                                         <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender2" requiredMessage="* Value is required">
                                             <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
-                                        </h:selectOneRadio> 
-                                        <h:message for="gender2" style="color:red"/>   
+                                        </h:selectOneRadio>
+                                        <h:message for="gender2" style="color:red"/>
                                     </div>
                                 </div>
                             </div>
@@ -267,13 +268,13 @@
                                     <h:message for="phoneNumber3" style="color:red"/>
                                 </div>
                             </div>
-      
+
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-6">
                                     <div class="input-group">
                                         <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address3" value="#{memberBean.address}" requiredMessage="* Value is required" disabled="true"/>
                                         <!-- buranın * Value is required kısmı yanda gözüküyor alta alınması gerek -->
-                                        <h:message for="address3" style="color:red" />                                    
+                                        <h:message for="address3" style="color:red" />
                                     </div>
                                 </div>
                                 <div class="col-3">
@@ -290,8 +291,8 @@
 <!--                                        <label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male<input type="radio" name="options"></input></label><label class="btn active" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified<input type="radio" name="options"></input></label><label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female<input type="radio" name="options"></input></label> -->
                                         <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender3" requiredMessage="* Value is required" disabled="true">
                                             <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
-                                        </h:selectOneRadio> 
-                                        <h:message for="gender3" style="color:red"/>                                     
+                                        </h:selectOneRadio>
+                                        <h:message for="gender3" style="color:red"/>
                                     </div>
                                 </div>
                             </div>
@@ -316,7 +317,7 @@
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-3">
                                     <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber4" value="#{memberBean.idNumber}" requiredMessage="* Value is required" disabled="true"/>
-                                    <h:message for="idNumber4" style="color:red"/>                               
+                                    <h:message for="idNumber4" style="color:red"/>
                                 </div>
                                 <div class="col-3">
                                     <h:commandButton value="Search Trainer"  styleClass="btn func-button" id="func-button2" actionListener="#{memberBean.updateTrainerDB()}"  disabled="true">
@@ -354,7 +355,7 @@
                                 <div class="col-6">
                                     <div class="input-group">
                                         <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address4" value="#{memberBean.address}" requiredMessage="* Value is required" disabled="true"/>
-                                        <h:message for="address4" style="color:red" />    
+                                        <h:message for="address4" style="color:red" />
                                     </div>
                                 </div>
                                 <div class="col-3">
@@ -369,8 +370,8 @@
                                     <div>
                                         <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender4" requiredMessage="* Value is required" disabled="true">
                                             <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
-                                        </h:selectOneRadio> 
-                                        <h:message for="gender4" style="color:red"/>   
+                                        </h:selectOneRadio>
+                                        <h:message for="gender4" style="color:red"/>
                                     </div>
                                 </div>
                             </div>
@@ -407,7 +408,7 @@
 
                                 </div>
                             </div>
-   
+
                             <div class="form-row" style="padding-bottom: 3%;">
                                 <div class="col-3">
                                     <!--                                    <input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
@@ -450,8 +451,8 @@
                                     <div>
                                         <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender2" requiredMessage="* Value is required" disabled="true">
                                             <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
-                                        </h:selectOneRadio> 
-                                        <h:message for="gender2" style="color:red"/>   
+                                        </h:selectOneRadio>
+                                        <h:message for="gender2" style="color:red"/>
                                     </div>
                                 </div>
                             </div>
