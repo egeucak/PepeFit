@@ -168,7 +168,7 @@ public class DatabaseBean {
 	 * @return ResultSet will use in execute_fetch_all() for taking tables from DB
 	 * @throws SQLException
 	 */
-	public ResultSet execute(String sql_query, int exec_type, Object... vars) throws SQLException {
+	public Object execute(String sql_query, int exec_type, Object... vars) throws SQLException {
 
 //        if(dbConnection != null){
 //            Statement statement = dbConnection.createStatement();
@@ -195,7 +195,7 @@ public class DatabaseBean {
 			prepStmt = (PreparedStatement) dbConnection.prepareStatement(sql_query);
 
 			// Sıkıntı cıkarsa prepStmt = bindvars(prepStmt,vars) dene
-			if (vars[0] != null){
+			if (vars != null){
 				bindvars(prepStmt, vars);
 			}
 
@@ -210,15 +210,19 @@ public class DatabaseBean {
 			} else if (exec_type == 1) {
 				// INSERT, UPDATE OR DELETE . We don't have any returns
 				prepStmt.executeUpdate();
-				dbConnection.commit();
+//				dbConnection.commit();
 			}
+
 
 		} catch (SQLException e) {
 
 			if (dbConnection != null) {
 				try {
-					System.err.print("Transaction is being rolled back ERROR " + e.getMessage());
+					System.err.print("Transaction is being rolled back ERROR " + e.getMessage() + "\n");
 					dbConnection.rollback();
+					// Returning message for controlling the errors for adding, deleting etc.
+					return(e.getMessage());
+
 				} catch (SQLException excep) {
 					System.out.println("Error occured while rollbacking ERROR " + excep.getMessage());
 				}
@@ -235,7 +239,7 @@ public class DatabaseBean {
 //
 //        TreeMap<String, HashMap<String, String>> selectResult =
 //                new TreeMap<String, HashMap<String, String>>();
-		ResultSet resultSet = execute(sql_query, exec_type, vars);
+		ResultSet resultSet = (ResultSet) execute(sql_query, exec_type, vars);
 
 		ResultSetMetaData rsmd = resultSet.getMetaData();
 		int returned_coloumn_count = rsmd.getColumnCount();
@@ -249,11 +253,11 @@ public class DatabaseBean {
 			}
 			query_results.add(row);
 		}
-		int p = 0;
-
-		while(p < query_results.size()){
-			System.out.println(query_results.get(p++));
-		}
+//		int p = 0;
+//
+//		while(p < query_results.size()){
+//			System.out.println(query_results.get(p++));
+//		}
 
 
 		return query_results;

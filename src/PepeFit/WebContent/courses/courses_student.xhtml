@@ -50,19 +50,22 @@
 
 <!--    LEFT MENU   -->
 <div class="container-fluid">
+
+    <!-- Filling Courses -->
     <div class="row" style="padding-top: 8%;">
         <div class="col-2">
             <div class="grey-bg left-menu" id="courses">
                 <ul class="list-unstyled" style="margin-top: 0px">
-                    <c:forEach items="#{listCourseBean.getCourseNames()}" var="course" value="#{course.getName()}">
-                        <li><a href="#" class="" id="#{course.getName()}" onclick="toggleCourse('#{course.getName()}')">#{course.getName()}</a>
+                    <c:forEach items="#{listCourseBean.getCourseNames()}" var="course" value="#{course.getCourseName()}">
+                        <li><a href="#" class="" id="#{course.getCourseName()}" onclick="toggleCourse('#{course.getCourseName()}')">#{course.getCourseName()}</a>
                             <span style="color: var(--gray-dark); display: none;font-size: 15px;padding-right: 2%;"
-                                  id="#{course.getName()}p">#{course.getDescription()}<br/></span>
+                                  id="#{course.getCourseName()}p">#{course.getCourseDescription()}<br/></span>
                         </li>
                     </c:forEach>
                 </ul>
             </div>
         </div>
+        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
         <div class="col-1"></div>
         <div class="col-6">
             <div class="container" id="empty-container">

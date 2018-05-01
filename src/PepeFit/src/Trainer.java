@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 
 public class Trainer extends Person {
 	
@@ -17,11 +18,16 @@ public class Trainer extends Person {
           
     }
 	
-	public void addCourse(int courseId, String courseTime,int trainerId) {
-		
-		
-	}
-	
+//	public void addCourse(String courseName, String courseTime,String courseDate,int trainerID) {
+//	    try {
+//            DatabaseBean database = new DatabaseBean();
+//            database.execute("INSERT INTO ? VALUES(?,?,?)", 1,"Course",courseName,courseTime,courseDate);
+//            database.destruct_connection();
+//        } catch (SQLException e) {
+//            System.out.println("ERROR OCCURED WHILE ADDING COURSE " + e.getMessage());
+//        }
+//	}
+//
 	public void addAchievement(int studentId,int achievementId){
 		
 		

@@ -63,7 +63,7 @@ public class ShiroAuthenticationClass {
             currentUser.logout();
         } 
         catch (Exception ex) {
-            System.err.println(ex);
+            System.err.println(ex.getMessage());
         }
         
         return "/index.xhtml?faces-redirect=true";
