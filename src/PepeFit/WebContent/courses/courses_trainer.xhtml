@@ -111,7 +111,7 @@
                             <div class="form-row" style="padding-bottom: 3%;padding-left: 3%;">
                                 <h:outputLabel for="Time1">Time:</h:outputLabel>
                                 <div class="col-2">
-                                    <h:inputText style="width: 90%;" type="text" id="Time1"/>
+                                    <h:inputText style="width: 90%;" type="text" id="Time1" value="#{trainerBean.firstName}"/>
                                 </div>
                                 <h:outputLabel for="Capacity1">Capacity:</h:outputLabel>
                                 <div class="col-2"> 
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="col-2" style="font-size: 15px;">
                                     <!-- Add Member rengi yeşil olmuyor -->
-                                    <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener="#"/> <!--  add action later this button -->
+                                    <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.denemeTest()}"/> <!--  add action later this button -->
                                 </div>
                             </div>
                         </h:form>
@@ -127,11 +127,12 @@
                         <h:form>
                         -->
                             <ul class="scrollbar list-unstyled" style="margin-top: 0px">
-                                <c:forEach items="#{listTrainerBean.getTrainerNames()}" var="trainer" value="#">
+                                <c:forEach items='#{listTrainerBean.loadTrainers("1","02.02.2018")}' var="trainer" value="#">
+                                <!--<c:forEach items="#{listTrainerBean.getTrainerNames()}" var="trainer" value="#">-->
                                 <li style="width: 99%;">
                                     <div class="form-row" style="padding-bottom: 2%;">
                                         <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                            <a>#{trainer.getName()}</a>
+                                            <a>#{trainer.getTrainerName()}</a>
                                         </div>
                                         <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                             <!-- <h:selectOneRadio id="xd" style="padding-right: 10%;" value="#">
