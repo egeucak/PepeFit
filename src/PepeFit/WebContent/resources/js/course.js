@@ -41,6 +41,10 @@ function toggleCourse(clickedOn) {
             'pattern': '{{H9}}:{{M9}}-{{H9}}:{{M9}}',
             'persistent': false
         });
+        $("#formCnT\\:Capacity1").formatter({
+            'pattern': '{{99}}',
+            'persistent': false
+        });
     });
 })(jQuery);
 
