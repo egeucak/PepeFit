@@ -330,8 +330,10 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(103, 152, 77, 0.25) !important;
 }
 
+/*<<<<<<< serhat_develop*/
 table{
-  width: 25% !important;
+  border-collapse: separate !important;
+  border-spacing: 0.3rem 0px;
 }
 
 table label:hover{
@@ -371,4 +373,26 @@ table input[type="radio"]:hover + label{
   .scrollbar {
     height: 90px;
     overflow-y: scroll;*/
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 0.4rem;
+  background-color: #4f964f40; 
+
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: var(--green);
+}
+
+.mokar{
+  margin-bottom:0%;
+  border-radius: 0.4rem;
+  border: 1px solid var(--green);  
+  color: var(--green) !important;
+  padding: 0% 0.2rem 0% 0.2rem;
+  max-width:100% !important;
+  white-space: nowrap;
+  background-color: white;
 }
