@@ -134,12 +134,17 @@
                                             <a>#{trainer.getName()}</a>
                                         </div>
                                         <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                            <h:selectOneRadio id="xd" style="padding-right: 10%;" value="#">
+                                            <!-- <h:selectOneRadio id="xd" style="padding-right: 10%;" value="#">
                                                 <f:selectItem itemLabel="10.00-12.00" />
                                                 <f:selectItem itemLabel="12.00-14.00" />
                                                 <f:selectItem itemLabel="14.00-16.00" />
                                                 <f:selectItem itemLabel="16.00-18.00"/>
-                                            </h:selectOneRadio>
+                                            </h:selectOneRadio> -->
+                                            <ul class="list-unstyled" style="margin-top: 0px">
+                                            <c:forEach items="#{listCourseBean.getCourseNames()}" var="course" value="#">
+                                                <li style="display: inline;"><a class="mokar">#{course.getCourseName()}</a></li>
+                                            </c:forEach>
+                                            </ul>
                                         </div>
                                     </div>
                                 </li>

@@ -309,3 +309,14 @@ table input[type="radio"]:hover + label{
   border-radius: 2rem;
   background-color: var(--green);
 }
+
+.mokar{
+  margin-bottom:0%;
+  border-radius: 0.4rem;
+  border: 1px solid var(--green);  
+  color: var(--green) !important;
+  padding: 0% 0.2rem 0% 0.2rem;
+  max-width:100% !important;
+  white-space: nowrap;
+  background-color: white;
+}
