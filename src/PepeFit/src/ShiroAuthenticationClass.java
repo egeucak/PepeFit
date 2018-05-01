@@ -1,3 +1,7 @@
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
@@ -17,7 +21,8 @@ public class ShiroAuthenticationClass {
 
     private String userName;
     private String password;
-
+    public static String id;
+    
     public String getUserName() {
         return userName;
     }
@@ -34,11 +39,19 @@ public class ShiroAuthenticationClass {
         this.password = password;
     }
 
-    public void authenticateTheUser(){
+	public static String getId() {
+		return id;
+	}
+
+	public static void setId(String id) {
+		ShiroAuthenticationClass.id = id;
+	}
+
+	public void authenticateTheUser(){
 
         Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password); /* TODO use Sha256Hash when hiding the password later */
-
+        
          try{
                 currentUser.login(token);
         } catch (UnknownAccountException uae ) {
@@ -57,7 +70,7 @@ public class ShiroAuthenticationClass {
     {
 
         Subject currentUser = SecurityUtils.getSubject();
-
+        
         try 
         {
             currentUser.logout();
@@ -69,18 +82,20 @@ public class ShiroAuthenticationClass {
         return "/index.xhtml?faces-redirect=true";
     }
     
-    public void isAnyUserLoggedIn()
+    public void isAnyUserLoggedIn() throws SQLException
     {
     	Subject currentUser = SecurityUtils.getSubject();
-
+    	
         if(SecurityUtils.getSubject().getPrincipal()!=null)
         {
         	if(currentUser.hasRole("admin")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+                assignId("admin");
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/admin/admin.xhtml?faces-redirect=true");
         	}
         	else if(currentUser.hasRole("member")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+                assignId("member");
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/member/member.xhtml?faces-redirect=true");
         	}
         	else if(currentUser.hasRole("trainer")) {
@@ -89,5 +104,13 @@ public class ShiroAuthenticationClass {
         	}
 
         }
+    }
+    
+    public void assignId(String role) throws SQLException {
+    	DatabaseBean database = new DatabaseBean();
+    	if (role.equals("member")) {
+    		ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select TC from Member where EMAIL=?",-1,this.userName);
+    		System.out.println(results.get(0).get("TC"));
+    	}
     }
 }
