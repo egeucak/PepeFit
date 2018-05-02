@@ -152,6 +152,8 @@ function syncRadios(courseContainerId,radioId){
         if(courseButtonslis[i].getAttribute('type')=='radio'){
             courseButtonslis[i].name = "radioId";
             courseTableEllis[i].style.display= "inline-block";
+            courseTableEllis[i].style.width= "25%";    
+            courseTableEllis[i].parentElement.parentElement.parentElement.style.width="100%";
         }
     }
 }
