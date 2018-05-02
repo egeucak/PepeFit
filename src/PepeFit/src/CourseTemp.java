@@ -9,7 +9,7 @@ public class CourseTemp {
         setDescription(description);
     }
 
-    public String getCourseName() {
+    public String getName() {
         return name;
     }
 
@@ -25,11 +25,11 @@ public class CourseTemp {
         this.description = description;
     }
 
-    public String getCourseId() {
+    public String getId() {
         return id;
     }
 
-    public String getCourseDescription() {
+    public String getDescription() {
         return description;
     }
 }
