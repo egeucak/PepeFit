@@ -109,8 +109,6 @@
 
                         <div class="container" id="Body-Fit-Container" style="display: none">
                             <ul class="scrollbar list-unstyled" style="margin-top: 0px">
-                                <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender1" requiredMessage="* Value is required">
-
                                 <c:forEach id="courseTimeList1" items='#{listTrainerBean.loadTrainers("1")}' var="trainer" value="#">
                                     <li style="width: 99%;">
                                         <div class="form-row" style="padding-bottom: 2%;">
@@ -119,25 +117,22 @@
                                                 
                                             </div>
                                             <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                <ul class="list-unstyled" style="margin-top: 0px">
-
-                                                    <c:forEach items="#{trainer.getCourseTime()}" var="coursetime" value="#">
-                                                    <li style="display: inline;"><a class="courseTimeLabel">#{coursetime}</a></li>
-                                                    </c:forEach>
-                                                </ul>
+                                                <h:selectOneRadio value="#{memberBean.gender}" required="true" id="pickatime1" requiredMessage="* Value is required">
+                                                    <ul class="list-unstyled" style="margin-top: 0px">
+                                                    <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemValue="#{coursetime}"/>
+                                                    </ul>
+                                                </h:selectOneRadio>
                                             </div>
                                         </div>
                                     </li>
                                 </c:forEach>
-                                </h:selectOneRadio>
-
                             </ul>
                         </div>
 
                         <div class="container" id="Fit-Step-Container" style="display: none">
                             <a/>
                             <ul class="scrollbar list-unstyled" style="margin-top: 0px">
-                                <c:forEach id="courseTimeList2" items='#{listTrainerBean.loadTrainers("2")}' var="trainer" value="#">
+                                <c:forEach id="courseTimeList1" items='#{listTrainerBean.loadTrainers("2")}' var="trainer" value="#">
                                     <li style="width: 99%;">
                                         <div class="form-row" style="padding-bottom: 2%;">
                                             <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
@@ -145,11 +140,11 @@
                                                 
                                             </div>
                                             <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                <ul class="list-unstyled" style="margin-top: 0px">
-                                                <c:forEach items="#{trainer.getCourseTime()}" var="coursetime" value="#">
-                                                    <li style="display: inline;"><a class="courseTimeLabel">#{coursetime}</a></li>
-                                                </c:forEach>
-                                                </ul>
+                                                <h:selectOneRadio value="#{memberBean.gender}" required="true" id="pickatime2" requiredMessage="* Value is required">
+                                                    <ul class="list-unstyled" style="margin-top: 0px">
+                                                    <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemValue="#{coursetime}"/>
+                                                    </ul>
+                                                </h:selectOneRadio>
                                             </div>
                                         </div>
                                     </li>
@@ -159,7 +154,7 @@
 
                          <div class="container" id="GFX-Container" style="display: none">
                             <ul class="scrollbar list-unstyled" style="margin-top: 0px">
-                                <c:forEach id="courseTimeList3" items='#{listTrainerBean.loadTrainers("3")}' var="trainer" value="#">
+                                <c:forEach id="courseTimeList1" items='#{listTrainerBean.loadTrainers("3")}' var="trainer" value="#">
                                     <li style="width: 99%;">
                                         <div class="form-row" style="padding-bottom: 2%;">
                                             <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
@@ -167,11 +162,11 @@
                                                 
                                             </div>
                                             <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                <ul class="list-unstyled" style="margin-top: 0px">
-                                                <c:forEach items="#{trainer.getCourseTime()}" var="coursetime" value="#">
-                                                    <li style="display: inline;"><a class="courseTimeLabel">#{coursetime}</a></li>
-                                                </c:forEach>
-                                                </ul>
+                                                <h:selectOneRadio value="#{memberBean.gender}" required="true" id="pickatime3" requiredMessage="* Value is required">
+                                                    <ul class="list-unstyled" style="margin-top: 0px">
+                                                    <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemValue="#{coursetime}"/>
+                                                    </ul>
+                                                </h:selectOneRadio>
                                             </div>
                                         </div>
                                     </li>

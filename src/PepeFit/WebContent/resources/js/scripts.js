@@ -130,18 +130,28 @@ function toggleCourseSplit(clickedOn) {
         if (coursedivid==clickedOn){
             lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
             document.getElementById(coursepid).style.display = "block";
-            //document.getElementById("course-form").reset();
+            if(document.getElementById("course-form")){
+                document.getElementById("course-form").reset();
+            }
             document.getElementById("block-func").value = coursedivid;
             document.getElementById("block-func").textContent = document.getElementById("block-func").value;
             console.log(document.getElementById("block-func").value);
             document.getElementById("empty-container").style.display ="none";
             document.getElementById("addCourse").style.display ="contents";
             document.getElementById(courseContainerId).style.display = "block";
+            syncRadios(courseContainerId,"pickatime");
         }
     }
 }
 
-
+function syncRadios(courseContainerId,radioId){
+    var xdlis = document.getElementById(courseContainerId).getElementsByTagName("input");
+    for(var i=0; i<xdlis.length; i++){
+        if(xdlis[i].getAttribute('type')=='radio'){
+            xdlis[i].name = "radioId";
+        }
+    }
+}
 
 (function($, undefined) {
 
