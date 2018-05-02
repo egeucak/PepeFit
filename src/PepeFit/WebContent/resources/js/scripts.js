@@ -104,13 +104,44 @@ function toggleCourse(clickedOn) {
             lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
             document.getElementById(coursepid).style.display = "block";
             //document.getElementById("course-form").reset();
-            document.getElementById("block-func").textContent = coursedivid;
-            console.log(document.getElementById(coursepid));
+            document.getElementById("block-func").value = coursedivid;
+            document.getElementById("block-func").textContent = document.getElementById("block-func").value;
+            console.log(document.getElementById("block-func").value);
             document.getElementById("empty-container").style.display ="none";
             document.getElementById("addCourse").style.display ="contents";
         }
     }
 }
+
+function toggleCourseSplit(clickedOn) {
+    var lis = document.getElementById("courses").getElementsByTagName("li");
+    for (var i=0; i<lis.length; i++){
+        lis[i].firstChild.classList.remove("active");
+        var coursedivid = lis[i].firstChild.id;
+        var coursepid = coursedivid.concat("p");
+        document.getElementById(coursepid).style.display = "none";
+
+        courseContainerId = coursedivid; //for different containers
+        if(courseContainerId.includes(" ")){
+            courseContainerId = coursedivid.replace(" ","-");
+        }
+        courseContainerId = courseContainerId.concat("-Container");
+        document.getElementById(courseContainerId).style.display = "none";
+        if (coursedivid==clickedOn){
+            lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
+            document.getElementById(coursepid).style.display = "block";
+            //document.getElementById("course-form").reset();
+            document.getElementById("block-func").value = coursedivid;
+            document.getElementById("block-func").textContent = document.getElementById("block-func").value;
+            console.log(document.getElementById("block-func").value);
+            document.getElementById("empty-container").style.display ="none";
+            document.getElementById("addCourse").style.display ="contents";
+            document.getElementById(courseContainerId).style.display = "block";
+        }
+    }
+}
+
+
 
 (function($, undefined) {
 

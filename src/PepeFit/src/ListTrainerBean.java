@@ -1,5 +1,7 @@
 import org.primefaces.context.RequestContext;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,10 +21,13 @@ public class ListTrainerBean {
 
     //private ArrayList<TrainerTemp> trainerNames = new ArrayList<TrainerTemp>();
 
+    public DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
 
+    public ArrayList<Trainer> loadTrainers(String courseId) {
 
-    public ArrayList<Trainer> loadTrainers(String courseId,String courseDate) {
+        String courseDate = (String)dtf.format(LocalDateTime.now());
+
         ArrayList<Trainer> trainers = new ArrayList<Trainer>();
         ArrayList<LinkedHashMap<String,Object>> result = null;
         ArrayList<ArrayList<Object>> trainer_times = new ArrayList<ArrayList<Object>>();
@@ -30,12 +35,12 @@ public class ListTrainerBean {
             DatabaseBean database = new DatabaseBean();
 
             // Fetch unique trainers for given course id and course_date.
-            result = database.execute_fetch_all("SELECT DISTINCT TC FROM Trainer NATURAL JOIN GeneralSchedule WHERE C_ID=? AND C_DATE=?",-1,courseId,courseDate);
+            result = database.execute_fetch_all("SELECT DISTINCT T_ID FROM GeneralSchedule WHERE C_ID=? AND C_DATE=? ORDER BY T_ID ASC",-1,courseId,courseDate);
             // Fetch course hours for these trainers.
             for(LinkedHashMap<String,Object> row_map:result){
-                String trainerId = row_map.get("TC").toString();
+                String trainerId = row_map.get("T_ID").toString();
                 ArrayList<LinkedHashMap<String,Object>> result_times = null;
-                result_times = database.execute_fetch_all("SELECT NAME,C_TIME FROM Trainer NATURAL JOIN GeneralSchedule WHERE C_ID=? AND TC=? AND C_DATE=? ORDER BY C_TIME ASC",-1,courseId,trainerId,courseDate);
+                result_times = database.execute_fetch_all("SELECT T_NAME,C_TIME FROM Trainer NATURAL JOIN GeneralSchedule WHERE C_ID=? AND T_ID=? AND C_DATE=? ORDER BY C_TIME ASC",-1,courseId,trainerId,courseDate);
                 // Trainer's course times for given c_id. It will store in Trainer's object.
                 // Store in an array for storing Trainer's object.
                 ArrayList<String> times = new ArrayList<String>();
@@ -44,7 +49,7 @@ public class ListTrainerBean {
                 }
                 ArrayList<Object> names_times = new ArrayList<Object>();
                 names_times.add(trainerId); // 0
-                names_times.add(result_times.get(0).get("NAME"));// 1
+                names_times.add(result_times.get(0).get("T_NAME"));// 1
                 names_times.add(times); // 2
                 trainer_times.add(names_times);
 
@@ -65,13 +70,7 @@ public class ListTrainerBean {
                 System.out.println((ArrayList<String>) times.get(2));
             }
         }
-        System.out.println("xd");
-        System.out.println(trainer_times);
-        for(Trainer trainer:trainers){
-            System.out.println(trainer.getTrainerName());
 
-        }
-        System.out.println("yd");
         return trainers;
     }
 

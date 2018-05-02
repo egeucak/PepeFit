@@ -386,7 +386,7 @@ table input[type="radio"]:hover + label{
   background-color: var(--green);
 }
 
-.mokar{
+.courseTimeLabel{
   margin-bottom:0%;
   border-radius: 0.4rem;
   border: 1px solid var(--green);  
