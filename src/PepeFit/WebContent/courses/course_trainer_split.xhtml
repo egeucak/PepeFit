@@ -46,9 +46,16 @@
         <li class="nav-item" >
             <div class="" data-toggle="dropdown" style="position: absolute; left: 90%;">
                 <img src="../resources/img/gear1.png" id="gear" alt=""/>
+                    <!--<img src="#resource{['img/gear1.png']}" id="gear" alt=""/>-->
                 <ul class="dropdown-menu" id="dropdown">
-                    <li><a href="#" id="dropdown-text">Settings</a></li>
-                    <li><a href="index.xhtml" id="dropdown-text">Logout</a></li>
+                    <h:form>
+                        <li><a href="#" id="dropdown-text">Settings</a></li>
+                        <li>
+                            <span id="dropdown-text">
+                                <h:commandLink style="color: white" action="#{shiroAuthenticationClass.logout()}">Logout</h:commandLink>
+                            </span>
+                        </li>
+                    </h:form>
                 </ul>
             </div>
         </li>
