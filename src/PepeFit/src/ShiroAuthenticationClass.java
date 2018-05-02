@@ -90,12 +90,12 @@ public class ShiroAuthenticationClass {
         {
         	if(currentUser.hasRole("admin")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-                assignId("admin");
+                //assignId("admin");
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/admin/admin.xhtml?faces-redirect=true");
         	}
         	else if(currentUser.hasRole("member")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-                assignId("member");
+                //assignId("member");
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/member/member.xhtml?faces-redirect=true");
         	}
         	else if(currentUser.hasRole("trainer")) {
