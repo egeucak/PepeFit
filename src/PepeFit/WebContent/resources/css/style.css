@@ -369,6 +369,7 @@ table input[type="radio"]:hover + label{
 .scrollbar{
   height: 20rem;
   overflow-y:scroll;
+  overflow-x: hidden;
   /*
   .scrollbar {
     height: 90px;
@@ -391,7 +392,7 @@ table input[type="radio"]:hover + label{
   border-radius: 0.4rem;
   border: 1px solid var(--green);  
   color: var(--green) !important;
-  padding: 0% 0.2rem 0% 0.2rem;
+  padding: 0.2% 0.2rem 0.2% 0.2rem;
   max-width:100% !important;
   white-space: nowrap;
   background-color: white;

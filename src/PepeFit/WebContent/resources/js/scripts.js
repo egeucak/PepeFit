@@ -145,10 +145,12 @@ function toggleCourseSplit(clickedOn) {
 }
 
 function syncRadios(courseContainerId,radioId){
-    var xdlis = document.getElementById(courseContainerId).getElementsByTagName("input");
-    for(var i=0; i<xdlis.length; i++){
-        if(xdlis[i].getAttribute('type')=='radio'){
-            xdlis[i].name = "radioId";
+    var courseButtonslis = document.getElementById(courseContainerId).getElementsByTagName("input");
+    var courseTableEllis= document.getElementById(courseContainerId).getElementsByTagName("td");
+    for(var i=0; i<courseButtonslis.length; i++){
+        if(courseButtonslis[i].getAttribute('type')=='radio'){
+            courseButtonslis[i].name = "radioId";
+            courseTableEllis[i].style.display= "inline-block";
         }
     }
 }
