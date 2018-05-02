@@ -17,11 +17,26 @@ import javax.xml.stream.events.StartDocument;
 @ManagedBean
 @RequestScoped
 
+
 public class ListTrainerBean {
+
+    static DatabaseBean database;
+
+    static {
+        try {
+            database = new DatabaseBean();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     //private ArrayList<TrainerTemp> trainerNames = new ArrayList<TrainerTemp>();
 
     public DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+    public ListTrainerBean() throws SQLException {
+    }
 
 
     public ArrayList<Trainer> loadTrainers(String courseId) {
@@ -32,7 +47,7 @@ public class ListTrainerBean {
         ArrayList<LinkedHashMap<String,Object>> result = null;
         ArrayList<ArrayList<Object>> trainer_times = new ArrayList<ArrayList<Object>>();
         try {
-            DatabaseBean database = new DatabaseBean();
+
 
             // Fetch unique trainers for given course id and course_date.
             result = database.execute_fetch_all("SELECT DISTINCT T_ID FROM GeneralSchedule WHERE C_ID=? AND C_DATE=? ORDER BY T_ID ASC",-1,courseId,courseDate);
@@ -53,8 +68,8 @@ public class ListTrainerBean {
                 names_times.add(times); // 2
                 trainer_times.add(names_times);
 
+
             }
-            database.destruct_connection();
         } catch (SQLException e) {
             System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
         }
