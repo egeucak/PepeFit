@@ -1,3 +1,4 @@
+import com.google.api.services.sqladmin.model.Database;
 import org.primefaces.context.RequestContext;
 
 import java.time.LocalDateTime;
@@ -20,16 +21,7 @@ import javax.xml.stream.events.StartDocument;
 
 public class ListTrainerBean {
 
-    static DatabaseBean database;
 
-    static {
-        try {
-            database = new DatabaseBean();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     //private ArrayList<TrainerTemp> trainerNames = new ArrayList<TrainerTemp>();
 
@@ -55,8 +47,11 @@ public class ListTrainerBean {
     public int trainerX = -1;
     public int old_courseId;
 
-    public ArrayList<Trainer> loading(String courseId){
-        if(this.trainerX == -1){
+
+
+    public ArrayList<Trainer> loading(String courseId) throws SQLException {
+
+       if(this.trainerX == -1){
             System.out.println("FUCK1 + " + courseId+ "\n");
             this.trainerX = Integer.parseInt(courseId) - 1;
             this.trainer_deneme = (ArrayList<Trainer>) loadTrainers(courseId).clone();
@@ -70,6 +65,7 @@ public class ListTrainerBean {
             this.trainerX = Integer.parseInt(courseId) - 1;
             this.trainer_deneme = (ArrayList<Trainer>) loadTrainers(courseId).clone();
             this.old_courseId = Integer.parseInt(courseId);
+
             return this.trainer_deneme;
         }
 
@@ -78,9 +74,10 @@ public class ListTrainerBean {
 
 
 
-    public ArrayList<Trainer> loadTrainers(String courseId) {
+    public ArrayList<Trainer> loadTrainers(String courseId) throws SQLException {
 
         String courseDate = (String)dtf.format(LocalDateTime.now());
+        DatabaseBean database = new DatabaseBean();
 
         ArrayList<Trainer> trainers = new ArrayList<Trainer>();
         ArrayList<LinkedHashMap<String,Object>> result = null;

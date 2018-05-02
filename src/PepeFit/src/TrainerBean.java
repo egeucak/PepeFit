@@ -15,17 +15,6 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class TrainerBean {
 
-
-    DatabaseBean database;
-
-    {
-        try {
-            database = new DatabaseBean();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     String firstName, lastName, eMail, phoneNumber, address, idNumber, gender;
     String birthDate, registirationDate;
 
@@ -269,7 +258,7 @@ public class TrainerBean {
         String courseDate = (String)dtf.format(LocalDateTime.now());
         String trainerID = "3";
     	try {
-
+			DatabaseBean database = new DatabaseBean();
 //            database.execute("CALL insert_course(?,?,?)", 1,courseName.toUpperCase(),courseTime,courseDate);
 			// Checking trainer is already add that course with the same time and the same date into database !
 			ArrayList<LinkedHashMap<String,Object>> result = database.execute_fetch_all("SELECT * FROM GeneralSchedule WHERE C_ID = ? AND C_TIME = ? AND C_DATE = ? AND T_ID = ?",-1,courseId,this.courseTime,courseDate,trainerID);
@@ -278,7 +267,9 @@ public class TrainerBean {
 				database.execute("CALL insert_courseSchedule(?,?,?,?,?)",1,courseId,courseTime,courseDate,trainerID,this.courseCapacity);
 				database.commit_trans();
 				System.out.println("SUCCESSFULLY ADDED INTO GENERALSCHEDULE!" + result + "\n");
-				this.courseCapacity = null;
+				database.destruct_connection();
+
+                this.courseCapacity = null;
                 this.courseTime = null;
 
 				return "Successfully Added !";
