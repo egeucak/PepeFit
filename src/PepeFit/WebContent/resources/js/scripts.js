@@ -185,18 +185,16 @@ function toggleCourseSplit(clickedOn) {
             $this.val(function() {
                 console.log(input);
                 console.log(checkTcNum(input));
-                if (checkTcNum(input)){
+                if (checkTcNum(input)) {
                     $('#idResultBox').text("Your ID is valid").attr('class', 'text-uppercase text-success');
-                    $('#idResultBox').css({"display": "block", "class":"text-success"});
+                    $('#idResultBox').css({"display": "block", "class": "text-success"});
                     $('#addButton').css({"display": "block"});
-                }else{
-                    $('#idResultBox').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
-                    $('#idResultBox').css({"display": "block", "class":"text-danger"});
-                    $('#addButton').css({"display": "none"});
+                } else {
+                        $('#idResultBox').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
+                        $('#idResultBox').css({"display": "block", "class": "text-danger"});
+                        $('#addButton').css({"display": "none"});
                 }
-                return ((input.toString().length > 11) ? input=input.toString().substring(0,11) : input);
-                // return (checkTcNum(input) ? input : console.log("False"));
-                // return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+                return ((input.toString().length > 11) ? input.toString().substring(0,11) : input);
             } );
         } );
     });

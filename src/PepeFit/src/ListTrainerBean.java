@@ -17,11 +17,69 @@ import javax.xml.stream.events.StartDocument;
 @ManagedBean
 @RequestScoped
 
+
 public class ListTrainerBean {
+
+    static DatabaseBean database;
+
+    static {
+        try {
+            database = new DatabaseBean();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     //private ArrayList<TrainerTemp> trainerNames = new ArrayList<TrainerTemp>();
 
     public DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+
+
+
+
+
+    public ArrayList<Trainer> getTrainer_deneme() {
+        return trainer_deneme;
+    }
+
+    public void setTrainer_deneme(ArrayList<Trainer> trainer_deneme) {
+        this.trainer_deneme = trainer_deneme;
+    }
+
+
+
+
+    public ArrayList<Trainer> trainer_deneme = new ArrayList<Trainer>();
+    public int trainerX = -1;
+    public int old_courseId;
+
+
+
+    public ArrayList<Trainer> loading(String courseId){
+
+       if(this.trainerX == -1){
+            System.out.println("FUCK1 + " + courseId+ "\n");
+            this.trainerX = Integer.parseInt(courseId) - 1;
+            this.trainer_deneme = (ArrayList<Trainer>) loadTrainers(courseId).clone();
+            this.old_courseId = Integer.parseInt(courseId);
+
+        }else if(trainerX == (Integer.parseInt(courseId) - 1)){
+            System.out.println("FUCK2 + " + courseId  + "\n");
+            return this.trainer_deneme;
+        }else if(Integer.parseInt(courseId) != this.old_courseId){
+            System.out.println("FUCK3 + " + courseId+ "\n");
+            this.trainerX = Integer.parseInt(courseId) - 1;
+            this.trainer_deneme = (ArrayList<Trainer>) loadTrainers(courseId).clone();
+            this.old_courseId = Integer.parseInt(courseId);
+
+            return this.trainer_deneme;
+        }
+
+        return this.trainer_deneme;
+    }
+
 
 
     public ArrayList<Trainer> loadTrainers(String courseId) {
@@ -32,7 +90,7 @@ public class ListTrainerBean {
         ArrayList<LinkedHashMap<String,Object>> result = null;
         ArrayList<ArrayList<Object>> trainer_times = new ArrayList<ArrayList<Object>>();
         try {
-            DatabaseBean database = new DatabaseBean();
+
 
             // Fetch unique trainers for given course id and course_date.
             result = database.execute_fetch_all("SELECT DISTINCT T_ID FROM GeneralSchedule WHERE C_ID=? AND C_DATE=? ORDER BY T_ID ASC",-1,courseId,courseDate);
@@ -54,7 +112,7 @@ public class ListTrainerBean {
                 trainer_times.add(names_times);
 
             }
-            database.destruct_connection();
+
         } catch (SQLException e) {
             System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
         }
@@ -71,19 +129,22 @@ public class ListTrainerBean {
             }
         }
 
+
         return trainers;
     }
 
 }
 
 
+
+
 //
 //    public ArrayList<TrainerTemp> getTrainerNames() {
-//        trainerNames.add(new TrainerTemp("Ege UÃ§ak", "egeu", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-//        trainerNames.add(new TrainerTemp("BahadÄ±r Adak", "baho", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-//        trainerNames.add(new TrainerTemp("EyÃ¼pcan Bodur", "konyalÄ±", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-//        trainerNames.add(new TrainerTemp("Berk Can Ã–zen", "brkczn", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-//        trainerNames.add(new TrainerTemp("Serhat SaÄŸlÄ±k", "mavi", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Ege Uçak", "egeu", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Bahadýr Adak", "baho", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Eyüpcan Bodur", "konyalý", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Berk Can Özen", "brkczn", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Serhat Saðlýk", "mavi", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
 //        trainerNames.add(new TrainerTemp("Sean Green", "seangreen", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
 //        trainerNames.add(new TrainerTemp("Keegan Alvarado", "keeganalvarado", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
 //        trainerNames.add(new TrainerTemp("Nguyen","oscarnguyen", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));

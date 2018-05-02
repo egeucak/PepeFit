@@ -89,19 +89,18 @@ public class ShiroAuthenticationClass {
         if(SecurityUtils.getSubject().getPrincipal()!=null)
         {
         	if(currentUser.hasRole("admin") || currentUser.hasRole("superadmin")) {
-                NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-                //assignId("admin");
+                NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();          
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/admin/admin.xhtml?faces-redirect=true");
         	}
         	else if(currentUser.hasRole("member")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-                assignId("member");
+                //assignId("member");
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/member/member.xhtml?faces-redirect=true");
         	}
         	else if(currentUser.hasRole("trainer")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-                assignId("trainer");
-                nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/trainer/progressadd.xhtml?faces-redirect=true");
+                //assignId("trainer");
+                nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/trainer/course_trainer_split.xhtml?faces-redirect=true");
         	}
 
         }

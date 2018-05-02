@@ -35,17 +35,8 @@
     <h:outputStylesheet library="css" name="bootstrap.css" />
     <h:outputStylesheet library="css" name="style.css" />
 
-    <h:outputScript library="js" name="formatter.js" />
-    <h:outputScript library="js" name="phone-helper.js" />
-    <h:outputScript library="js" name="bootstrap.js" />
-    <h:outputScript library="js" name="scripts.js" />
-    <h:outputScript library="js" name="course.js" />
-    <h:outputStylesheet library="css" name="bootstrap.css" />
-    <h:outputStylesheet library="css" name="style.css" />
-
 </h:head>
-
-<h:body styleClass="bg">
+<h:body styleClass = "bg">
 
 <div class="navbar navbar-expand-sm navbar-light" id="bar">
     <ul class="navbar-nav">
@@ -55,9 +46,16 @@
         <li class="nav-item" >
             <div class="" data-toggle="dropdown" style="position: absolute; left: 90%;">
                 <img src="../resources/img/gear1.png" id="gear" alt=""/>
+                    <!--<img src="#resource{['img/gear1.png']}" id="gear" alt=""/>-->
                 <ul class="dropdown-menu" id="dropdown">
-                    <li><a href="#" id="dropdown-text">Settings</a></li>
-                    <li><a href="index.xhtml" id="dropdown-text">Logout</a></li>
+                    <h:form>
+                        <li><a href="#" id="dropdown-text">Settings</a></li>
+                        <li>
+                            <span id="dropdown-text">
+                                <h:commandLink style="color: white" action="#{shiroAuthenticationClass.logout()}">Logout</h:commandLink>
+                            </span>
+                        </li>
+                    </h:form>
                 </ul>
             </div>
         </li>
@@ -76,7 +74,7 @@
             <div class="grey-bg left-menu" id="courses">
                 <ul class="list-unstyled" style="margin-top: 0px">
                     <c:forEach items="#{listCourseBean.getCourseNames()}" var="course" value="#{course.getCourseName()}">
-                        <li><a href="#" class="" id="#{course.getCourseName()}" onclick="toggleCourse('#{course.getCourseName()}')">#{course.getCourseName()}</a>
+                        <li><a href="#" class="" id="#{course.getCourseName()}" onclick="toggleCourseSplit('#{course.getCourseName()}')">#{course.getCourseName()}</a>
                             <span style="color: var(--gray-dark); display: none;font-size: 15px;padding-right: 2%;"
                                   id="#{course.getCourseName()}p">#{course.getCourseDescription()}<br/></span>
                         </li>
@@ -108,7 +106,7 @@
                     <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
                         <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
                             <div class="col-4">
-                                <a id="block-func" value="#"></a>
+                                <a id="block-func"></a>
                             </div>
                             <div class="col-4">
                                 <a class="col-1" style="color:var(--gray-dark);">Today's Date: <script type="text/javascript">showDate();</script></a>
@@ -117,35 +115,33 @@
                             <div class="col-3" style="padding-left: 5%;">
                             </div>
                         </div>
+                        <div class="container" id="Body-Fit-Container" style="display: none">
 
-                        <h:form id="course-form" value="#">
-                            <div class="form-row" style="padding-bottom: 3%;padding-left: 3%;">
-                                <h:outputLabel for="Time1">Time:</h:outputLabel>
-                                <div class="col-2">
-                                    <h:inputText style="width: 90%;" type="text" id="Time1" value="#{trainerBean.firstName}"/>
+                            <h:form id="Body-Fit-Form" value="#">
+                                <div class="form-row" style="padding-bottom: 3%;padding-left: 3%;">
+                                    <h:outputLabel for="Time1">Time:</h:outputLabel>
+                                    <div class="col-2">
+                                        <h:inputText style="width: 90%;" type="text" id="Time1" value="#{trainerBean.courseTime}"/>
+                                    </div>
+                                    <h:outputLabel for="Capacity1">Capacity:</h:outputLabel>
+                                    <div class="col-2">
+                                        <h:inputText style="width: 90%;" type="text" id="Capacity1" value="#{trainerBean.courseCapacity}"/>
+                                    </div>
+                                    <div class="col-2" style="font-size: 15px;">
+                                        <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.addCourse(1)}"/>
+                                    </div>
                                 </div>
-                                <h:outputLabel for="Capacity1">Capacity:</h:outputLabel>
-                                <div class="col-2"> 
-                                    <h:inputText style="width: 90%;" type="text" id="Capacity1"/>
-                                </div>
-                                <div class="col-2" style="font-size: 15px;">
-                                    <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.denemeTest()}"/>
-                                </div>
-                            </div>
-                        </h:form>
-                        <!--
-                        <h:form>
-                        -->
+                            </h:form>
+
                             <ul class="scrollbar list-unstyled" style="margin-top: 0px">
-                                <c:forEach id="courseTimeList" items='#{listTrainerBean.loadTrainers("1")}' var="trainer" value="#">
+                                <c:forEach id="courseTimeList1" items='#{listTrainerBean.loading("1")}' var="trainer" value="#">
                                     <li style="width: 99%;">
                                         <div class="form-row" style="padding-bottom: 2%;">
                                             <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                 <a>#{trainer.getTrainerName()}</a>
-                                                
                                             </div>
                                             <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                <ul class="list-unstyled" style="margin-top: 0px">
+                                                <ul class="list-unstyled">
                                                 <c:forEach items="#{trainer.getCourseTime()}" var="coursetime" value="#">
                                                     <li style="display: inline;"><a class="courseTimeLabel">#{coursetime}</a></li>
                                                 </c:forEach>
@@ -155,11 +151,87 @@
                                     </li>
                                 </c:forEach>
                             </ul>
+                        </div>
+
+                        <div class="container" id="Fit-Step-Container" style="display: none">
+
+                            <h:form id="Fit-Step-Form" value="#">
+                                <div class="form-row" style="padding-bottom: 3%;padding-left: 3%;">
+                                    <h:outputLabel for="Time1">Time:</h:outputLabel>
+                                    <div class="col-2">
+                                        <h:inputText style="width: 90%;" type="text" id="Time1" value="#{trainerBean.courseTime}"/>
+                                    </div>
+                                    <h:outputLabel for="Capacity1">Capacity:</h:outputLabel>
+                                    <div class="col-2">
+                                        <h:inputText style="width: 90%;" type="text" id="Capacity1" value="#{trainerBean.courseCapacity}"/>
+                                    </div>
+                                    <div class="col-2" style="font-size: 15px;">
+                                        <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.addCourse(2)}"/>
+                                    </div>
+                                </div>
+                            </h:form>
+
+                            <ul class="scrollbar list-unstyled" style="margin-top: 0px">
+                                <c:forEach id="courseTimeList2" items='#{listTrainerBean.loading("2")}' var="trainer" value="#">
+                                    <li style="width: 99%;">
+                                        <div class="form-row" style="padding-bottom: 2%;">
+                                            <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <a>#{trainer.getTrainerName()}</a>
+
+                                            </div>
+                                            <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <ul class="list-unstyled">
+                                                <c:forEach items="#{trainer.getCourseTime()}" var="coursetime" value="#">
+                                                    <li style="display: inline;"><a class="courseTimeLabel">#{coursetime}</a></li>
+                                                </c:forEach>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+
+                         <div class="container" id="GFX-Container" style="display: none">
+                             <h:form id="GFX-Form" value="#">
+                                 <div class="form-row" style="padding-bottom: 3%;padding-left: 3%;">
+                                     <h:outputLabel for="Time1">Time:</h:outputLabel>
+                                     <div class="col-2">
+                                         <h:inputText style="width: 90%;" type="text" id="Time1" value="#{trainerBean.courseTime}"/>
+                                     </div>
+                                     <h:outputLabel for="Capacity1">Capacity:</h:outputLabel>
+                                     <div class="col-2">
+                                         <h:inputText style="width: 90%;" type="text" id="Capacity1" value="#{trainerBean.courseCapacity}"/>
+                                     </div>
+                                     <div class="col-2" style="font-size: 15px;">
+                                         <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.addCourse(3)}"/>
+                                     </div>
+                                 </div>
+                             </h:form>
+
+                            <ul class="scrollbar list-unstyled" style="margin-top: 0px">
+                                <c:forEach id="courseTimeList3" items='#{listTrainerBean.loading("3")}' var="trainer" value="#">
+                                    <li style="width: 99%;">
+                                        <div class="form-row" style="padding-bottom: 2%;">
+                                            <div class="col-6" style="background-color: var(--white);border-radius: 0.7srem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <a>#{trainer.getTrainerName()}</a>
+                                            </div>
+                                            <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <ul class="list-unstyled">
+                                                <c:forEach items="#{trainer.getCourseTime()}" var="coursetime" value="#">
+                                                    <li style="display: inline;"><a class="courseTimeLabel">#{coursetime}</a></li>
+                                                </c:forEach>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
             </div>
-
-
 
         </div>
     </div>
