@@ -35,8 +35,47 @@ public class ListTrainerBean {
 
     public DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-    public ListTrainerBean() throws SQLException {
+
+
+
+
+
+    public ArrayList<Trainer> getTrainer_deneme() {
+        return trainer_deneme;
     }
+
+    public void setTrainer_deneme(ArrayList<Trainer> trainer_deneme) {
+        this.trainer_deneme = trainer_deneme;
+    }
+
+
+
+
+    public ArrayList<Trainer> trainer_deneme = new ArrayList<Trainer>();
+    public int trainerX = -1;
+    public int old_courseId;
+
+    public ArrayList<Trainer> loading(String courseId){
+        if(this.trainerX == -1){
+            System.out.println("FUCK1 + " + courseId+ "\n");
+            this.trainerX = Integer.parseInt(courseId) - 1;
+            this.trainer_deneme = (ArrayList<Trainer>) loadTrainers(courseId).clone();
+            this.old_courseId = Integer.parseInt(courseId);
+
+        }else if(trainerX == (Integer.parseInt(courseId) - 1)){
+            System.out.println("FUCK2 + " + courseId  + "\n");
+            return this.trainer_deneme;
+        }else if(Integer.parseInt(courseId) != this.old_courseId){
+            System.out.println("FUCK3 + " + courseId+ "\n");
+            this.trainerX = Integer.parseInt(courseId) - 1;
+            this.trainer_deneme = (ArrayList<Trainer>) loadTrainers(courseId).clone();
+            this.old_courseId = Integer.parseInt(courseId);
+            return this.trainer_deneme;
+        }
+
+        return this.trainer_deneme;
+    }
+
 
 
     public ArrayList<Trainer> loadTrainers(String courseId) {
@@ -68,8 +107,8 @@ public class ListTrainerBean {
                 names_times.add(times); // 2
                 trainer_times.add(names_times);
 
-
             }
+
         } catch (SQLException e) {
             System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
         }
@@ -86,10 +125,13 @@ public class ListTrainerBean {
             }
         }
 
+
         return trainers;
     }
 
 }
+
+
 
 
 //

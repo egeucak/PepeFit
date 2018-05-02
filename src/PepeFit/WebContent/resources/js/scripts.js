@@ -125,13 +125,14 @@ function toggleCourseSplit(clickedOn) {
         if(courseContainerId.includes(" ")){
             courseContainerId = coursedivid.replace(" ","-");
         }
+        courseFormId = courseContainerId.concat("-Form");
         courseContainerId = courseContainerId.concat("-Container");
         document.getElementById(courseContainerId).style.display = "none";
         if (coursedivid==clickedOn){
             lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
             document.getElementById(coursepid).style.display = "block";
-            if(document.getElementById("course-form")){
-                document.getElementById("course-form").reset();
+            if(document.getElementById(courseFormId)){
+                document.getElementById(courseFormId).reset();
             }
             document.getElementById("block-func").value = coursedivid;
             document.getElementById("block-func").textContent = document.getElementById("block-func").value;
