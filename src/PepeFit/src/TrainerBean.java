@@ -10,10 +10,10 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class TrainerBean {
-	
+
 	String firstName, lastName, eMail, phoneNumber, address, idNumber, gender;
 	Date birthDate;
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -77,7 +77,7 @@ public class TrainerBean {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	
+
 	public void editActionGender(String gender) {
 		if(gender.equals("Male")) {
 			setGender("Male");
@@ -91,9 +91,9 @@ public class TrainerBean {
 	}
 
 
-    public String addCourse(int courseId, String courseTime,String courseDate,String trainerID,int capacity) {
-        try {
-            DatabaseBean database = new DatabaseBean();
+	public String addCourse(int courseId, String courseTime,String courseDate,String trainerID,int capacity) {
+		try {
+			DatabaseBean database = new DatabaseBean();
 //            database.execute("CALL insert_course(?,?,?)", 1,courseName.toUpperCase(),courseTime,courseDate);
 			// Checking trainer is already add that course with the same time and the same date into database !
 			ArrayList<LinkedHashMap<String,Object>> result = database.execute_fetch_all("SELECT * FROM GeneralSchedule WHERE C_ID = ? AND C_TIME = ? AND C_DATE = ? AND TRAINER_ID = ?",-1,courseId,courseTime,courseDate,trainerID);
@@ -101,7 +101,7 @@ public class TrainerBean {
 			if(result.size() == 0){
 				database.execute("CALL insert_courseSchedule(?,?,?,?,?)",1,courseId,courseTime,courseDate,trainerID,capacity);
 				database.commit_trans();
-				System.out.println("SUCCESSFULLY ADDED INTO GENERALSCHEDULE! -> " + result + "\n");
+				System.out.println("SUCCESSFULLY ADDED INTO GENERALSCHEDULE!" + result + "\n");
 				database.destruct_connection();
 				return "Successfully Added !";
 
@@ -113,25 +113,29 @@ public class TrainerBean {
 			}
 
 
-        } catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("ERROR OCCURED WHILE ADDING COURSE " + e.getMessage());
-        	return "Cannot do this operation please try again later !";
+			return "Cannot do this operation please try again later !";
 
-        }
-    }
+		}
+	}
 
-    public void deneme() {
+	public void deneme() {
 
-        Courses courses = new Courses();
-        courses.loadCourses();
-        int len = courses.courses.size();
-        int x = 0;
-        while(x < len){
-            System.out.print("CourseId: "+ courses.courses.get(x).getCourseId() + " CourseName: " + courses.courses.get(x).getCourseName() + " Description: " + courses.courses.get(x).getCourseDescription() + "\n");
-            x++;
-        }
+		Courses courses = new Courses();
+		courses.loadCourses();
+		int len = courses.courses.size();
+		int x = 0;
+		while(x < len){
+			System.out.print("CourseId: "+ courses.courses.get(x).getCourseId() + " CourseName: " + courses.courses.get(x).getCourseName() + " Description: " + courses.courses.get(x).getCourseDescription() + "\n");
+			x++;
+		}
 
 
-    }
-	
+	}
+
+	public void denemeTest(){
+		System.out.print(this.firstName+"\n");
+	}
+
 }
