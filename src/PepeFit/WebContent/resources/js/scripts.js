@@ -157,3 +157,67 @@ function toggleCourseSplit(clickedOn) {
         });
     });
 })(jQuery);
+
+(function($, undefined) {
+    "use strict";
+    $(function() {
+
+        var $input = $( "#addMemberForm\\:idNumber1" );
+
+        $input.on( "keyup", function( event ) {
+
+
+            // When user select text in the document, also abort.
+            var selection = window.getSelection().toString();
+            if ( selection !== '' ) {
+                return;
+            }
+
+            // When the arrow keys are pressed, abort.
+            if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+                return;
+            }
+            var $this = $( this );
+            // Get the value.
+            var input = $this.val();
+            var input = input.replace(/[\D\s\._\-]+/g, "");
+            input = input ? parseInt( input, 10 ) : "";
+            $this.val(function() {
+                console.log(input);
+                console.log(checkTcNum(input));
+                if (checkTcNum(input)){
+                    $('#idResultBox').text("Your ID is valid").attr('class', 'text-uppercase text-success');
+                    $('#idResultBox').css({"display": "block", "class":"text-success"});
+                    $('#addButton').css({"display": "block"});
+                }else{
+                    $('#idResultBox').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
+                    $('#idResultBox').css({"display": "block", "class":"text-danger"});
+                    $('#addButton').css({"display": "none"});
+                }
+                return ((input.toString().length > 11) ? input=input.toString().substring(0,11) : input);
+                // return (checkTcNum(input) ? input : console.log("False"));
+                // return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+            } );
+        } );
+    });
+})(jQuery);
+
+var checkTcNum = function(value) {
+    value = value.toString();
+    var isEleven = /^[0-9]{11}$/.test(value);
+    var totalX = 0;
+    for (var i = 0; i < 10; i++) {
+        totalX += Number(value.substr(i, 1));
+    }
+    var isRuleX = totalX % 10 == value.substr(10,1);
+    var totalY1 = 0;
+    var totalY2 = 0;
+    for (var i = 0; i < 10; i+=2) {
+        totalY1 += Number(value.substr(i, 1));
+    }
+    for (var i = 1; i < 10; i+=2) {
+        totalY2 += Number(value.substr(i, 1));
+    }
+    var isRuleY = ((totalY1 * 7) - totalY2) % 10 == value.substr(9,0);
+    return isEleven && isRuleX && isRuleY;
+};
