@@ -69,11 +69,11 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/error/error404.jsp</location>
+        <location>/error/error404.xhtml</location>
     </error-page>
     <error-page>
         <error-code>401</error-code>
-        <location>/error/error401.jsp</location>
+        <location>/error/error401.xhtml</location>
     </error-page>
 
     <welcome-file-list>
