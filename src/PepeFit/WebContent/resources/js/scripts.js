@@ -200,6 +200,90 @@ function toggleCourseSplit(clickedOn) {
     });
 })(jQuery);
 
+(function($, undefined) {
+    "use strict";
+    $(function() {
+
+        var $input = $( "#searchMemberForm\\:idNumber2" );
+
+        $input.on( "keyup", function( event ) {
+
+
+            // When user select text in the document, also abort.
+            var selection = window.getSelection().toString();
+            if ( selection !== '' ) {
+                return;
+            }
+
+            // When the arrow keys are pressed, abort.
+            if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+                return;
+            }
+            var $this = $( this );
+            // Get the value.
+            var input = $this.val();
+            var input = input.replace(/[\D\s\._\-]+/g, "");
+            input = input ? parseInt( input, 10 ) : "";
+            $this.val(function() {
+                console.log(input);
+                console.log(checkTcNum(input));
+                if (checkTcNum(input)) {
+                    $('#idResultBox2').text("Your ID is valid").attr('class', 'text-uppercase text-success');
+                    $('#idResultBox2').css({"display": "block", "class": "text-success"});
+                    $('#searchButton1').css({"display": "block"});
+                } else {
+                        $('#idResultBox2').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
+                        $('#idResultBox2').css({"display": "block", "class": "text-danger"});
+                        $('#searchButton1').css({"display": "none"});
+                }
+                return ((input.toString().length > 11) ? input.toString().substring(0,11) : input);
+            } );
+        } );
+    });
+})(jQuery);
+
+(function($, undefined) {
+    "use strict";
+    $(function() {
+
+        var $input = $( "#updateMemberForm\\:idNumber_2" );
+
+        $input.on( "keyup", function( event ) {
+
+
+            // When user select text in the document, also abort.
+            var selection = window.getSelection().toString();
+            if ( selection !== '' ) {
+                return;
+            }
+
+            // When the arrow keys are pressed, abort.
+            if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+                return;
+            }
+            var $this = $( this );
+            // Get the value.
+            var input = $this.val();
+            var input = input.replace(/[\D\s\._\-]+/g, "");
+            input = input ? parseInt( input, 10 ) : "";
+            $this.val(function() {
+                console.log(input);
+                console.log(checkTcNum(input));
+                if (checkTcNum(input)) {
+                    $('#idResultBox3').text("Your ID is valid").attr('class', 'text-uppercase text-success');
+                    $('#idResultBox3').css({"display": "block", "class": "text-success"});
+                    $('#updateButton1').css({"display": "block"});
+                } else {
+                        $('#idResultBox3').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
+                        $('#idResultBox3').css({"display": "block", "class": "text-danger"});
+                        $('#updateButton1').css({"display": "none"});
+                }
+                return ((input.toString().length > 11) ? input.toString().substring(0,11) : input);
+            } );
+        } );
+    });
+})(jQuery);
+
 var checkTcNum = function(value) {
     value = value.toString();
     var isEleven = /^[0-9]{11}$/.test(value);

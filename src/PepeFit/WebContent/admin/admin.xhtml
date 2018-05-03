@@ -176,14 +176,15 @@
                                     <a class="col-1" style="color:var(--gray-dark);">Update Date: <script type="text/javascript">showDate();</script></a>
                                 </div>
                             </div>
-                            <h:form>
+                            <h:form id="searchMemberForm">
                                 <div class="form-row" style="padding-bottom: 3%;">
                                     <div class="col-3">
                                         <!--                                     <input type="text" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"/> -->
                                         <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber2" value="#{memberBean.idNumber}" requiredMessage="* Value is required"/>
+                                        <p style="display: none;font-size: 10px; padding-bottom: -50%;" id="idResultBox2"></p>
                                         <h:message for="idNumber2" style="color:red"/>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-3" style="display: none" id="searchButton1">
                                         <!--                                     <button type="button" class="btn" id="func-button" onclick="updateSearch('updateMemberForm')" style="font-size: 15px; margin-top: 1%;">Search Member</button> -->
                                         <h:commandButton value="Search Member"  styleClass="btn func-button" actionListener="#{memberBean.showMemberDB()}" >
                                             <!--<f:ajax execute="@form" render="@none"  onevent="updateSearch('updateMemberForm')"  />-->
@@ -192,7 +193,7 @@
                                     </div>
                                 </div>
                             </h:form>
-                            <h:form>
+                            <h:form id="updateMemberForm">
                                 <div class="form-row" style="padding-bottom: 3%;">
                                     <div class="col-3">
                                         <!--                                 	<input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
@@ -228,8 +229,9 @@
                                     <div class="col-3">
                                         <!--disabled="true"-->
                                         <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber_2" value="#{memberBean.idNumber}" requiredMessage="* Value is required" />
+                                        <p style="display: none;font-size: 10px; padding-bottom: -50%;" id="idResultBox3"></p>
                                         <h:message for="idNumber_2" style="color:red"/>
-                                        <div style="font-size: 15px; margin-top: 10%;">
+                                        <div style="font-size: 15px; margin-top: 10%;display: none" id="updateButton1">
                                             <!-- Add Member rengi yeşil olmuyor -->
                                             <h:commandButton value="Update Member" type="submit" styleClass="btn func-button" actionListener="#{memberBean.updateMemberDB()}"/> <!--  add action later this button -->
                                         </div>

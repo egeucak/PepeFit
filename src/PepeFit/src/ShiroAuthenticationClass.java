@@ -99,7 +99,7 @@ public class ShiroAuthenticationClass {
         	}
         	else if(currentUser.hasRole("trainer")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-                //assignId("trainer");
+                assignId("trainer");
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/trainer/course_trainer_split.xhtml?faces-redirect=true");
         	}
 
@@ -114,7 +114,9 @@ public class ShiroAuthenticationClass {
     	}
     	else if (role.equals("trainer")) {
     		ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select T_ID from Trainer where T_EMAIL=?",-1,this.userName);
+    		System.out.println("GELDÝ");
     		System.out.println(results.get(0).get("T_ID"));
+    		id = (String) results.get(0).get("T_ID");
     	}
     }
 }
