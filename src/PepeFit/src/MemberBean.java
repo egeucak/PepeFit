@@ -23,6 +23,22 @@ public class MemberBean {
 	private String birthDate,registirationDate;
 	private static Map<String,Object> genders = new LinkedHashMap<String, Object>();
 
+	public String selectedCourse;
+
+	public void printCourse(){
+		System.out.println("Anan");
+		System.out.println(this.selectedCourse);
+	}
+
+
+	public String getSelectedCourse() {
+		return selectedCourse;
+	}
+
+	public void setSelectedCourse(String selectedCourse) {
+		this.selectedCourse = selectedCourse;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -136,7 +152,7 @@ public class MemberBean {
 		this.setGender(null);
 		this.setPhoneNumber(null);
 		this.seteMail(null);
-
+		this.setSelectedCourse(null);
 	}
 
 	public String addMemberDB() throws SQLException {
@@ -220,11 +236,6 @@ public class MemberBean {
 
 		return "ID NUMBER PLACE CANNOT BE EMPTY !";
 
-
-
-
-
-
 	}
 
 
@@ -255,5 +266,14 @@ public class MemberBean {
 		}catch(SQLException e){
 			System.out.println("ERROR OCCURED WHILE DELETING MEMBER " + e.getMessage());
 		}
+	}
+
+	public void pp(){
+		if(this.selectedCourse.isEmpty()){
+			System.out.println("SENIN BEN ANANIN AMINI SIKEYIM !\n" );
+		}else{
+			System.out.println("YERIM LEN! " + this.selectedCourse + "\n" );
+		}
+
 	}
 }

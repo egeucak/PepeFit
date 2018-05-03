@@ -160,6 +160,61 @@ function syncRadios(courseListIdv,radioId){
     }
 }
 
+function toggleCourseSplitDeneme(clickedOn) { // Don't use this function
+    var lis = document.getElementById("courses").getElementsByTagName("li");
+    var firstName;
+    var numberXD = 0;
+    for (var i=0; i<lis.length; i++){
+        lis[i].firstChild.classList.remove("active");
+        var coursedivid = lis[i].firstChild.id;
+        var coursepid = coursedivid.concat("p");
+        document.getElementById(coursepid).style.display = "none";
+
+        courseContainerId = coursedivid; //for different containers
+        if(courseContainerId.includes(" ")){
+            courseContainerId = coursedivid.replace(" ","-");
+        }
+        courseFormId = courseContainerId.concat("-Form");
+        courseListId = courseContainerId.concat("-List");
+        courseContainerId = courseContainerId.concat("-Container");
+        if (i==0){
+            firstName = document.getElementById(courseListId).getElementsByTagName("input")[0].name;
+        }
+        document.getElementById(courseContainerId).style.display = "none";
+        if (coursedivid==clickedOn){
+            lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
+            document.getElementById(coursepid).style.display = "block";
+            if(document.getElementById(courseFormId)){
+                document.getElementById(courseFormId).reset();
+            }
+            document.getElementById("block-func").value = coursedivid;
+            document.getElementById("block-func").textContent = document.getElementById("block-func").value;
+            console.log(document.getElementById("block-func").value);
+            document.getElementById("empty-container").style.display ="none";
+            document.getElementById("addCourse").style.display ="contents";
+            document.getElementById(courseContainerId).style.display = "block";
+            syncRadios(courseListId,firstName,numberXD);
+            numberXD=numberXD+document.getElementById(courseListId).getElementsByTagName("input").length;
+
+        }
+    }
+}
+
+function syncRadiosDeneme(courseListIdv,firstName,xd){ // Don't use this function
+    var courseButtonslis = document.getElementById(courseListIdv).getElementsByTagName("input");
+    var courseTableEllis= document.getElementById(courseListIdv).getElementsByTagName("td");
+    for(var i=0; i<courseButtonslis.length; i++){
+        if(courseButtonslis[i].getAttribute('type')=='radio'){
+            courseButtonslis[i].name = firstName;
+            courseButtonslis[i].id = firstName.concat(":").concat(i+xd);
+            courseButtonslis[i].parentElement.getElementsByTagName("label")[0].for = firstName.concat(":").concat(i+xd);
+            courseTableEllis[i].style.display= "inline-block";
+            courseTableEllis[i].style.width= "25%";    
+            courseTableEllis[i].parentElement.parentElement.parentElement.style.width="100%";
+        }
+    }
+}
+
 (function($, undefined) {
 
     "use strict";

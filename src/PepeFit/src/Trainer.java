@@ -65,10 +65,11 @@ public class Trainer extends Person {
 
 
 
-	Trainer(String trainerName, ArrayList<String> courseTime, String courseDate){
-	    setTrainerName(trainerName);
-	    setCourseTime(courseTime);
-	    setCourseDate(courseDate);
+    Trainer(String trainerId,String trainerName, ArrayList<String> courseTime, String courseDate){
+        setTrainerId(trainerId);
+        setTrainerName(trainerName);
+        setCourseTime(courseTime);
+        setCourseDate(courseDate);
     }
 
 	

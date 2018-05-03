@@ -28,12 +28,28 @@ public class ListTrainerBean {
     public DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
 
-
-
-
-
     public ArrayList<Trainer> getTrainer_deneme() {
         return trainer_deneme;
+    }
+
+    public void printAnan(){
+        System.out.println("Anan");  
+  }
+
+    public ArrayList<ArrayList<Trainer>> coursesTimes = new ArrayList<ArrayList<Trainer>>();
+
+    public void fillCoursesTimes(String maxId) throws SQLException {
+        for (int i=1;i<=Integer.parseInt(maxId);i++){
+            coursesTimes.add(loading(Integer.toString(i)));
+        }
+    }
+
+    public void setCoursesTimes(ArrayList<ArrayList<Trainer>> coursesTimes){
+        this.coursesTimes = coursesTimes;
+    }
+
+    public ArrayList<Trainer> getCoursesTimes(String id){
+        return coursesTimes.get(Integer.parseInt(id)-1);
     }
 
     public void setTrainer_deneme(ArrayList<Trainer> trainer_deneme) {
@@ -116,7 +132,7 @@ public class ListTrainerBean {
             int len = trainer_times.size();
             int x = 0;
             for(ArrayList<Object> times:trainer_times){
-                Trainer trainer = new Trainer(times.get(1).toString(),(ArrayList<String>) times.get(2),courseDate);
+                Trainer trainer = new Trainer(times.get(0).toString(),times.get(1).toString(),(ArrayList<String>) times.get(2),courseDate);
                 trainers.add(trainer);
                 System.out.println((ArrayList<String>) times.get(2));
             }
