@@ -19,7 +19,7 @@ import javax.xml.stream.events.StartDocument;
 @RequestScoped
 public class MemberBean {
 
-	private String firstName, lastName, eMail, phoneNumber, address, idNumber, gender, error;
+	private String firstName, lastName, eMail, phoneNumber, address, idNumber, gender, error, success, showError, updateSuccess, deleteSuccess;
 	private String birthDate,registirationDate;
 	private static Map<String,Object> genders = new LinkedHashMap<String, Object>();
 
@@ -102,6 +102,38 @@ public class MemberBean {
 	public void setError(String error) {
 		this.error = error;
 	}
+	
+	public String getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(String success) {
+		this.success = success;
+	}
+	
+	public String getShowError() {
+		return showError;
+	}
+
+	public void setShowError(String showError) {
+		this.showError = showError;
+	}
+	
+	public String getUpdateSuccess() {
+		return updateSuccess;
+	}
+
+	public void setUpdateSuccess(String updateSuccess) {
+		this.updateSuccess = updateSuccess;
+	}
+
+	public String getDeleteSuccess() {
+		return deleteSuccess;
+	}
+
+	public void setDeleteSuccess(String deleteSuccess) {
+		this.deleteSuccess = deleteSuccess;
+	}
 
 	public void editActionGender(String gender) {
 		if(gender.equals("Male")) {
@@ -172,6 +204,7 @@ public class MemberBean {
 		}
 
 		ret = "Successfully added Member with ID NUMBER: "+ this.idNumber +" !";
+		this.success = "Successfully added Member with ID NUMBER: "+ this.idNumber +" !";
 		setNull();
 		System.out.println(ret+"\n");
 
@@ -197,7 +230,7 @@ public class MemberBean {
 				ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select * from Member where TC=?",-1,this.idNumber);
 				// If it's not in our database
 				if(results.size()==0){
-					this.error = "There is no Member with ID : "+ this.idNumber;
+					this.showError = "There is no Member with ID : "+ this.idNumber;
 					System.out.println("THERE IS NO PERSON WITH ID : "+ this.idNumber);
 					database.destruct_connection();
 					return resultShow = "There is no person with ID : "+ this.idNumber;
@@ -247,6 +280,7 @@ public class MemberBean {
 					this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
 			database.commit_trans();
 			database.destruct_connection();
+			this.updateSuccess = this.idNumber + " successfully updated !";
 		}catch(SQLException e){
 			System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
 		}
@@ -262,6 +296,7 @@ public class MemberBean {
 			database.execute("DELETE FROM Member WHERE TC=?",1,this.idNumber);
 			database.commit_trans();
 			database.destruct_connection();
+			this.deleteSuccess= this.idNumber + " successfully deleted !";
 		}catch(SQLException e){
 			System.out.println("ERROR OCCURED WHILE DELETING MEMBER " + e.getMessage());
 		}
