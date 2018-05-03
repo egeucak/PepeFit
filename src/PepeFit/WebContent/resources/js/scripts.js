@@ -126,7 +126,9 @@ function toggleCourseSplit(clickedOn) {
             courseContainerId = coursedivid.replace(" ","-");
         }
         courseFormId = courseContainerId.concat("-Form");
+        courseListId = courseContainerId.concat("-List");
         courseContainerId = courseContainerId.concat("-Container");
+
         document.getElementById(courseContainerId).style.display = "none";
         if (coursedivid==clickedOn){
             lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
@@ -140,14 +142,14 @@ function toggleCourseSplit(clickedOn) {
             document.getElementById("empty-container").style.display ="none";
             document.getElementById("addCourse").style.display ="contents";
             document.getElementById(courseContainerId).style.display = "block";
-            syncRadios(courseContainerId,"pickatime");
+            syncRadios(courseListId,"pickatime");
         }
     }
 }
 
-function syncRadios(courseContainerId,radioId){
-    var courseButtonslis = document.getElementById(courseContainerId).getElementsByTagName("input");
-    var courseTableEllis= document.getElementById(courseContainerId).getElementsByTagName("td");
+function syncRadios(courseListIdv,radioId){
+    var courseButtonslis = document.getElementById(courseListIdv).getElementsByTagName("input");
+    var courseTableEllis= document.getElementById(courseListIdv).getElementsByTagName("td");
     for(var i=0; i<courseButtonslis.length; i++){
         if(courseButtonslis[i].getAttribute('type')=='radio'){
             courseButtonslis[i].name = "radioId";

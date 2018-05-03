@@ -128,12 +128,12 @@
                                         <h:inputText style="width: 90%;" type="text" id="Capacity1" value="#{trainerBean.courseCapacity}"/>
                                     </div>
                                     <div class="col-2" style="font-size: 15px;">
-                                        <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.addCourse(1)}"/>
+                                        <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener='#{trainerBean.addCourse(1,shiroAuthenticationClass.id)}'/>
                                     </div>
                                 </div>
                             </h:form>
 
-                            <ul class="scrollbar list-unstyled" style="margin-top: 0px">
+                            <ul id="Body-Fit-List" class="scrollbar list-unstyled" style="margin-top: 0px">
                                 <c:forEach id="courseTimeList1" items='#{listTrainerBean.loading("1")}' var="trainer" value="#">
                                     <li style="width: 99%;">
                                         <div class="form-row" style="padding-bottom: 2%;">
@@ -166,12 +166,12 @@
                                         <h:inputText style="width: 90%;" type="text" id="Capacity1" value="#{trainerBean.courseCapacity}"/>
                                     </div>
                                     <div class="col-2" style="font-size: 15px;">
-                                        <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.addCourse(2)}"/>
+                                        <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener='#{trainerBean.addCourse(2,shiroAuthenticationClass.id)}'/>
                                     </div>
                                 </div>
                             </h:form>
 
-                            <ul class="scrollbar list-unstyled" style="margin-top: 0px">
+                            <ul id="Fit-Step-List" class="scrollbar list-unstyled" style="margin-top: 0px">
                                 <c:forEach id="courseTimeList2" items='#{listTrainerBean.loading("2")}' var="trainer" value="#">
                                     <li style="width: 99%;">
                                         <div class="form-row" style="padding-bottom: 2%;">
@@ -204,12 +204,12 @@
                                          <h:inputText style="width: 90%;" type="text" id="Capacity1" value="#{trainerBean.courseCapacity}"/>
                                      </div>
                                      <div class="col-2" style="font-size: 15px;">
-                                         <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.addCourse(3)}"/>
+                                         <h:commandButton value="Add Course" type="submit" styleClass="btn func-button" actionListener='#{trainerBean.addCourse(3,shiroAuthenticationClass.id)}'/>
                                      </div>
                                  </div>
                              </h:form>
 
-                            <ul class="scrollbar list-unstyled" style="margin-top: 0px">
+                            <ul id="GFX-List" class="scrollbar list-unstyled" style="margin-top: 0px">
                                 <c:forEach id="courseTimeList3" items='#{listTrainerBean.loading("3")}' var="trainer" value="#">
                                     <li style="width: 99%;">
                                         <div class="form-row" style="padding-bottom: 2%;">

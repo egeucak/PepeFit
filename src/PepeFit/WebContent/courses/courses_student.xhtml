@@ -108,78 +108,100 @@
 
 
                         <div class="container" id="Body-Fit-Container" style="display: none">
-                            <ul class="scrollbar list-unstyled" style="margin-top: 0px">
-                                <c:forEach id="courseTimeList1" items='#{listTrainerBean.loading("1")}' var="trainer" value="#">
-                                    <li style="width: 99%;">
-                                        <div class="form-row" style="padding-bottom: 2%;">
-                                            <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                <a>#{trainer.getTrainerName()}</a>
+                            <h:form id="Body-Fit-Form">
+                                <ul id="Body-Fit-List" class="scrollbar list-unstyled" style="margin-top: 0px">
+                                    <c:forEach id="courseTimeList1" items='#{listTrainerBean.loading("1")}' var="trainer" value="#">
+                                        <li style="width: 99%;">
+                                            <div class="form-row" style="padding-bottom: 2%;">
+                                                <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                    <a>#{trainer.getTrainerName()}</a>
+                                                </div>
+                                                <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                    <h:selectOneRadio value="#" required="true" id="pickatime1" requiredMessage="* Value is required">
+                                                        <ul class="list-unstyled" style="margin-top: 0px">
+                                                        <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemValue="#{coursetime}"/>
+                                                        </ul>
+                                                    </h:selectOneRadio>
+                                                </div>
                                             </div>
-                                            <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                <h:selectOneRadio value="#" required="true" id="pickatime1" requiredMessage="* Value is required">
-                                                    <ul class="list-unstyled" style="margin-top: 0px">
-                                                    <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemValue="#{coursetime}"/>
-                                                    </ul>
-                                                </h:selectOneRadio>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </c:forEach>
-                            </ul>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            <div class="form-row">
+                                <div class="col-9"></div>
+                                <div class="col-3">
+                                    <div style="font-size: 15px;">
+                                        <h:commandButton value="Register" type="submit" styleClass="btn func-button" actionListener="#{memberBean.addMemberDB()}"/> <!-- Should be register() -->
+                                    </div>
+                                </div>
+                            </div>
+                            </h:form>
                         </div>
 
                         <div class="container" id="Fit-Step-Container" style="display: none">
-                            <a/>
-                            <ul class="scrollbar list-unstyled" style="margin-top: 0px">
-                                <c:forEach id="courseTimeList1" items='#{listTrainerBean.loading("2")}' var="trainer" value="#">
-                                    <li style="width: 99%;">
-                                        <div class="form-row" style="padding-bottom: 2%;">
-                                            <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                <a>#{trainer.getTrainerName()}</a>
-                                                
+                            <h:form id="Fit-Step-Form">
+                                <ul id="Fit-Step-List" class="scrollbar list-unstyled" style="margin-top: 0px">
+                                    <c:forEach id="courseTimeList2" items='#{listTrainerBean.loading("2")}' var="trainer" value="#">
+                                        <li style="width: 99%;">
+                                            <div class="form-row" style="padding-bottom: 2%;">
+                                                <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                    <a>#{trainer.getTrainerName()}</a>
+                                                    
+                                                </div>
+                                                <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                    <h:selectOneRadio value="#" required="true" id="pickatime2" requiredMessage="* Value is required">
+                                                        <ul class="list-unstyled" style="margin-top: 0px">
+                                                        <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemValue="#{coursetime}"/>
+                                                        </ul>
+                                                    </h:selectOneRadio>
+                                                </div>
                                             </div>
-                                            <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                <h:selectOneRadio value="#" required="true" id="pickatime2" requiredMessage="* Value is required">
-                                                    <ul class="list-unstyled" style="margin-top: 0px">
-                                                    <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemValue="#{coursetime}"/>
-                                                    </ul>
-                                                </h:selectOneRadio>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div>
-
-                         <div class="container" id="GFX-Container" style="display: none">
-                            <ul class="scrollbar list-unstyled" style="margin-top: 0px">
-                                <c:forEach id="courseTimeList1" items='#{listTrainerBean.loading("3")}' var="trainer" value="#">
-                                    <li style="width: 99%;">
-                                        <div class="form-row" style="padding-bottom: 2%;">
-                                            <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                <a>#{trainer.getTrainerName()}</a>
-                                                
-                                            </div>
-                                            <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                <h:selectOneRadio value="#" required="true" id="pickatime3" requiredMessage="* Value is required">
-                                                    <ul class="list-unstyled" style="margin-top: 0px">
-                                                    <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemValue="#{coursetime}"/>
-                                                    </ul>
-                                                </h:selectOneRadio>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-9"/>
-                            <div class="col-3">
-                                <div style="font-size: 15px;">
-                                    <h:commandButton value="Register" type="submit" styleClass="btn func-button" actionListener="#{memberBean.addMemberDB()}"/> <!-- Should be register() -->
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            
+                            <div class="form-row">
+                                <div class="col-9"></div>
+                                <div class="col-3">
+                                    <div style="font-size: 15px;">
+                                        <h:commandButton value="Register" type="submit" styleClass="btn func-button" actionListener="#{memberBean.addMemberDB()}"/> <!-- Should be register() -->
+                                    </div>
                                 </div>
                             </div>
+                            </h:form>
+                        </div>
+
+                        <div class="container" id="GFX-Container" style="display: none">
+                            <h:form id="GFX-Form">
+                                <ul id="GFX-List" class="scrollbar list-unstyled" style="margin-top: 0px">
+                                    <c:forEach id="courseTimeList3" items='#{listTrainerBean.loading("3")}' var="trainer" value="#">
+                                        <li style="width: 99%;">
+                                            <div class="form-row" style="padding-bottom: 2%;">
+                                                <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                    <a>#{trainer.getTrainerName()}</a>
+                                                    
+                                                </div>
+                                                <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                    <h:selectOneRadio value="#" required="true" id="pickatime3" requiredMessage="* Value is required">
+                                                        <ul class="list-unstyled" style="margin-top: 0px">
+                                                        <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemValue="#{coursetime}"/>
+                                                        </ul>
+                                                    </h:selectOneRadio>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            
+                            <div class="form-row">
+                                <div class="col-9"></div>
+                                <div class="col-3">
+                                    <div style="font-size: 15px;">
+                                        <h:commandButton value="Register" type="submit" styleClass="btn func-button" actionListener="#{memberBean.addMemberDB()}"/> <!-- Should be register() -->
+                                    </div>
+                                </div>
+                            </div>
+                            </h:form>
                         </div>
 
                     </div>
