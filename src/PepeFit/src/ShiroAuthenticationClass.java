@@ -56,8 +56,8 @@ public class ShiroAuthenticationClass {
         Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password); /* TODO use Sha256Hash when hiding the password later */
         
-         try{
-                currentUser.login(token);
+        try{
+            currentUser.login(token);
         } catch (UnknownAccountException uae ) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed 1", "username wrong"));
         } catch (IncorrectCredentialsException ice ) {

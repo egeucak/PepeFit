@@ -253,42 +253,43 @@ public class TrainerBean {
     }
 
 
-	public String addCourse(int courseId) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    public String addCourse(int courseId,String trainerID) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String courseDate = (String)dtf.format(LocalDateTime.now());
-        String trainerID = "3";
-    	try {
-			DatabaseBean database = new DatabaseBean();
+
+
+        try {
+            DatabaseBean database = new DatabaseBean();
 //            database.execute("CALL insert_course(?,?,?)", 1,courseName.toUpperCase(),courseTime,courseDate);
-			// Checking trainer is already add that course with the same time and the same date into database !
-			ArrayList<LinkedHashMap<String,Object>> result = database.execute_fetch_all("SELECT * FROM GeneralSchedule WHERE C_ID = ? AND C_TIME = ? AND C_DATE = ? AND T_ID = ?",-1,courseId,this.courseTime,courseDate,trainerID);
-			// If result is empty, it means that we are good to go.
-			if(result.size() == 0){
-				database.execute("CALL insert_courseSchedule(?,?,?,?,?)",1,courseId,courseTime,courseDate,trainerID,this.courseCapacity);
-				database.commit_trans();
-				System.out.println("SUCCESSFULLY ADDED INTO GENERALSCHEDULE!" + result + "\n");
-				database.destruct_connection();
+            // Checking trainer is already add that course with the same time and the same date into database !
+            ArrayList<LinkedHashMap<String,Object>> result = database.execute_fetch_all("SELECT * FROM GeneralSchedule WHERE C_ID = ? AND C_TIME = ? AND C_DATE = ? AND T_ID = ?",-1,courseId,this.courseTime,courseDate,trainerID);
+            // If result is empty, it means that we are good to go.
+            if(result.size() == 0){
+                database.execute("CALL insert_courseSchedule(?,?,?,?,?)",1,courseId,courseTime,courseDate,trainerID,this.courseCapacity);
+                database.commit_trans();
+                System.out.println("SUCCESSFULLY ADDED INTO GENERALSCHEDULE!" + result + "\n");
+                database.destruct_connection();
 
                 this.courseCapacity = null;
                 this.courseTime = null;
+                database.destruct_connection();
+                return "Successfully Added !";
 
-				return "Successfully Added !";
+            }else{
+                database.destruct_connection();
+                System.out.println("TRAINER: " + trainerID + " ALREADY OPEN THIS CLASS WITH THE SAME TIME AND DATE!\n");
+                return "TRAINER: " + trainerID + " ALREADY OPEN THIS CLASS WITH THE SAME TIME AND DATE!";
 
-			}else{
-				database.destruct_connection();
-				System.out.println("TRAINER: " + trainerID + " ALREADY OPEN THIS CLASS WITH THE SAME TIME AND DATE!\n");
-				return "TRAINER: " + trainerID + " ALREADY OPEN THIS CLASS WITH THE SAME TIME AND DATE!";
-
-			}
+            }
 
 
-		} catch (SQLException e) {
-			System.out.println("ERROR OCCURED WHILE ADDING COURSE " + e.getMessage());
-			return "Cannot do this operation please try again later !";
+        } catch (SQLException e) {
+            System.out.println("ERROR OCCURED WHILE ADDING COURSE " + e.getMessage());
+            return "Cannot do this operation please try again later !";
 
-		}
+        }
 
-	}
+    }
 
     public void deneme() {
 
