@@ -19,7 +19,7 @@ import javax.xml.stream.events.StartDocument;
 @RequestScoped
 public class MemberBean {
 
-	private String firstName, lastName, eMail, phoneNumber, address, idNumber, gender;
+	private String firstName, lastName, eMail, phoneNumber, address, idNumber, gender, error;
 	private String birthDate,registirationDate;
 	private static Map<String,Object> genders = new LinkedHashMap<String, Object>();
 
@@ -94,6 +94,14 @@ public class MemberBean {
 	public void setRegistirationDate(String registirationDate){
 		this.registirationDate = registirationDate;
 	}
+	
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
 
 	public void editActionGender(String gender) {
 		if(gender.equals("Male")) {
@@ -146,6 +154,7 @@ public class MemberBean {
 			ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select * from Member where TC=?",-1,this.idNumber);
 
 			if(results.size() != 0){
+				this.error = "This Member (ID : " + this.idNumber + ") has been already registered!";
 				ret = "This User has been already registered!";
 				database.destruct_connection();
 				System.out.println(ret +"\n");
@@ -188,6 +197,7 @@ public class MemberBean {
 				ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select * from Member where TC=?",-1,this.idNumber);
 				// If it's not in our database
 				if(results.size()==0){
+					this.error = "There is no Member with ID : "+ this.idNumber;
 					System.out.println("THERE IS NO PERSON WITH ID : "+ this.idNumber);
 					database.destruct_connection();
 					return resultShow = "There is no person with ID : "+ this.idNumber;
@@ -243,7 +253,7 @@ public class MemberBean {
 	}
 
 	/**
-	 * 	KENDIME NOT. SONRADAN KONTROL ET EÄžER DATANASE != NULL DEÄžÄ°LSE OLUÅžTURMA
+	 * 	KENDIME NOT. SONRADAN KONTROL ET EÐER DATANASE != NULL DEÐÝLSE OLUÞTURMA
 	 */
 
 	public void deleteMemberDB(){

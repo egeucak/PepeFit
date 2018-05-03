@@ -101,6 +101,7 @@
                                 </div>
                             </div>
                             <h:form id="addMemberForm">
+                            	<h:outputText value="#{memberBean.error}" style="color:red" />
                                 <div class="form-row" style="padding-bottom: 3%;">
                                     <div class="col-3">
                                         <!--                                 	<input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
@@ -114,7 +115,9 @@
                                     </div>
                                     <div class="col-3">
                                         <!--                                 	<input type="text" class="form-control" placeholder="Email" required="true" value="#{memberBean.eMail}"/> -->
-                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail1" value="#{memberBean.eMail}" requiredMessage="* Value is required"/>
+                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail1" value="#{memberBean.eMail}" validatorMessage="invalid email" requiredMessage="* Value is required">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                        </h:inputText>
                                         <h:message for="eMail1" style="color:red"/>
                                     </div>
                                     <div class="col-3">
@@ -177,6 +180,7 @@
                                 </div>
                             </div>
                             <h:form id="updateMember1Form">
+                            	<h:outputText value="#{memberBean.error}" style="color:red" />
                                 <div class="form-row" style="padding-bottom: 3%;">
                                     <div class="col-3">
                                         <!--                                     <input type="text" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"/> -->
@@ -207,7 +211,9 @@
                                     </div>
                                     <div class="col-3">
                                         <!--                                 	<input type="text" class="form-control" placeholder="Email" required="true" value="#{memberBean.eMail}"/> -->
-                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail2" value="#{memberBean.eMail}" requiredMessage="* Value is required"/>
+                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail2" value="#{memberBean.eMail}" validatorMessage="invalid email" requiredMessage="* Value is required">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                        </h:inputText>
                                         <h:message for="eMail2" style="color:red"/>
                                     </div>
                                     <div class="col-3">
@@ -262,6 +268,7 @@
                                 </div>
                             </div>
                             <h:form id="addTrainerForm">
+                            	<h:outputText value="#{trainerBean.error}" style="color:red" />
                                 <div class="form-row" style="padding-bottom: 3%;">
                                     <div class="col-3">
                                         <h:inputText type="text" class="form-control" a:placeholder="First name" required="true" id="firstName3" value="#{trainerBean.firstName}" requiredMessage="* Value is required" disabled="false"/>
@@ -272,7 +279,9 @@
                                         <h:message for="lastName3" style="color:red"/>
                                     </div>
                                     <div class="col-3">
-                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail3" value="#{trainerBean.eMail}" requiredMessage="* Value is required" disabled="false"/>
+                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail3" value="#{trainerBean.eMail}" validatorMessage="invalid email" requiredMessage="* Value is required" disabled="false">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                        </h:inputText>
                                         <h:message for="eMail3" style="color:red"/>
                                     </div>
                                     <div class="col-3">
@@ -328,6 +337,7 @@
                                 </div>
                             </div>
                             <h:form id="updateTrainer1Form">
+                            	<h:outputText value="#{trainerBean.error}" style="color:red" />
                                 <div class="form-row" style="padding-bottom: 3%;">
                                     <div class="col-3">
                                         <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber4" value="#{trainerBean.idNumber}" requiredMessage="* Value is required" disabled="false"/>
@@ -355,7 +365,9 @@
                                     </div>
                                     <div class="col-3">
                                         <!--                                    <input type="text" class="form-control" placeholder="Email" required="true" value="#{trainerBean.eMail}"/> -->
-                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail4" value="#{trainerBean.eMail}" requiredMessage="* Value is required" disabled="false"/>
+                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail4" value="#{trainerBean.eMail}" validatorMessage="invalid email" requiredMessage="* Value is required" disabled="false">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                        </h:inputText>
                                         <h:message for="eMail4" style="color:red"/>
                                     </div>
                                     <div class="col-3">
@@ -410,6 +422,7 @@
                                 </div>
                             </div>
                             <h:form id="deleteForm">
+                            	<h:outputText value="#{memberBean.error}" style="color:red" />
                                 <div class="form-row" style="padding-bottom: 3%;">
                                     <div class="col-3">
                                         <!--                                     <input type="text" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"/> -->

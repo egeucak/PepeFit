@@ -22,6 +22,7 @@ public class ShiroAuthenticationClass {
     private String userName;
     private String password;
     public static String id;
+    public String error;
     
     public String getUserName() {
         return userName;
@@ -42,9 +43,17 @@ public class ShiroAuthenticationClass {
 	public static String getId() {
 		return id;
 	}
-
+	
 	public static void setId(String id) {
 		ShiroAuthenticationClass.id = id;
+	}
+	
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
 	}
 
 	public void authenticateTheUser(){
@@ -99,11 +108,16 @@ public class ShiroAuthenticationClass {
         	}
         	else if(currentUser.hasRole("trainer")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-                assignId("trainer");
+                //assignId("trainer");
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/trainer/course_trainer_split.xhtml?faces-redirect=true");
-        	}
-
+        	} 
         }
+        else {
+        	if(this.userName != null) {
+        		this.error = "This mail is not registered to the system";
+        	}
+        }
+        
     }
     
     public void assignId(String role) throws SQLException {
@@ -114,7 +128,6 @@ public class ShiroAuthenticationClass {
     	}
     	else if (role.equals("trainer")) {
     		ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select T_ID from Trainer where T_EMAIL=?",-1,this.userName);
-    		System.out.println("GELDÝ");
     		System.out.println(results.get(0).get("T_ID"));
     		id = (String) results.get(0).get("T_ID");
     	}
