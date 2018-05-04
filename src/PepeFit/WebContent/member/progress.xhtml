@@ -96,7 +96,7 @@
                     <li id="header"><h3 style="color: var(--green)">Private Trainers</h3></li>
                     <c:forEach items="#{listTrainerBean.getTrainerNames()}" var="trainer">
                         <li><a href="#" class="" id="#{trainer.getId()}" onclick="toggleTrainer('#{trainer.getId()}')">#{trainer.getName()}</a>
-                            <span style="display: none; border-bottom: 2px solid var(--gray-dark);font-size: 15px;"
+                            <span style="display: none; border-bottom: 2px solid var(--gray-dark);font-size: 15px;color:var(--gray-dark);"
                                   id="#{trainer.getId()}p">#{trainer.getBio()}<br/></span>
                         </li>
                     </c:forEach>

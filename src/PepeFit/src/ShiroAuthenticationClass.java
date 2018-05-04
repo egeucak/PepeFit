@@ -109,12 +109,12 @@ public class ShiroAuthenticationClass {
             else if(currentUser.hasRole("trainer")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
                 assignId("trainer");
-                nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/trainer/course_trainer_split.xhtml?faces-redirect=true");
+                nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/trainer/trainer.xhtml?faces-redirect=true");
             }
         }
         else {
             if(this.userName != null) {
-                this.error = "This mail is not registered to the system";
+                this.error = "Incorrect mail or password";
             }
         }
 
