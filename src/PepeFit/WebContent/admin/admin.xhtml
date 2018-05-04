@@ -3,7 +3,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <!-- Required meta tags -->
@@ -13,453 +14,477 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
     <!--<meta http-equiv="refresh" content="3" />-->
 
-    <link href="../resources/css/bootstrap.css" rel="stylesheet"> </link>
-    <link href="../resources/css/style.css" rel="stylesheet"> </link>
-    <link href="../resources/css/style_admin.css" rel="stylesheet"> </link>
-
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"  type="text/javascript"/> <!-- sadece src kısmı yeterli html'den xhtml'e çevirirken -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" type="text/javascript"/>
-    <script src="../resources/js/bootstrap.js" type="text/javascript"/>
-    <script src="../resources/js/scripts.js" type="text/javascript"/>
-    <script src="../resources/js/phone-helper.js" type="text/javascript"/>
+
+    <!--<link href="../resources/css/bootstrap.css" rel="stylesheet"> </link>-->
+    <!--<link href="../resources/css/style.css" rel="stylesheet"> </link>-->
+    <!--<link href="../resources/css/style_admin.css" rel="stylesheet"> </link>-->
+
+    <!--<script src="../resources/js/bootstrap.js" type="text/javascript"/>-->
+    <!--<script src="../resources/js/scripts.js" type="text/javascript"/>-->
+    <!--<script src="../resources/js/phone-helper.js" type="text/javascript"/>-->
+
+    <h:outputScript library="js" name="phone-helper.js" />
+    <h:outputScript library="js" name="bootstrap.js" />
+    <h:outputScript library="js" name="scripts.js" />
+    <h:outputStylesheet library="css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="style.css" />
+    <!--<h:outputStylesheet library="css" name="style_admin.css" />-->
+
 
 </h:head>
-<body>
 
-<!--    NAVIGATION MENU     -->
-<div class="navbar navbar-expand-sm navbar-light" id="bar">
-    <ul class="navbar-nav">
-        <li class="nav-item"><a class="active" href="PepeFit/admin/admin.xhtml" id="bartext">Admin</a></li>
-        <li class="nav-item"><a class="" href="#" id="bartext">Courses</a></li>
-        <li class="nav-item"><a class="" href="#" id="bartext">Student</a></li>
-        <li class="nav-item" >
-            <div class="" data-toggle="dropdown" style="position: absolute; left: 90%;">
-                <img src="../resources/img/gear1.png" id="gear" alt=""/>
-                <ul class="dropdown-menu" id="dropdown">
-                    <li><a href="#" id="dropdown-text">Settings</a></li>
-                    <li><a href="index.xhtml" id="dropdown-text">Logout</a></li>
-                </ul>
-            </div>
-        </li>
-    </ul>
-    <a class="navbar-brand" href="#" >
-        <img src="../resources/img/pepe2.png" style="width:50px;" id="pepe-logo" alt=""/>
-    </a>
-</div>
 
-<!--    LEFT MENU   -->
-<div class="container-fluid">
-    <div class="row" style="padding-top: 8%;">
-        <div class="col-2">
-            <div class="grey-bg left-menu">
-                <ul class="list-unstyled">
-                    <li><a href="#" class="active" id="addMemberList" onclick="changeContainer('addMember')">Add Member</a></li>
-                    <li><a href="#" id="updateMemberList" onclick="changeContainer('updateMember')">Update Member</a></li>
-                    <li><a href="#" id="addTrainerList" onclick="changeContainer('addTrainer')">Add Trainer</a></li>
-                    <li><a href="#" id="updateTrainerList" onclick="changeContainer('updateTrainer')">Update Trainer</a></li>
-                    <li><a href="#" id="deleteList" onclick="changeContainer('delete')">Delete</a></li>
-                </ul>
-            </div>
-        </div>
+<!--####    {trainerBean.addCourse(2,"12:00-13:00","2018-01-01","1",20)}-->
+<!--###    {trainerBean.addCourse(2,"12:00-13:00","2018-01-01","1",20)}-->
 
-        <div class="col-1"></div>
-        <div class="col-6">
-            <div class="container" id="addMember">
-                <div class="row">
-                    <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
-                        <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
-                            <div class="col-4">
-                                <a id="block-func">Add Member</a>
-                            </div>
-                            <div class="col-4">
-                                <a class="col-1" style="color:var(--gray-dark);">Registration Date: <script type="text/javascript">showDate();</script></a>
-                            </div>
-                        </div>
+
+<h:body styleClass="bg">
+
+
+    <!--    NAVIGATION MENU     -->
+
+    <div class="navbar navbar-expand-sm navbar-light" id="bar">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="active" href="../admin/admin.xhtml" id="bartext">Admin</a></li>
+
+            <li class="nav-item" >
+                <div class="" data-toggle="dropdown" style="position: absolute; left: 90%;">
+                    <img src="../resources/img/gear1.png" id="gear" alt=""/>
+                    <!--<img src="#resource{['img/gear1.png']}" id="gear" alt=""/>-->
+                    <ul class="dropdown-menu" id="dropdown">
                         <h:form>
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-3">
-<!--                                 	<input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
-                                	<h:inputText type="text" class="form-control" a:placeholder="First name" required="true" id="firstName1" value="#{memberBean.firstName}" requiredMessage="* Value is required"/>
-                                	<h:message for="firstName1" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-<!--                                 	<input type="text" class="form-control" placeholder="Last name" required="required" value="#{memberBean.lastName}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="Last name" required="true" id="lastName1" value="#{memberBean.lastName}" requiredMessage="* Value is required"/>
-                                	<h:message for="lastName1" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-<!--                                 	<input type="text" class="form-control" placeholder="Email" required="true" value="#{memberBean.eMail}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail1" value="#{memberBean.eMail}" requiredMessage="* Value is required"/>
-                                	<h:message for="eMail1" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-<!--                                 	<input type="text" class="form-control bfh-phone" value="#{memberBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required" /> -->
-                                    <h:inputText type="text" class="form-control bfh-phone" a:data-format="(ddd) ddd-dddd" required="true" id="phoneNumber1" value="#{memberBean.phoneNumber}" requiredMessage="* Value is required"/>
-                                	<!-- buranın .js sinden direkt ( dolu olarak geliyor hiçbir zaman boş olmuyor  -->
-                                	<h:message for="phoneNumber1" style="color:red"/>
-                                </div>
-                            </div>
-  
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-6">
-                                    <div class="input-group">
-<!--                                     	<textarea cols="" class="form-control" rows="3" placeholder="Address" required="required" value="#{memberBean.address}"/> -->
-                                        <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address1" value="#{memberBean.address}" requiredMessage="* Value is required"/>
-                                    	<!-- buranın * Value is required kısmı yanda gözüküyor alta alınması gerek -->
-                                    	<h:message for="address1" style="color:red" />
-                                    </div>
-                                </div>
-                                <div class="col-3">
-<!--                                     <input type="number" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"/> -->
-<!--                                     <button type="submit" class="btn" id="func-button" style="font-size: 15px; margin-top: 10%;">Add Member</button>                                 -->                               
-                                    <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber1" value="#{memberBean.idNumber}" requiredMessage="* Value is required"/>
-                                    <h:message for="idNumber1" style="color:red"/>
-                                    
-                                    <div style="font-size: 15px; margin-top: 10%;">
-                                    	<!-- Add Member rengi yeşil olmuyor -->
-                                        <h:commandButton value="Add Member" type="submit" styleClass="btn func-button" actionListener="#{memberBean.addMemberDB()}"/> <!--  add action later this button -->
-                                    </div>
-
-                                </div>
-                                <div class="col-3">
-                                    <div >
-                                    <!-- Radio button görünümü sorun çıkardı h:selectOneRadio için -->
-<!--                                        <label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male<input type="radio" name="options"></input></label><label class="btn active" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified<input type="radio" name="options"></input></label><label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female<input type="radio" name="options"></input></label> -->
-                                    	<h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender1" requiredMessage="* Value is required">
-                                    		<f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
-                                    	</h:selectOneRadio> 
-                                    	<h:message for="gender1" style="color:red"/>                                   	
-                                    </div>
-                                </div>
-                            </div>
+                            <li><a href="#" id="dropdown-text">Settings</a></li>
+                            <li>
+                                <span id="dropdown-text">
+                                    <h:commandLink style="color: white" action="#{shiroAuthenticationClass.logout()}">Logout</h:commandLink>
+                                </span>
+                            </li>
                         </h:form>
-                    </div>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <a class="navbar-brand" href="#" >
+            <!--<img src="../resources/img/pepe2.png" style="width:50px;" id="pepe-logo" alt=""/>-->
+            <img src="#{resource['img/pepe2.png']}" style="width:50px;" id="pepe-logo" alt=""/>
+        </a>
+    </div>
+
+    <!--    LEFT MENU   -->
+    <div class="container-fluid">
+        <div class="row" style="padding-top: 8%;">
+            <div class="col-2">
+                <div class="grey-bg left-menu">
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="active" id="addMemberList" onclick="changeContainer('addMember')">Add Member</a></li>
+                        <li><a href="#" id="updateMemberList" onclick="changeContainer('updateMember')">Update Member</a></li>
+                        <li><a href="#" id="addTrainerList" onclick="changeContainer('addTrainer')">Add Trainer</a></li>
+                        <li><a href="#" id="updateTrainerList" onclick="changeContainer('updateTrainer')">Update Trainer</a></li>
+                        <li><a href="#" id="deleteList" onclick="changeContainer('delete')">Delete</a></li>
+                    </ul>
                 </div>
             </div>
 
+            <div class="col-1"></div>
+            <div class="col-6">
+                <div class="container" id="addMember">
+                    <div class="row">
+                        <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
+                            <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
+                                <div class="col-4">
+                                    <a id="block-func">Add Member</a>
+                                </div>
+                                <div class="col-4">
+                                    <a class="col-1" style="color:var(--gray-dark);">Registration Date: <script type="text/javascript">showDate();</script></a>
+                                </div>
+                            </div>
+                            <h:form id="addMemberForm">
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-3">
+                                        <!--                                 	<input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="First name" required="true" id="firstName1" value="#{memberBean.firstName}" requiredMessage="* Value is required"/>
+                                        <h:message for="firstName1" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                 	<input type="text" class="form-control" placeholder="Last name" required="required" value="#{memberBean.lastName}"/> -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="Last name" required="true" id="lastName1" value="#{memberBean.lastName}" requiredMessage="* Value is required"/>
+                                        <h:message for="lastName1" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                 	<input type="text" class="form-control" placeholder="Email" required="true" value="#{memberBean.eMail}"/> -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail1" value="#{memberBean.eMail}" requiredMessage="* Value is required"/>
+                                        <h:message for="eMail1" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                 	<input type="text" class="form-control bfh-phone" value="#{memberBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required" /> -->
+                                        <h:inputText type="text" class="form-control bfh-phone" a:data-format="(ddd) ddd-dddd" required="true" id="phoneNumber1" value="#{memberBean.phoneNumber}" requiredMessage="* Value is required"/>
+                                        <!-- buranın .js sinden direkt ( dolu olarak geliyor hiçbir zaman boş olmuyor  -->
+                                        <h:message for="phoneNumber1" style="color:red"/>
+                                    </div>
+                                </div>
 
-            <div class="container" id="updateMember" style="display: none">
-                <div class="row">
-                    <!--<div class="col-3"></div>-->
-                    <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
-                        <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
-                            <div class="col-4">
-                                <a id="block-func">Update Member</a>
-                            </div>
-                            <div class="col-4">
-                                <a class="col-1" style="color:var(--gray-dark);">Update Date: <script type="text/javascript">showDate();</script></a>
-                            </div>
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-6">
+                                        <div class="input-group">
+                                            <!--                                     	<textarea cols="" class="form-control" rows="3" placeholder="Address" required="required" value="#{memberBean.address}"/> -->
+                                            <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address1" value="#{memberBean.address}" requiredMessage="* Value is required"/>
+                                            <!-- buranın * Value is required kısmı yanda gözüküyor alta alınması gerek -->
+                                            <h:message for="address1" style="color:red" />
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                     <input type="number" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"/> -->
+                                        <!--                                     <button type="submit" class="btn" id="func-button" style="font-size: 15px; margin-top: 10%;">Add Member</button>                                 -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber1" value="#{memberBean.idNumber}" requiredMessage="* Value is required"/>
+                                        <h:message for="idNumber1" style="color:red"/>
+
+                                        <div style="font-size: 15px; margin-top: 10%;">
+                                            <!-- Add Member rengi yeşil olmuyor -->
+                                            <h:commandButton value="Add Member" type="submit" styleClass="btn func-button" actionListener="#{memberBean.addMemberDB()}"/> <!--  add action later this button -->
+                                        </div>
+
+                                    </div>
+                                    <div class="col-3">
+                                        <div >
+                                            <!-- Radio button görünümü sorun çıkardı h:selectOneRadio için -->
+                                            <!--                                        <label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male<input type="radio" name="options"></input></label><label class="btn active" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified<input type="radio" name="options"></input></label><label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female<input type="radio" name="options"></input></label> -->
+                                            <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender1" requiredMessage="* Value is required">
+                                                <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
+                                            </h:selectOneRadio>
+                                            <h:message for="gender1" style="color:red"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
                         </div>
-                        <h:form>
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-3">
-<!--                                     <input type="text" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber2" value="#{memberBean.idNumber}" requiredMessage="* Value is required"/>
-                                    <h:message for="idNumber2" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-<!--                                     <button type="button" class="btn" id="func-button" onclick="updateSearch('updateMemberForm')" style="font-size: 15px; margin-top: 1%;">Search Member</button> -->
-                                    <h:commandButton value="Search Member"  styleClass="btn func-button" actionListener="#{memberBean.showMemberDB()}" >
-                                        <!--<f:ajax execute="@form" render="@none"  onevent="updateSearch('updateMemberForm')"  />-->
-                                    </h:commandButton>
-
-                                </div>
-                            </div>
-                        </h:form>
-                        <h:form>    
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-3">
-                                    <!--                                 	<input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="First name" required="true" id="firstName2" value="#{memberBean.firstName}" requiredMessage="* Value is required"/>
-                                    <h:message for="firstName2" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <!--                                 	<input type="text" class="form-control" placeholder="Last name" required="required" value="#{memberBean.lastName}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="Last name" required="true" id="lastName2" value="#{memberBean.lastName}" requiredMessage="* Value is required"/>
-                                    <h:message for="lastName2" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <!--                                 	<input type="text" class="form-control" placeholder="Email" required="true" value="#{memberBean.eMail}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail2" value="#{memberBean.eMail}" requiredMessage="* Value is required"/>
-                                    <h:message for="eMail2" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <!--                                 	<input type="text" class="form-control bfh-phone" value="#{memberBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required" /> -->
-                                    <h:inputText type="text" class="form-control bfh-phone" a:data-format="(ddd) ddd-dddd" required="true" id="phoneNumber2" value="#{memberBean.phoneNumber}" requiredMessage="* Value is required" />
-                                    <!-- buranın .js sinden direkt ( dolu olarak geliyor hiçbir zaman boş olmuyor  -->
-                                    <h:message for="phoneNumber2" style="color:red"/>
-                                </div>
-                            </div>
-
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-6">
-                                    <div class="input-group">
-                                        <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address2" value="#{memberBean.address}" requiredMessage="* Value is required"/>
-                                        <!-- buranın * Value is required kısmı yanda gözüküyor alta alınması gerek -->
-                                        <h:message for="address2" style="color:red" />
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <!--disabled="true"-->
-                                    <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber_2" value="#{memberBean.idNumber}" requiredMessage="* Value is required" />
-                                    <h:message for="idNumber_2" style="color:red"/>
-                                    <div style="font-size: 15px; margin-top: 10%;">
-                                        <!-- Add Member rengi yeşil olmuyor -->
-                                        <h:commandButton value="Update Member" type="submit" styleClass="btn func-button" actionListener="#{memberBean.updateMemberDB()}"/> <!--  add action later this button -->
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div>
-                                        <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender2" requiredMessage="* Value is required">
-                                            <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
-                                        </h:selectOneRadio> 
-                                        <h:message for="gender2" style="color:red"/>   
-                                    </div>
-                                </div>
-                            </div>
-                        </h:form>
                     </div>
                 </div>
-            </div>
 
-            <div class="container" id="addTrainer" style="display: none">
-                <div class="row">
-                    <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
-                        <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
-                            <div class="col-4">
-                                <a id="block-func">Add Trainer</a>
+
+                <div class="container" id="updateMember" style="display: none">
+                    <div class="row">
+                        <!--<div class="col-3"></div>-->
+                        <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
+                            <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
+                                <div class="col-4">
+                                    <a id="block-func">Update Member</a>
+                                </div>
+                                <div class="col-4">
+                                    <a class="col-1" style="color:var(--gray-dark);">Update Date: <script type="text/javascript">showDate();</script></a>
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <a class="col-1" style="color:var(--gray-dark);">Registration Date: <script type="text/javascript">showDate();</script></a>
-                            </div>
+                            <h:form id="updateMember1Form">
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-3">
+                                        <!--                                     <input type="text" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"/> -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber2" value="#{memberBean.idNumber}" requiredMessage="* Value is required"/>
+                                        <h:message for="idNumber2" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                     <button type="button" class="btn" id="func-button" onclick="updateSearch('updateMemberForm')" style="font-size: 15px; margin-top: 1%;">Search Member</button> -->
+                                        <h:commandButton value="Search Member"  styleClass="btn func-button" actionListener="#{memberBean.showMemberDB()}" >
+                                            <!--<f:ajax execute="@form" render="@none"  onevent="updateSearch('updateMemberForm')"  />-->
+                                        </h:commandButton>
+
+                                    </div>
+                                </div>
+                            </h:form>
+                            <h:form id="updateMember2Form">
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-3">
+                                        <!--                                 	<input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="First name" required="true" id="firstName2" value="#{memberBean.firstName}" requiredMessage="* Value is required"/>
+                                        <h:message for="firstName2" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                 	<input type="text" class="form-control" placeholder="Last name" required="required" value="#{memberBean.lastName}"/> -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="Last name" required="true" id="lastName2" value="#{memberBean.lastName}" requiredMessage="* Value is required"/>
+                                        <h:message for="lastName2" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                 	<input type="text" class="form-control" placeholder="Email" required="true" value="#{memberBean.eMail}"/> -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail2" value="#{memberBean.eMail}" requiredMessage="* Value is required"/>
+                                        <h:message for="eMail2" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                 	<input type="text" class="form-control bfh-phone" value="#{memberBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required" /> -->
+                                        <h:inputText type="text" class="form-control bfh-phone" a:data-format="(ddd) ddd-dddd" required="true" id="phoneNumber2" value="#{memberBean.phoneNumber}" requiredMessage="* Value is required" />
+                                        <!-- buranın .js sinden direkt ( dolu olarak geliyor hiçbir zaman boş olmuyor  -->
+                                        <h:message for="phoneNumber2" style="color:red"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-6">
+                                        <div class="input-group">
+                                            <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address2" value="#{memberBean.address}" requiredMessage="* Value is required"/>
+                                            <!-- buranın * Value is required kısmı yanda gözüküyor alta alınması gerek -->
+                                            <h:message for="address2" style="color:red" />
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--disabled="true"-->
+                                        <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber_2" value="#{memberBean.idNumber}" requiredMessage="* Value is required" />
+                                        <h:message for="idNumber_2" style="color:red"/>
+                                        <div style="font-size: 15px; margin-top: 10%;">
+                                            <!-- Add Member rengi yeşil olmuyor -->
+                                            <h:commandButton value="Update Member" type="submit" styleClass="btn func-button" actionListener="#{memberBean.updateMemberDB()}"/> <!--  add action later this button -->
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div>
+                                            <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender2" requiredMessage="* Value is required">
+                                                <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
+                                            </h:selectOneRadio>
+                                            <h:message for="gender2" style="color:red"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
                         </div>
-                        <h:form>
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-3">
-                                    <h:inputText type="text" class="form-control" a:placeholder="First name" required="true" id="firstName3" value="#{memberBean.firstName}" requiredMessage="* Value is required" disabled="true"/>
-                                    <h:message for="firstName3" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <h:inputText type="text" class="form-control" a:placeholder="Last name" required="true" id="lastName3" value="#{memberBean.lastName}" requiredMessage="* Value is required" disabled="true"/>
-                                    <h:message for="lastName3" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail3" value="#{memberBean.eMail}" requiredMessage="* Value is required" disabled="true"/>
-                                    <h:message for="eMail3" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <h:inputText type="text" class="form-control bfh-phone" a:data-format="(ddd) ddd-dddd" required="true" id="phoneNumber3" value="#{memberBean.phoneNumber}" requiredMessage="* Value is required" disabled="true"/>
-                                    <!-- buranın .js sinden direkt ( dolu olarak geliyor hiçbir zaman boş olmuyor  -->
-                                    <h:message for="phoneNumber3" style="color:red"/>
-                                </div>
-                            </div>
-      
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-6">
-                                    <div class="input-group">
-                                        <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address3" value="#{memberBean.address}" requiredMessage="* Value is required" disabled="true"/>
-                                        <!-- buranın * Value is required kısmı yanda gözüküyor alta alınması gerek -->
-                                        <h:message for="address3" style="color:red" />                                    
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber3" value="#{memberBean.idNumber}" requiredMessage="* Value is required" disabled="true"/>
-                                    <h:message for="idNumber3" style="color:red"/>
-                                    <div style="font-size: 15px; margin-top: 10%;">
-                                        <!-- Add Member rengi yeşil olmuyor -->
-                                        <h:commandButton value="Add Trainer" type="submit" styleClass="btn func-button" actionListener="#{memberBean.addMemberDB()}" disabled="true"/> <!--  add action later this button -->
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div >
-                                    <!-- Radio button görünümü sorun çıkardı h:selectOneRadio için -->
-<!--                                        <label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male<input type="radio" name="options"></input></label><label class="btn active" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified<input type="radio" name="options"></input></label><label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female<input type="radio" name="options"></input></label> -->
-                                        <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender3" requiredMessage="* Value is required" disabled="true">
-                                            <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
-                                        </h:selectOneRadio> 
-                                        <h:message for="gender3" style="color:red"/>                                     
-                                    </div>
-                                </div>
-                            </div>
-                        </h:form>
                     </div>
                 </div>
-            </div>
 
-            <div class="container" id="updateTrainer" style="display: none">
-                <div class="row">
-                    <!--<div class="col-3"></div>-->
-                    <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
-                        <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
-                            <div class="col-4">
-                                <a id="block-func">Update Trainer</a>
+                <div class="container" id="addTrainer" style="display: none">
+                    <div class="row">
+                        <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
+                            <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
+                                <div class="col-4">
+                                    <a id="block-func">Add Trainer</a>
+                                </div>
+                                <div class="col-4">
+                                    <a class="col-1" style="color:var(--gray-dark);">Registration Date: <script type="text/javascript">showDate();</script></a>
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <a class="col-1" style="color:var(--gray-dark);">Update Date: <script type="text/javascript">showDate();</script></a>
-                            </div>
+                            <h:form id="addTrainerForm">
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-3">
+                                        <h:inputText type="text" class="form-control" a:placeholder="First name" required="true" id="firstName3" value="#{trainerBean.firstName}" requiredMessage="* Value is required" disabled="false"/>
+                                        <h:message for="firstName3" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <h:inputText type="text" class="form-control" a:placeholder="Last name" required="true" id="lastName3" value="#{trainerBean.lastName}" requiredMessage="* Value is required" disabled="false"/>
+                                        <h:message for="lastName3" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail3" value="#{trainerBean.eMail}" requiredMessage="* Value is required" disabled="false"/>
+                                        <h:message for="eMail3" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <h:inputText type="text" class="form-control bfh-phone" a:data-format="(ddd) ddd-dddd" required="true" id="phoneNumber3" value="#{trainerBean.phoneNumber}" requiredMessage="* Value is required" disabled="false"/>
+                                        <!-- buranın .js sinden direkt ( dolu olarak geliyor hiçbir zaman boş olmuyor  -->
+                                        <h:message for="phoneNumber3" style="color:red"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-6">
+                                        <div class="input-group">
+                                            <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address3" value="#{trainerBean.address}" requiredMessage="* Value is required" disabled="false"/>
+                                            <!-- buranın * Value is required kısmı yanda gözüküyor alta alınması gerek -->
+                                            <h:message for="address3" style="color:red" />
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber3" value="#{trainerBean.idNumber}" requiredMessage="* Value is required" disabled="false"/>
+                                        <h:message for="idNumber3" style="color:red"/>
+                                        <div style="font-size: 15px; margin-top: 10%;">
+                                            <!-- Add Member rengi yeşil olmuyor -->
+                                            <h:commandButton value="Add Trainer" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.addTrainerDB()}" disabled="false"/> <!--  add action later this button -->
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div >
+                                            <!-- Radio button görünümü sorun çıkardı h:selectOneRadio için -->
+                                            <!--                                        <label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Male)}">Male<input type="radio" name="options"></input></label><label class="btn active" id="gender-button" onclick="#{memberBean.editActionGender(NotSpecified)}">Not Specified<input type="radio" name="options"></input></label><label class="btn" id="gender-button" onclick="#{memberBean.editActionGender(Female)}">Female<input type="radio" name="options"></input></label> -->
+                                            <h:selectOneRadio value="#{trainerBean.gender}" required="true" id="gender3" requiredMessage="* Value is required">
+                                                <f:selectItems value="#{trainerBean.fillGender()}"></f:selectItems>
+                                            </h:selectOneRadio>
+                                            <h:message for="gender1" style="color:red"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
                         </div>
-                        <h:form>
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-3">
-                                    <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber4" value="#{memberBean.idNumber}" requiredMessage="* Value is required" disabled="true"/>
-                                    <h:message for="idNumber4" style="color:red"/>                               
-                                </div>
-                                <div class="col-3">
-                                    <h:commandButton value="Search Trainer"  styleClass="btn func-button" id="func-button2" actionListener="#{memberBean.updateTrainerDB()}"  disabled="true">
-                                        <f:ajax execute="@form" render="@none"  onevent="updateSearch('updateTrainerForm')"  />
-                                    </h:commandButton>
-                                </div>
-                            </div>
-                        </h:form>
-                        <h:form>
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-3">
-                                    <!--                                    <input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="First name" required="true" id="firstName4" value="#{memberBean.firstName}" requiredMessage="* Value is required" disabled="true"/>
-                                    <h:message for="firstName4" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <!--                                    <input type="text" class="form-control" placeholder="Last name" required="required" value="#{memberBean.lastName}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="Last name" required="true" id="lastName4" value="#{memberBean.lastName}" requiredMessage="* Value is required" disabled="true"/>
-                                    <h:message for="lastName4" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <!--                                    <input type="text" class="form-control" placeholder="Email" required="true" value="#{memberBean.eMail}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail4" value="#{memberBean.eMail}" requiredMessage="* Value is required" disabled="true"/>
-                                    <h:message for="eMail4" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <!--                                    <input type="text" class="form-control bfh-phone" value="#{memberBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required" /> -->
-                                    <h:inputText type="text" class="form-control bfh-phone" a:data-format="(ddd) ddd-dddd" required="true" id="phoneNumber4" value="#{memberBean.phoneNumber}" requiredMessage="* Value is required" disabled="true"/>
-                                    <!-- buranın .js sinden direkt ( dolu olarak geliyor hiçbir zaman boş olmuyor  -->
-                                    <h:message for="phoneNumber4" style="color:red"/>
-                                </div>
-                            </div>
-
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-6">
-                                    <div class="input-group">
-                                        <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address4" value="#{memberBean.address}" requiredMessage="* Value is required" disabled="true"/>
-                                        <h:message for="address4" style="color:red" />    
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber4_1" value="#{memberBean.idNumber}" requiredMessage="* Value is required" disabled="true"/>
-                                    <h:message for="idNumber4_1" style="color:red"/>
-                                    <div style="font-size: 15px; margin-top: 10%;">
-                                        <!-- Add Member rengi yeşil olmuyor -->
-                                        <h:commandButton value="Update Trainer" type="submit" styleClass="btn func-button" actionListener="#{memberBean.updateMemberDB()}" disabled="true"/> <!--  add action later this button -->
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div>
-                                        <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender4" requiredMessage="* Value is required" disabled="true">
-                                            <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
-                                        </h:selectOneRadio> 
-                                        <h:message for="gender4" style="color:red"/>   
-                                    </div>
-                                </div>
-                            </div>
-                        </h:form>
                     </div>
                 </div>
-            </div>
 
+                <div class="container" id="updateTrainer" style="display: none">
+                    <div class="row">
+                        <!--<div class="col-3"></div>-->
+                        <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
+                            <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
+                                <div class="col-4">
+                                    <a id="block-func">Update Trainer</a>
+                                </div>
+                                <div class="col-4">
+                                    <a class="col-1" style="color:var(--gray-dark);">Update Date: <script type="text/javascript">showDate();</script></a>
+                                </div>
+                            </div>
+                            <h:form id="updateTrainer1Form">
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-3">
+                                        <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber4" value="#{trainerBean.idNumber}" requiredMessage="* Value is required" disabled="false"/>
+                                        <h:message for="idNumber4" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <h:commandButton value="Search Trainer"  styleClass="btn func-button" id="func-button2" actionListener="#{trainerBean.showTrainerDB()}"  disabled="false">
+                                            <f:ajax execute="@form" render="@none"  onevent="updateSearch('updateTrainerForm')"  />
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+                            </h:form>
+                            <h:form id="updateTrainer2Form">
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-3">
+                                        <!--                                    <input type="text" class="form-control" placeholder="First name" required="required" value="#{trainerBean.firstName}"/>         -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="First name" required="true" id="firstName4" value="#{trainerBean.firstName}" requiredMessage="* Value is required" disabled="false"/>
+                                        <h:message for="firstName4" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                    <input type="text" class="form-control" placeholder="Last name" required="required" value="#{trainerBean.lastName}"/> -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="Last name" required="true" id="lastName4" value="#{trainerBean.lastName}" requiredMessage="* Value is required" disabled="false"/>
+                                        <h:message for="lastName4" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                    <input type="text" class="form-control" placeholder="Email" required="true" value="#{trainerBean.eMail}"/> -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="Email" required="true" id="eMail4" value="#{trainerBean.eMail}" requiredMessage="* Value is required" disabled="false"/>
+                                        <h:message for="eMail4" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                    <input type="text" class="form-control bfh-phone" value="#{trainerBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required" /> -->
+                                        <h:inputText type="text" class="form-control bfh-phone" a:data-format="(ddd) ddd-dddd" required="true" id="phoneNumber4" value="#{trainerBean.phoneNumber}" requiredMessage="* Value is required" disabled="false"/>
+                                        <!-- buranın .js sinden direkt ( dolu olarak geliyor hiçbir zaman boş olmuyor  -->
+                                        <h:message for="phoneNumber4" style="color:red"/>
+                                    </div>
+                                </div>
 
-            <div class="container" id="delete" style="display: none">
-                <div class="row">
-                    <!--<div class="col-3"></div>-->
-                    <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
-                        <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
-                            <div class="col-4">
-                                <a id="block-func">Delete</a>
-                            </div>
-                            <div class="col-4">
-                                <a class="col-1" style="color:var(--gray-dark);">Deletion Date: <script type="text/javascript">showDate();</script></a>
-                            </div>
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-6">
+                                        <div class="input-group">
+                                            <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address4" value="#{trainerBean.address}" requiredMessage="* Value is required" disabled="false"/>
+                                            <h:message for="address4" style="color:red" />
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber4_1" value="#{trainerBean.idNumber}" requiredMessage="* Value is required" disabled="false"/>
+                                        <h:message for="idNumber4_1" style="color:red"/>
+                                        <div style="font-size: 15px; margin-top: 10%;">
+                                            <!-- Add Member rengi yeşil olmuyor -->
+                                            <h:commandButton value="Update Trainer" type="submit" styleClass="btn func-button" actionListener="#{trainerBean.updateTrainerDB()}" disabled="false"/> <!--  add action later this button -->
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div>
+                                            <h:selectOneRadio value="#{trainerBean.gender}" required="true" id="gender4" requiredMessage="* Value is required" disabled="false">
+                                                <f:selectItems value="#{trainerBean.fillGender()}"></f:selectItems>
+                                            </h:selectOneRadio>
+                                            <h:message for="gender4" style="color:red"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
                         </div>
-                        <h:form>
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-3">
-<!--                                     <input type="text" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber5" value="#{memberBean.idNumber}" requiredMessage="* Value is required"/>
-                                    <h:message for="idNumber5" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-<!--                                     <button type="button" class="btn" id="func-button" onclick="updateSearch('updateMemberForm')" style="font-size: 15px; margin-top: 1%;">Search Member</button> -->
-                                    <h:commandButton value="Search Member"  styleClass="btn func-button" id="func-button" actionListener="#{memberBean.showMemberDB()}" >
-                                        <!--<f:ajax execute="@form" render="@none"  onevent="updateSearch('updateMemberForm')"  />-->
-                                    </h:commandButton>
-
-                                </div>
-                            </div>
-   
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-3">
-                                    <!--                                    <input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="First name" id="firstName5" value="#{memberBean.firstName}" disabled="true"/>
-                                    <h:message for="firstName5" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <!--                                    <input type="text" class="form-control" placeholder="Last name" required="required" value="#{memberBean.lastName}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="Last name" id="lastName5" value="#{memberBean.lastName}" disabled="true"/>
-                                    <h:message for="lastName5" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <!--                                    <input type="text" class="form-control" placeholder="Email" required="true" value="#{memberBean.eMail}"/> -->
-                                    <h:inputText type="text" class="form-control" a:placeholder="Email" id="eMail5" value="#{memberBean.eMail}" disabled="true"/>
-                                    <h:message for="eMail5" style="color:red"/>
-                                </div>
-                                <div class="col-3">
-                                    <!--                                    <input type="text" class="form-control bfh-phone" value="#{memberBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required" /> -->
-                                    <h:inputText type="text" class="form-control bfh-phone" a:data-format="(ddd) ddd-dddd" id="phoneNumber5" value="#{memberBean.phoneNumber}" disabled="true"/>
-                                    <!-- buranın .js sinden direkt ( dolu olarak geliyor hiçbir zaman boş olmuyor  -->
-                                </div>
-                            </div>
-
-                            <div class="form-row" style="padding-bottom: 3%;">
-                                <div class="col-6">
-                                    <div class="input-group">
-                                        <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address5" value="#{memberBean.address}" requiredMessage="* Value is required" disabled="true"/>
-                                        <!-- buranın * Value is required kısmı yanda gözüküyor alta alınması gerek -->
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber_5" value="#{memberBean.idNumber}" requiredMessage="* Value is required" disabled="true"/>
-                                    <h:message for="idNumber_5" style="color:red"/>
-                                    <div style="font-size: 15px; margin-top: 10%;">
-                                        <!-- Add Member rengi yeşil olmuyor -->
-                                        <h:commandButton value="Delete Member" type="submit" styleClass="btn func-button" actionListener="#{memberBean.deleteMemberDB()}"/> <!--  add action later this button -->
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div>
-                                        <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender2" requiredMessage="* Value is required" disabled="true">
-                                            <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
-                                        </h:selectOneRadio> 
-                                        <h:message for="gender2" style="color:red"/>   
-                                    </div>
-                                </div>
-                            </div>
-                        </h:form>
                     </div>
                 </div>
+
+
+                <div class="container" id="delete" style="display: none">
+                    <div class="row">
+                        <!--<div class="col-3"></div>-->
+                        <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
+                            <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
+                                <div class="col-4">
+                                    <a id="block-func">Delete</a>
+                                </div>
+                                <div class="col-4">
+                                    <a class="col-1" style="color:var(--gray-dark);">Deletion Date: <script type="text/javascript">showDate();</script></a>
+                                </div>
+                            </div>
+                            <h:form id="deleteForm">
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-3">
+                                        <!--                                     <input type="text" class="form-control" placeholder="ID Number" required="required" value="#{memberBean.idNumber}"/> -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber5" value="#{memberBean.idNumber}" requiredMessage="* Value is required"/>
+                                        <h:message for="idNumber5" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                     <button type="button" class="btn" id="func-button" onclick="updateSearch('updateMemberForm')" style="font-size: 15px; margin-top: 1%;">Search Member</button> -->
+                                        <h:commandButton value="Search Member"  styleClass="btn func-button" id="func-button" actionListener="#{memberBean.showMemberDB()}" >
+                                            <!--<f:ajax execute="@form" render="@none"  onevent="updateSearch('updateMemberForm')"  />-->
+                                        </h:commandButton>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-3">
+                                        <!--                                    <input type="text" class="form-control" placeholder="First name" required="required" value="#{memberBean.firstName}"/>         -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="First name" id="firstName5" value="#{memberBean.firstName}" disabled="true"/>
+                                        <h:message for="firstName5" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                    <input type="text" class="form-control" placeholder="Last name" required="required" value="#{memberBean.lastName}"/> -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="Last name" id="lastName5" value="#{memberBean.lastName}" disabled="true"/>
+                                        <h:message for="lastName5" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                    <input type="text" class="form-control" placeholder="Email" required="true" value="#{memberBean.eMail}"/> -->
+                                        <h:inputText type="text" class="form-control" a:placeholder="Email" id="eMail5" value="#{memberBean.eMail}" disabled="true"/>
+                                        <h:message for="eMail5" style="color:red"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <!--                                    <input type="text" class="form-control bfh-phone" value="#{memberBean.phoneNumber}" data-format="(ddd) ddd-dddd" required="required" /> -->
+                                        <h:inputText type="text" class="form-control bfh-phone" a:data-format="(ddd) ddd-dddd" id="phoneNumber5" value="#{memberBean.phoneNumber}" disabled="true"/>
+                                        <!-- buranın .js sinden direkt ( dolu olarak geliyor hiçbir zaman boş olmuyor  -->
+                                    </div>
+                                </div>
+
+                                <div class="form-row" style="padding-bottom: 3%;">
+                                    <div class="col-6">
+                                        <div class="input-group">
+                                            <h:inputTextarea cols="" class="form-control" rows="3" a:placeholder="Address" required="true" id="address5" value="#{memberBean.address}" requiredMessage="* Value is required" disabled="true"/>
+                                            <!-- buranın * Value is required kısmı yanda gözüküyor alta alınması gerek -->
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <h:inputText type="text" class="form-control" a:placeholder="ID Number" required="true" id="idNumber_5" value="#{memberBean.idNumber}" requiredMessage="* Value is required" disabled="true"/>
+                                        <h:message for="idNumber_5" style="color:red"/>
+                                        <div style="font-size: 15px; margin-top: 10%;">
+                                            <!-- Add Member rengi yeşil olmuyor -->
+                                            <h:commandButton value="Delete Member" type="submit" styleClass="btn func-button" actionListener="#{memberBean.deleteMemberDB()}"/> <!--  add action later this button -->
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div>
+                                            <h:selectOneRadio value="#{memberBean.gender}" required="true" id="gender2" requiredMessage="* Value is required" disabled="true">
+                                                <f:selectItems value="#{memberBean.fillGender()}"></f:selectItems>
+                                            </h:selectOneRadio>
+                                            <h:message for="gender2" style="color:red"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- xd -->
             </div>
 
-<!-- xd -->
+
         </div>
     </div>
-</div>
 
-<div class="footer">
-    <div class="container">
-        <a class="text-muted mr-sm-3" href="#" >About us</a>
-        <a class="text-muted mr-sm-3" href="#" >Contact</a>
+    <div class="footer">
+        <div class="container">
+            <a class="text-muted mr-sm-3" href="#" >About us</a>
+            <a class="text-muted mr-sm-3" href="#" >Contact</a>
+        </div>
     </div>
-</div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+</h:body>
 
-</body>
 </html>
