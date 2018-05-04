@@ -11,18 +11,36 @@
     <f:event type="preRenderView" listener="#{shiroAuthenticationClass.isAnyUserLoggedIn()}" />
     <link href="resources/img/favicon.ico" rel="icon" type="image"></link>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
-    <!--<meta http-equiv="refresh" content="3" />-->
-
-    <!--<link href="resources/css/bootstrap.css" rel="stylesheet"></link>-->
-    <!--<link href="resources/css/style.css" rel="stylesheet"></link>-->
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript" />
     <!-- sadece src kısmı yeterli html'den xhtml'e çevirirken -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" type="text/javascript" />
 
-    <h:outputStylesheet library="css" name="style.css" />
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+    <h:outputScript library="js" name="formatter.js"/>
+    <h:outputScript target="head">
+        $ = jQuery;
+    </h:outputScript>
+    <h:outputScript library="js" name="scripts.js"/>
     <h:outputScript library="js" name="bootstrap.js" />
     <h:outputStylesheet library="css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="style.css" />
+
+    <!--<h:outputStylesheet library="css" name="style_admin.css" />-->
+
+    <h:outputScript>
+        function ext() {
+            this.cfg.seriesDefaults = {
+                shadowDepth: 0,
+                lineWidth: 5,
+            };
+            this.cfg.grid = {
+                backgroundColor: "#b7b7b7",
+                gridLineColor: "#67984d",
+                gridLineWidth: 1,
+                drawBorder: false,
+                shadow: false,
+            }
+        }
+    </h:outputScript>
 
 </h:head>
 
