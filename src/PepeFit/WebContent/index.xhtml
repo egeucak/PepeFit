@@ -68,8 +68,11 @@
 							<div class="col-auto">
 								<h:inputText class="form-control" type="email" id="username"
 									a:placeholder="Email" required="true"
-									value="#{shiroAuthenticationClass.userName}" requiredMessage="Email is required"/>
+									value="#{shiroAuthenticationClass.userName}" validatorMessage="invalid email" requiredMessage="Email is required">
+									<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+									</h:inputText>
 								<h:message for="username" style="color:red"/>
+								<h:outputText value="#{shiroAuthenticationClass.error}" style="color:red" />
 							</div>
 
 							<div class="col-auto">

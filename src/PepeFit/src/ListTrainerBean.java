@@ -32,8 +32,8 @@ public class ListTrainerBean {
         return trainer_deneme;
     }
 
-    public void printAnan(){
-        System.out.println("Anan");  
+    public void printSelam(){
+        System.out.println("Selam");  
   }
 
     public ArrayList<ArrayList<Trainer>> coursesTimes = new ArrayList<ArrayList<Trainer>>();
