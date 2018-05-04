@@ -316,11 +316,13 @@ public class TrainerBean {
                 this.courseCapacity = null;
                 this.courseTime = null;
                 database.destruct_connection();
+                this.success = "Course has been added succesfully!";
                 return "Successfully Added !";
 
             }else{
                 database.destruct_connection();
                 System.out.println("TRAINER: " + trainerID + " ALREADY OPEN THIS CLASS WITH THE SAME TIME AND DATE!\n");
+                this.error = "TRAINER: " + trainerID + " ALREADY OPEN THIS CLASS WITH THE SAME TIME AND DATE!";
                 return "TRAINER: " + trainerID + " ALREADY OPEN THIS CLASS WITH THE SAME TIME AND DATE!";
 
             }
