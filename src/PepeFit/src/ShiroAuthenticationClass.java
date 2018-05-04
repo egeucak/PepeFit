@@ -108,7 +108,7 @@ public class ShiroAuthenticationClass {
             }
             else if(currentUser.hasRole("trainer")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-                //assignId("trainer");
+                assignId("trainer");
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/trainer/course_trainer_split.xhtml?faces-redirect=true");
             }
         }
