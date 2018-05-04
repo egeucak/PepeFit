@@ -42,7 +42,7 @@ function changeContainer(clickedOn) {
 }
 
 function resetForms(){ 
-    var formList = ["addMember", "updateMember1", "updateMember2", "addTrainer", "updateTrainer1", "updateTrainer2", "delete"]
+    var formList = ["addMember", "updateMember1", "updateMember2", "addTrainer", "updateTrainer1", "updateTrainer2", "delete"];
     for (var i = 0; i<formList.length; i++){
         document.getElementById(formList[i].concat("Form")).reset();
     }
