@@ -23,7 +23,7 @@ public class ShiroAuthenticationClass {
     private String password;
     public static String id;
     public String error;
-    
+
     public String getUserName() {
         return userName;
     }
@@ -40,29 +40,29 @@ public class ShiroAuthenticationClass {
         this.password = password;
     }
 
-	public static String getId() {
-		return id;
-	}
-	
-	public static void setId(String id) {
-		ShiroAuthenticationClass.id = id;
-	}
-	
-	public String getError() {
-		return error;
-	}
+    public static String getId() {
+        return id;
+    }
 
-	public void setError(String error) {
-		this.error = error;
-	}
+    public static void setId(String id) {
+        ShiroAuthenticationClass.id = id;
+    }
 
-	public void authenticateTheUser(){
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public void authenticateTheUser(){
 
         Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password); /* TODO use Sha256Hash when hiding the password later */
-        
-         try{
-                currentUser.login(token);
+
+        try{
+            currentUser.login(token);
         } catch (UnknownAccountException uae ) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed 1", "username wrong"));
         } catch (IncorrectCredentialsException ice ) {
@@ -79,57 +79,57 @@ public class ShiroAuthenticationClass {
     {
 
         Subject currentUser = SecurityUtils.getSubject();
-        
-        try 
+
+        try
         {
             currentUser.logout();
-        } 
+        }
         catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
-        
+
         return "/index.xhtml?faces-redirect=true";
     }
-    
+
     public void isAnyUserLoggedIn() throws SQLException
     {
-    	Subject currentUser = SecurityUtils.getSubject();
-    	
+        Subject currentUser = SecurityUtils.getSubject();
+
         if(SecurityUtils.getSubject().getPrincipal()!=null)
         {
-        	if(currentUser.hasRole("admin") || currentUser.hasRole("superadmin")) {
-                NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();          
+            if(currentUser.hasRole("admin") || currentUser.hasRole("superadmin")) {
+                NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/admin/admin.xhtml?faces-redirect=true");
-        	}
-        	else if(currentUser.hasRole("member")) {
+            }
+            else if(currentUser.hasRole("member")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
                 //assignId("member");
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/member/member.xhtml?faces-redirect=true");
-        	}
-        	else if(currentUser.hasRole("trainer")) {
+            }
+            else if(currentUser.hasRole("trainer")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
                 //assignId("trainer");
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/trainer/course_trainer_split.xhtml?faces-redirect=true");
-        	} 
+            }
         }
         else {
-        	if(this.userName != null) {
-        		this.error = "This mail is not registered to the system";
-        	}
+            if(this.userName != null) {
+                this.error = "This mail is not registered to the system";
+            }
         }
-        
+
     }
-    
+
     public void assignId(String role) throws SQLException {
-    	DatabaseBean database = new DatabaseBean();
-    	if (role.equals("member")) {
-    		ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select TC from Member where EMAIL=?",-1,this.userName);
-    		System.out.println(results.get(0).get("TC"));
-    	}
-    	else if (role.equals("trainer")) {
-    		ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select T_ID from Trainer where T_EMAIL=?",-1,this.userName);
-    		System.out.println(results.get(0).get("T_ID"));
-    		id = (String) results.get(0).get("T_ID");
-    	}
+        DatabaseBean database = new DatabaseBean();
+        if (role.equals("member")) {
+            ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select TC from Member where EMAIL=?",-1,this.userName);
+            System.out.println(results.get(0).get("TC"));
+        }
+        else if (role.equals("trainer")) {
+            ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select T_ID from Trainer where T_EMAIL=?",-1,this.userName);
+            System.out.println(results.get(0).get("T_ID"));
+            id = (String) results.get(0).get("T_ID");
+        }
     }
 }

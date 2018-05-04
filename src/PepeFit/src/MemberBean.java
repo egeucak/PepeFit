@@ -1,5 +1,4 @@
 
-
 import org.primefaces.context.RequestContext;
 
 import java.sql.Date;
@@ -291,6 +290,7 @@ public class MemberBean {
 					this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
 			database.commit_trans();
 			database.destruct_connection();
+			this.updateSuccess = this.idNumber + " successfully updated !";
 		}catch(SQLException e){
 			System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
 		}
@@ -306,6 +306,7 @@ public class MemberBean {
 			database.execute("DELETE FROM Member WHERE TC=?",1,this.idNumber);
 			database.commit_trans();
 			database.destruct_connection();
+			this.deleteSuccess= this.idNumber + " successfully deleted !";
 		}catch(SQLException e){
 			System.out.println("ERROR OCCURED WHILE DELETING MEMBER " + e.getMessage());
 		}

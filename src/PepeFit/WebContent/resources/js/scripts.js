@@ -36,7 +36,7 @@ function changeContainer(clickedOn) {
     document.getElementById(containerArrayDelete[0]).style.display = "none";
     document.getElementById(clickedOn).style.display = "contents";
     if (clickedOn )
-    document.getElementById(clickedOn.concat("List")).classList.add("active");
+        document.getElementById(clickedOn.concat("List")).classList.add("active");
     resetForms();
     console.log(clickedOn);
 }
@@ -263,9 +263,9 @@ function syncRadiosDeneme(courseListIdv,firstName,xd){ // Don't use this functio
                     $('#idResultBox').css({"display": "block", "class": "text-success"});
                     $('#addButton').css({"display": "block"});
                 } else {
-                        $('#idResultBox').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
-                        $('#idResultBox').css({"display": "block", "class": "text-danger"});
-                        $('#addButton').css({"display": "none"});
+                    $('#idResultBox').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
+                    $('#idResultBox').css({"display": "block", "class": "text-danger"});
+                    $('#addButton').css({"display": "none"});
                 }
                 return ((input.toString().length > 11) ? input.toString().substring(0,11) : input);
             } );
@@ -305,9 +305,9 @@ function syncRadiosDeneme(courseListIdv,firstName,xd){ // Don't use this functio
                     $('#idResultBox2').css({"display": "block", "class": "text-success"});
                     $('#searchButton1').css({"display": "block"});
                 } else {
-                        $('#idResultBox2').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
-                        $('#idResultBox2').css({"display": "block", "class": "text-danger"});
-                        $('#searchButton1').css({"display": "none"});
+                    $('#idResultBox2').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
+                    $('#idResultBox2').css({"display": "block", "class": "text-danger"});
+                    $('#searchButton1').css({"display": "none"});
                 }
                 return ((input.toString().length > 11) ? input.toString().substring(0,11) : input);
             } );
@@ -347,9 +347,9 @@ function syncRadiosDeneme(courseListIdv,firstName,xd){ // Don't use this functio
                     $('#idResultBox3').css({"display": "block", "class": "text-success"});
                     $('#updateButton1').css({"display": "block"});
                 } else {
-                        $('#idResultBox3').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
-                        $('#idResultBox3').css({"display": "block", "class": "text-danger"});
-                        $('#updateButton1').css({"display": "none"});
+                    $('#idResultBox3').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
+                    $('#idResultBox3').css({"display": "block", "class": "text-danger"});
+                    $('#updateButton1').css({"display": "none"});
                 }
                 return ((input.toString().length > 11) ? input.toString().substring(0,11) : input);
             } );
@@ -389,9 +389,9 @@ function syncRadiosDeneme(courseListIdv,firstName,xd){ // Don't use this functio
                     $('#idResultBox4').css({"display": "block", "class": "text-success"});
                     $('#addButton2').css({"display": "block"});
                 } else {
-                        $('#idResultBox4').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
-                        $('#idResultBox4').css({"display": "block", "class": "text-danger"});
-                        $('#addButton2').css({"display": "none"});
+                    $('#idResultBox4').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
+                    $('#idResultBox4').css({"display": "block", "class": "text-danger"});
+                    $('#addButton2').css({"display": "none"});
                 }
                 return ((input.toString().length > 11) ? input.toString().substring(0,11) : input);
             } );
@@ -431,9 +431,9 @@ function syncRadiosDeneme(courseListIdv,firstName,xd){ // Don't use this functio
                     $('#idResultBox5').css({"display": "block", "class": "text-success"});
                     $('#searchButton2').css({"display": "block"});
                 } else {
-                        $('#idResultBox5').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
-                        $('#idResultBox5').css({"display": "block", "class": "text-danger"});
-                        $('#searchButton2').css({"display": "none"});
+                    $('#idResultBox5').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
+                    $('#idResultBox5').css({"display": "block", "class": "text-danger"});
+                    $('#searchButton2').css({"display": "none"});
                 }
                 return ((input.toString().length > 11) ? input.toString().substring(0,11) : input);
             } );
@@ -473,9 +473,9 @@ function syncRadiosDeneme(courseListIdv,firstName,xd){ // Don't use this functio
                     $('#idResultBox6').css({"display": "block", "class": "text-success"});
                     $('#updateButton2').css({"display": "block"});
                 } else {
-                        $('#idResultBox6').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
-                        $('#idResultBox6').css({"display": "block", "class": "text-danger"});
-                        $('#updateButton2').css({"display": "none"});
+                    $('#idResultBox6').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
+                    $('#idResultBox6').css({"display": "block", "class": "text-danger"});
+                    $('#updateButton2').css({"display": "none"});
                 }
                 return ((input.toString().length > 11) ? input.toString().substring(0,11) : input);
             } );
@@ -515,9 +515,9 @@ function syncRadiosDeneme(courseListIdv,firstName,xd){ // Don't use this functio
                     $('#idResultBox7').css({"display": "block", "class": "text-success"});
                     $('#searchButton3').css({"display": "block"});
                 } else {
-                        $('#idResultBox7').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
-                        $('#idResultBox7').css({"display": "block", "class": "text-danger"});
-                        $('#searchButton3').css({"display": "none"});
+                    $('#idResultBox7').text("Enter a valid ID").attr('class', 'text-uppercase text-danger');
+                    $('#idResultBox7').css({"display": "block", "class": "text-danger"});
+                    $('#searchButton3').css({"display": "none"});
                 }
                 return ((input.toString().length > 11) ? input.toString().substring(0,11) : input);
             } );
