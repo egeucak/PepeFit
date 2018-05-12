@@ -1,26 +1,42 @@
 
-
 import org.primefaces.context.RequestContext;
 
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.sound.midi.SysexMessage;
 import javax.xml.stream.events.StartDocument;
 
+
 @ManagedBean
 @RequestScoped
 public class MemberBean {
 
-	private String firstName, lastName, eMail, phoneNumber, address, idNumber, gender;
-	private Date birthDate,registirationDate;
+	private String firstName, lastName, eMail, phoneNumber, address, idNumber, gender, error, success, showError, updateSuccess, deleteSuccess;
+	private String birthDate,registirationDate;
 	private static Map<String,Object> genders = new LinkedHashMap<String, Object>();
+
+	public String selectedCourse;
+
+	public void printCourse(){
+		System.out.println("Selam");
+		System.out.println(this.selectedCourse);
+	}
+
+
+	public String getSelectedCourse() {
+		return selectedCourse;
+	}
+
+	public void setSelectedCourse(String selectedCourse) {
+		this.selectedCourse = selectedCourse;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -50,7 +66,7 @@ public class MemberBean {
 		return phoneNumber;
 	}
 
-	public Date getRegistirationDate(){
+	public String getRegistirationDate(){
 		return this.registirationDate;
 	}
 
@@ -82,16 +98,56 @@ public class MemberBean {
 		this.gender = gender;
 	}
 
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 
-	public void setRegistirationDate(Date registirationDate){
+	public void setRegistirationDate(String registirationDate){
 		this.registirationDate = registirationDate;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+	
+	public String getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(String success) {
+		this.success = success;
+	}
+	
+	public String getShowError() {
+		return showError;
+	}
+
+	public void setShowError(String showError) {
+		this.showError = showError;
+	}
+	
+	public String getUpdateSuccess() {
+		return updateSuccess;
+	}
+
+	public void setUpdateSuccess(String updateSuccess) {
+		this.updateSuccess = updateSuccess;
+	}
+
+	public String getDeleteSuccess() {
+		return deleteSuccess;
+	}
+
+	public void setDeleteSuccess(String deleteSuccess) {
+		this.deleteSuccess = deleteSuccess;
 	}
 
 	public void editActionGender(String gender) {
@@ -135,21 +191,39 @@ public class MemberBean {
 		this.setGender(null);
 		this.setPhoneNumber(null);
 		this.seteMail(null);
-
+		this.setSelectedCourse(null);
 	}
 
-	public void addMemberDB() throws SQLException {
-
+	public String addMemberDB() throws SQLException {
+		String ret;
 		try{
 			DatabaseBean database = new DatabaseBean();
+			ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select * from Member where TC=?",-1,this.idNumber);
+
+			if(results.size() != 0){
+				this.error = "This Member (ID : " + this.idNumber + ") has been already registered!";
+				ret = "This User has been already registered!";
+				database.destruct_connection();
+				System.out.println(ret +"\n");
+				return ret;
+			}
+
 			database.execute("Insert into Member values(?,?,?,?,?,\"1997-01-01\",?,?,\"1997-01-01\")", 1, this.idNumber, this.firstName, this.lastName, this.gender,this.phoneNumber,this.eMail, this.address);
+			// Otherwise continue to work.
+			database.commit_trans();
+
 			database.destruct_connection();
 		}catch (SQLException e){
-			System.out.println("ERROR OCCURED WHILE ADDING MEMBER "+e.getMessage());
+			System.out.println("ERROR OCCURED WHILE ADDING MEMBER "+e.getMessage() + "\n");
+
 		}
 
-
+		ret = "Successfully added Member with ID NUMBER: "+ this.idNumber +" !";
+		this.success = "Successfully added Member with ID NUMBER: "+ this.idNumber +" !";
 		setNull();
+		System.out.println(ret+"\n");
+
+		return ret;
 
 
 	}
@@ -160,41 +234,49 @@ public class MemberBean {
 		return resultShow;
 	}
 
-	public void showMemberDB() {
+	public String showMemberDB() {
 
 		if(this.idNumber != null){
 			System.out.println(this.idNumber + " YESSSSS");
 			try {
+				// Connecting to database
 				DatabaseBean database = new DatabaseBean();
-				ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select * from Member where tc=?",-1,this.idNumber);
+				// Check id from database.
+				ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select * from Member where TC=?",-1,this.idNumber);
+				// If it's not in our database
 				if(results.size()==0){
+					this.showError = "There is no Member with ID : "+ this.idNumber;
 					System.out.println("THERE IS NO PERSON WITH ID : "+ this.idNumber);
-					resultShow = "There is no person with ID : "+ this.idNumber;
+					database.destruct_connection();
+					return resultShow = "There is no person with ID : "+ this.idNumber;
 
 				}else{
+					// If it's in our database, show the member.
 					setFirstName(results.get(0).get("NAME").toString());
 					setLastName(results.get(0).get("SURNAME").toString());
 					setGender(results.get(0).get("GENDER").toString());
 					setPhoneNumber(results.get(0).get("PHONE").toString());
-					setBirthDate((Date)results.get(0).get("BDATE"));
+					setBirthDate((String)results.get(0).get("BDATE"));
 					seteMail(results.get(0).get("EMAIL").toString());
 					setAddress(results.get(0).get("ADRESS").toString());
-					setRegistirationDate((Date)results.get(0).get("RDATE"));
+					setRegistirationDate((String)results.get(0).get("RDATE"));
 					resultShow = null;
+					database.destruct_connection();
+					return "SHOWING..";
 				}
-				database.destruct_connection();
 
 			} catch (SQLException e) {
 				System.out.println("ERROR OCCURED WHILE SHOWING MEMBER " + e.getMessage());
 
 			}
 		}else{
+			// If ID NUMBER place is empty.
 			System.out.println("ID NUMBER IS NULL IN SHOW NUMBER");
+
 		}
 
 
-
-
+		return "ID NUMBER PLACE CANNOT BE EMPTY !";
 
 	}
 
@@ -202,14 +284,16 @@ public class MemberBean {
 	public void updateMemberDB(){
 
 		printAll();
-
 		try{
-				DatabaseBean database = new DatabaseBean();
-				database.execute("UPDATE Member SET name=?,surname=?,gender=?,phone=?,bDate=?,email=?,adress=?,rDate=? where tc=?",1,
-						this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
-			}catch(SQLException e){
-				System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
-			}
+			DatabaseBean database = new DatabaseBean();
+			database.execute("UPDATE Member SET name=?,surname=?,gender=?,phone=?,bDate=?,email=?,adress=?,rDate=? where tc=?",1,
+					this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
+			database.commit_trans();
+			database.destruct_connection();
+			this.updateSuccess = this.idNumber + " successfully updated !";
+		}catch(SQLException e){
+			System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
+		}
 	}
 
 	/**
@@ -220,9 +304,20 @@ public class MemberBean {
 		try{
 			DatabaseBean database = new DatabaseBean();
 			database.execute("DELETE FROM Member WHERE TC=?",1,this.idNumber);
+			database.commit_trans();
 			database.destruct_connection();
+			this.deleteSuccess= this.idNumber + " successfully deleted !";
 		}catch(SQLException e){
 			System.out.println("ERROR OCCURED WHILE DELETING MEMBER " + e.getMessage());
 		}
+	}
+
+	public void pp(){
+		if(this.selectedCourse.isEmpty()){
+			System.out.println("SENIN BEN ANANIN AMINI SIKEYIM !\n" );
+		}else{
+			System.out.println("YERIM LEN! " + this.selectedCourse + "\n" );
+		}
+
 	}
 }

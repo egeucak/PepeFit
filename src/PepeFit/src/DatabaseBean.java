@@ -46,12 +46,12 @@ public class DatabaseBean {
 
 	public DatabaseBean() throws SQLException {
 		dbConnection = dbConnection();
-		dbConnection.setAutoCommit(false);
 		if (dbConnection == null) {
 			System.out.println("Cannot connect to database (Maybe from Auth )");
 		} else {
 			System.out.println("Connected to the DATABASE");
 		}
+		dbConnection.setAutoCommit(false);
 	}
 
 
@@ -93,19 +93,22 @@ public class DatabaseBean {
 		Connection con = null;
 
 		try {
-
+			System.out.println("Trying...");
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			System.out.println(DriverManager.getDrivers());
 			String jdbcUrl = String.format(
 					"jdbc:mysql://google/%s?cloudSqlInstance=%s&"
 							+ "socketFactory=com.google.cloud.sql.mysql.SocketFactory&relaxAutoCommit=true",
 					databaseName, instanceConnectionName);
+			System.out.println(jdbcUrl);
 
 			con = DriverManager.getConnection(jdbcUrl, username, password);
 			System.out.println("Connection completed.");
 
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
-
+			System.out.println("Error connecting the database, don't know why");
+			return null;
 
 		}
 		return con;
@@ -192,7 +195,7 @@ public class DatabaseBean {
 			prepStmt = (PreparedStatement) dbConnection.prepareStatement(sql_query);
 
 			// Sıkıntı cıkarsa prepStmt = bindvars(prepStmt,vars) dene
-			if (vars[0] != null){
+			if (vars != null){
 				bindvars(prepStmt, vars);
 			}
 
@@ -207,15 +210,19 @@ public class DatabaseBean {
 			} else if (exec_type == 1) {
 				// INSERT, UPDATE OR DELETE . We don't have any returns
 				prepStmt.executeUpdate();
-				dbConnection.commit();
+//				dbConnection.commit();
 			}
+
 
 		} catch (SQLException e) {
 
 			if (dbConnection != null) {
 				try {
-					System.err.print("Transaction is being rolled back ERROR " + e.getMessage());
+					System.err.print("Transaction is being rolled back ERROR " + e.getMessage() + "\n");
 					dbConnection.rollback();
+					// Returning message for controlling the errors for adding, deleting etc.
+
+
 				} catch (SQLException excep) {
 					System.out.println("Error occured while rollbacking ERROR " + excep.getMessage());
 				}
@@ -246,11 +253,11 @@ public class DatabaseBean {
 			}
 			query_results.add(row);
 		}
-		int p = 0;
-
-		while(p < query_results.size()){
-			System.out.println(query_results.get(p++));
-		}
+//		int p = 0;
+//
+//		while(p < query_results.size()){
+//			System.out.println(query_results.get(p++));
+//		}
 
 
 		return query_results;
