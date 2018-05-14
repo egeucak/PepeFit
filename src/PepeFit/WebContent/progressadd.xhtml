@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+
+<h:head>
+    <!-- Required meta tags -->
+    <title>Add Progress</title>
+    <meta charset="utf-8" content=""/>
+    <link href="../resources/img/favicon.ico" rel="icon" type="image"> </link>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
+    <!--<meta http-equiv="refresh" content="3" />-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" type="text/javascript"/>
+
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+    <h:outputScript library="js" name="formatter.js"/>
+
+    <h:outputScript target="head">
+        $ = jQuery;
+    </h:outputScript>
+
+    <h:outputScript library="js" name="scripts.js"/>
+    <h:outputScript library="js" name="bootstrap.js" />
+    <h:outputStylesheet library="css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="style.css" />
+
+    <h:outputScript>
+        function ext() {
+            this.cfg.seriesDefaults = {
+                shadowDepth: 0,
+                lineWidth: 5,
+                rendererOptions: {
+                    smooth: true,
+                }
+            };
+            this.cfg.grid = {
+                backgroundColor: "#b7b7b7",
+                gridLineColor: "#67984d",
+                gridLineWidth: 1,
+                drawBorder: false,
+                shadow: false
+            }
+            this.cfg.legend = {
+                location : "sw",
+                // placement : "outsideGrid",
+                showLabels : true,
+                show : false,
+                showSwatches : false,
+                renderer: $.jqplot.LegendRenderer,
+            }
+        }
+    </h:outputScript>
+
+</h:head>
+
+<h:body styleClass="bg">
+
+<!--    NAVIGATION MENU     -->
+
+<div class="navbar navbar-expand-sm navbar-light" id="bar">
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="" href="trainer.xhtml" id="bartext">Courses</a></li>
+        <li class="nav-item"><a class="active" href="progressadd.xhtml" id="bartext">Members</a></li>
+
+        <li class="nav-item" >
+            <div class="" data-toggle="dropdown" style="position: absolute; left: 90%;">
+                <img src="../resources/img/gear1.png" id="gear" alt=""/>
+                <!--<h:graphicImage styleClass="" url="#resource{['img/gear1.png']}" alt=""/>-->
+                <ul class="dropdown-menu" id="dropdown">
+                    <h:form>
+                        <li><a href="#" id="dropdown-text">Settings</a></li>
+                        <li>
+                            <span id="dropdown-text">
+                                <h:commandLink style="color: white" action="#{shiroAuthenticationClass.logout()}">Logout</h:commandLink>
+                            </span>
+                        </li>
+                    </h:form>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <a class="navbar-brand" href="#" >
+        <!--<img src="../resources/img/pepe2.png" style="width:50px;" id="pepe-logo" alt=""/>-->
+        <img src="#{resource['img/pepe2.png']}" style="width:50px;" id="pepe-logo" alt=""/>
+    </a>
+</div>
+
+<!--    LEFT MENU   -->
+<div class="container-fluid">
+    <div class="row" style="padding-top: 8%;">
+        <div class="col-2">
+            <div class="grey-bg left-menu scrollbar" id="members">
+                <ul class="list-unstyled" style="margin-top: 0px">
+                    <li id="header"><h3 style="color: var(--green)">Students</h3></li>
+                    <c:forEach items="#{listMemberBean.getUserNames()}" var="user">
+                        <li><a href="#" class="" id="#{user.getId()}" onclick="showGraphAdd('#{user.getId()}')">#{user.getName()}</a></li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-1"></div>
+        <div class="col-6">
+            <div class="container" id="progressGraph">
+                <div class="row">
+                    <div class="col-12" style="background-color: var(--gray-light); min-height: 30rem;">
+                        <div class="row" id="main-block-title"  style="padding-top: 2.5%; padding-bottom: 3%;">
+                            <div class="offset-1 col-10">
+                                <a class="col-1" style="color:var(--gray-dark);margin-left: 42%"><script type="text/javascript">showDate();</script></a>
+                                <h1 style="color: var(--green); margin-left: 40%">Progress</h1>
+                                <br/>
+                                <h:form>
+                                    <div class="graph" style="visibility: visible">
+                                        <p:outputPanel>
+                                            <p:chart id="chart" type="line" model="#{chartTest.lineModel}" responsive="true">
+
+                                            </p:chart>
+                                        </p:outputPanel>
+                                    </div>
+
+                                    <div class="btn-group" style="padding-left: 5%;margin-top: -14%">
+                                        <p:commandButton update="chart" class="btn" actionListener="#{chartTest.getLineModel1}" type="" id="option1" autocomplete="off" value="Arm"/>
+                                        <p:commandButton update="chart" class="btn" actionListener="#{chartTest.getLineModel2}" type="" id="option2" autocomplete="off" value="Leg"/>
+                                    </div>
+                                </h:form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- xd -->
+        </div>
+    </div>
+</div>
+
+    <div class="footer">
+        <div class="container">
+            <a href="../about_us.xhtml" class="text-muted mr-sm-3 ">About us</a> <a href="../contact.xhtml"
+                                                                                    class="text-muted mr-sm-3">Contact</a>
+        </div>
+    </div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+</h:body>
+</html>

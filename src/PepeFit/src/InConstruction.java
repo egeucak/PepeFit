@@ -1,4 +1,4 @@
-package org.primefaces.showcase.view.misc;
+//package org.primefaces.showcase.view.misc;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;

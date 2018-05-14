@@ -227,7 +227,7 @@ body {
   word-break: keep-all !important;
 }
 
-.btn:active, .btn:focus {
+.btn:active, .btn:focus, .btn:hover {
   background-color: var(--green) !important;
   outline: none !important;
   box-shadow: none;
@@ -251,8 +251,7 @@ body {
 
 .btn-outline-login {
   color: var(--green);
-  background-color: transparent;
-  background-image: none;
+  background-color: var(--white);
   border-color: var(--green);
 }
 
