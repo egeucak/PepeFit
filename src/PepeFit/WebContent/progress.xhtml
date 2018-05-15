@@ -9,7 +9,7 @@
 
 <h:head>
     <!-- Required meta tags -->
-    <title>Add Progress</title>
+    <title>Progress</title>
     <meta charset="utf-8" content=""/>
     <link href="../resources/img/favicon.ico" rel="icon" type="image"> </link>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
@@ -123,24 +123,9 @@
                                     </div>
 
                                     <div class="btn-group" style="padding-left: 5%;margin-top: -14%">
-                                        <p:commandButton update="chart type" class="btn" actionListener="#{chartTest.getLineModel1}" type="" id="option1" autocomplete="off" value="Arm"/>
-                                        <p:commandButton update="chart type" class="btn" actionListener="#{chartTest.getLineModel2}" type="" id="option2" autocomplete="off" value="Leg"/>
-
-
+                                        <p:commandButton update="chart" class="btn" actionListener="#{chartTest.getLineModel1}" type="" id="option1" autocomplete="off" value="Arm"/>
+                                        <p:commandButton update="chart" class="btn" actionListener="#{chartTest.getLineModel2}" type="" id="option2" autocomplete="off" value="Leg"/>
                                     </div>
-                                    <br/>
-                                    <div style="padding-left: 5%">
-                                        <h:outputLabel for="progress" value="Add new progress: " />
-                                        <p:inputText id="progress" value="#{chartTest.value}" style="width: 10%"/>
-                                        <p:commandButton value="Add" class="btn" update="chart type" icon="ui-icon-check" />
-                                    </div>
-
-                                    <!--<h:panelGrid columns="4" cellpadding="5">-->
-
-                                        <!--<h:outputText id="display" value="#{chartTest.value}" />-->
-                                    <!--</h:panelGrid>-->
-                                    <h:outputText id="type" value="#{chartTest.currentGraph}" style="display: none"/>
-
                                 </h:form>
 
                             </div>

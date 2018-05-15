@@ -18,6 +18,15 @@ public class ChartTest implements Serializable {
     private LineChartModel lineModel2;
 
     private HashMap values = new HashMap();
+    private static String currentGraph = "";
+
+    public void setCurrentGraph(String currentGraph) {
+        this.currentGraph = currentGraph;
+    }
+
+    public String getCurrentGraph() {
+        return currentGraph;
+    }
 
     @PostConstruct
     public void init() {
@@ -27,10 +36,16 @@ public class ChartTest implements Serializable {
     public LineChartModel getLineModel() { return lineModel; }
     public LineChartModel getLineModel1() {
         lineModel = lineModel1;
+        setCurrentGraph("arm");
+        System.out.println("In getLineModel1");
+        System.out.println(lineModel.getTitle());
         return lineModel;
     }
     public LineChartModel getLineModel2() {
         lineModel = lineModel2;
+        setCurrentGraph("leg");
+        System.out.println("In getLineModel2");
+        System.out.println(getCurrentGraph());
         return lineModel;
     }
 
@@ -88,5 +103,16 @@ public class ChartTest implements Serializable {
         return model;
     }
 
+    private String value;
 
+    public String getValue() {
+        System.out.println("Get içinde");
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+        System.out.println(getCurrentGraph() + value);
+        System.out.println("Set içinde");
+    }
 }
