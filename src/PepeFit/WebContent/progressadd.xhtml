@@ -122,7 +122,7 @@
                                         </p:outputPanel>
                                     </div>
 
-                                    <div class="btn-group" style="padding-left: 5%;margin-top: -14%">
+                                    <div class="btn-group" style="padding-left: 5%;margin-top: 3%">
                                     	<p:commandButton update="chart type" class="btn" actionListener="#{lineChartBean.getLineHeight}" type="" id="option1" autocomplete="off" value="Height"/>
                                         <p:commandButton update="chart type" class="btn" actionListener="#{lineChartBean.getLineWeight}" type="" id="option2" autocomplete="off" value="Weight"/>
                                         <p:commandButton update="chart type" class="btn" actionListener="#{lineChartBean.getLineArm}" type="" id="option3" autocomplete="off" value="Arm"/>
@@ -134,7 +134,7 @@
                                     	<p:commandButton update="chart type" class="btn" actionListener="#{lineChartBean.getLineHip}" type="" id="option9" autocomplete="off" value="Hip"/>
                                     </div>
                                     <br/>
-                                    <div style="padding-left: 5%">
+                                    <div style="padding-left: 5%;margin-top: 3%">
                                         <h:outputLabel for="progress" value="Add new progress: " />
                                         <p:inputText id="progress" value="#{lineChartBean.value}" style="width: 10%"/>
                                         <p:commandButton value="Add" class="btn" update="chart type" icon="ui-icon-check" />
