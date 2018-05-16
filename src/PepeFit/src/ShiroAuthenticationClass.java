@@ -103,7 +103,7 @@ public class ShiroAuthenticationClass {
             }
             else if(currentUser.hasRole("member")) {
                 NavigationHandler nh=FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-                //assignId("member");
+                assignId("member");
                 nh.handleNavigation(FacesContext.getCurrentInstance(), null, "/member/member.xhtml?faces-redirect=true");
             }
             else if(currentUser.hasRole("trainer")) {
@@ -125,6 +125,7 @@ public class ShiroAuthenticationClass {
         if (role.equals("member")) {
             ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select TC from Member where EMAIL=?",-1,this.userName);
             System.out.println(results.get(0).get("TC"));
+            id = (String) results.get(0).get("TC");
         }
         else if (role.equals("trainer")) {
             ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select T_ID from Trainer where T_EMAIL=?",-1,this.userName);

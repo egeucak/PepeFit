@@ -1,6 +1,14 @@
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+
 import javax.faces.bean.ManagedBean;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
@@ -19,8 +27,10 @@ public class ProgressBean implements Serializable {
     private LineChartModel lineAbdomen;
     private LineChartModel lineWaist;
     private LineChartModel lineHip;
-
-	//private HashMap values = new HashMap();
+    
+    ArrayList<LinkedHashMap<String,Object>> result = null;
+	
+    //private HashMap values = new HashMap();
 	private static String currentGraph = "";
 
 	public void setCurrentGraph(String currentGraph) {
@@ -43,16 +53,16 @@ public class ProgressBean implements Serializable {
 	public LineChartModel getLineArm() {
 		lineModel = lineArm;
 		setCurrentGraph("arm");
-		System.out.println("In getLineModel1");
-		System.out.println(lineModel.getTitle());
+		//System.out.println("In getLineModel1");
+		//System.out.println(lineModel.getTitle());
 		return lineModel;
 	}
 
 	public LineChartModel getLineLeg() {
 		lineModel = lineLeg;
 		setCurrentGraph("leg");
-		System.out.println("In getLineModel2");
-		System.out.println(getCurrentGraph());
+		//System.out.println("In getLineModel2");
+		//System.out.println(getCurrentGraph());
 		return lineModel;
 	}
 	
@@ -117,79 +127,38 @@ public class ProgressBean implements Serializable {
 
 		LineChartModel model = new LineChartModel();
 		LineChartSeries series = new LineChartSeries();
-		series.setLabel(measure);
 		
-		//TODO Bu kisimlari db den al for dongusu ile set yap
-		if(measure.equals("Height")) {
-			series.set(1, 170);
-			series.set(2, 171);
-			series.set(3, 171);
-			series.set(4, 172);
-			series.set(5, 173);
-		}
-		else if(measure.equals("Weight")) {
-			series.set(1, 60);
-			series.set(2, 65);
-			series.set(3, 70);
-			series.set(4, 68);
-			series.set(5, 67);
-		}
-		else if(measure.equals("Arm")) {
-			series.set(1, 2);
-			series.set(2, 1);
-			series.set(3, 3);
-			series.set(4, 6);
-			series.set(5, 8);
-		}
-		else if(measure.equals("Shoulder")) {
-			series.set(1, 90);
-			series.set(2, 95);
-			series.set(3, 98);
-			series.set(4, 100);
-			series.set(5, 102);
-		}
-		else if(measure.equals("Leg")) {
-			series.set(1, 5);
-			series.set(2, 2);
-			series.set(3, 7);
-			series.set(4, 8);
-			series.set(5, 6);
-		}
-		else if(measure.equals("Chest")) {
-			series.set(1, 70);
-			series.set(2, 75);
-			series.set(3, 78);
-			series.set(4, 80);
-			series.set(5, 88);
-		}
-		else if(measure.equals("Chest")) {
-			series.set(1, 70);
-			series.set(2, 75);
-			series.set(3, 78);
-			series.set(4, 80);
-			series.set(5, 88);
-		}
-		else if(measure.equals("Abdomen")) {
-			series.set(1, 50);
-			series.set(2, 55);
-			series.set(3, 58);
-			series.set(4, 60);
-			series.set(5, 68);
-		}
-		else if(measure.equals("Waist")) {
-			series.set(1, 30);
-			series.set(2, 35);
-			series.set(3, 38);
-			series.set(4, 40);
-			series.set(5, 48);
-		}
-		else if(measure.equals("Hip")) {
-			series.set(1, 50);
-			series.set(2, 55);
-			series.set(3, 58);
-			series.set(4, 60);
-			series.set(5, 68);
-		}
+		series.setLabel(measure);
+		traverseAndSet(measure, series);
+
+//		if(measure.equals("Height")) {
+//			//System.out.println(result);
+//			traverseAndSet(measure, series);
+//		}
+//		else if(measure.equals("Weight")) {
+//			traverseAndSet(measure, series);
+//		}
+//		else if(measure.equals("Arm")) {
+//			traverseAndSet(measure, series);
+//		}
+//		else if(measure.equals("Shoulder")) {
+//			traverseAndSet(measure, series);
+//		}
+//		else if(measure.equals("Leg")) {
+//			traverseAndSet(measure, series);
+//		}
+//		else if(measure.equals("Chest")) {
+//			traverseAndSet(measure, series);
+//		}
+//		else if(measure.equals("Abdomen")) {
+//			traverseAndSet(measure, series);
+//		}
+//		else if(measure.equals("Waist")) {
+//			traverseAndSet(measure, series);
+//		}
+//		else if(measure.equals("Hip")) {
+//			traverseAndSet(measure, series);
+//		}
 
 		model.setTitle(measure);
 		model.setLegendPosition("sw");
@@ -197,7 +166,7 @@ public class ProgressBean implements Serializable {
 		model.setExtender("ext");
 		model.setSeriesColors("ffffff");
 		model.setShadow(false);
-		System.out.println("1");
+		//System.out.println("1");
 		model.getAxis(AxisType.Y).setMin(min);
 		model.getAxis(AxisType.Y).setMax(max);
 		return model;
@@ -224,13 +193,44 @@ public class ProgressBean implements Serializable {
 	private String value;
 
 	public String getValue() {
-		System.out.println("Get içinde");
+		//System.out.println("Get içinde");
 		return value;
 	}
 
 	public void setValue(String value) {
 		this.value = value;
-		System.out.println(getCurrentGraph() + value);
-		System.out.println("Set içinde");
+		//System.out.println(getCurrentGraph() + value);
+		//System.out.println("Set içinde");
+	}
+	
+	public void traverseAndSet(String measure, LineChartSeries series) {
+		
+		String measureX = measure.toUpperCase(Locale.ENGLISH) + "X";
+		String measureY = measure.toUpperCase(Locale.ENGLISH) + "Y";
+		Subject currentUser = SecurityUtils.getSubject();
+		
+		//System.out.println("measureX : " + measureX);
+		//System.out.println("measureY : " + measureY);
+        try {
+            DatabaseBean database = new DatabaseBean();
+            result = database.execute_fetch_all("SELECT * FROM Progress",-1);
+            database.destruct_connection();
+        } catch (SQLException e) {
+            System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
+        }
+		
+		if (currentUser.hasRole("member")) {
+			//System.out.println("role member");
+			String memberID = ShiroAuthenticationClass.getId();
+			
+			for(LinkedHashMap<String, Object> memberInfo : result) {
+				if(memberInfo.get("TC").equals(memberID)) {
+					series.set((Number) memberInfo.get(measureX), (Number) memberInfo.get(measureY));
+				}
+			}
+		}
+		else if(currentUser.hasRole("trainer")) {
+			System.out.println("role trainer");
+		}
 	}
 }

@@ -18,28 +18,39 @@
 
     <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
     <h:outputScript library="js" name="formatter.js"/>
+
     <h:outputScript target="head">
         $ = jQuery;
     </h:outputScript>
+
     <h:outputScript library="js" name="scripts.js"/>
     <h:outputScript library="js" name="bootstrap.js" />
     <h:outputStylesheet library="css" name="bootstrap.css" />
     <h:outputStylesheet library="css" name="style.css" />
-
-    <!--<h:outputStylesheet library="css" name="style_admin.css" />-->
 
     <h:outputScript>
         function ext() {
             this.cfg.seriesDefaults = {
                 shadowDepth: 0,
                 lineWidth: 5,
+                rendererOptions: {
+                    smooth: true,
+                }
             };
             this.cfg.grid = {
                 backgroundColor: "#b7b7b7",
                 gridLineColor: "#67984d",
                 gridLineWidth: 1,
                 drawBorder: false,
-                shadow: false,
+                shadow: false
+            }
+            this.cfg.legend = {
+                location : "sw",
+                // placement : "outsideGrid",
+                showLabels : true,
+                show : false,
+                showSwatches : false,
+                renderer: $.jqplot.LegendRenderer,
             }
         }
     </h:outputScript>
@@ -49,15 +60,6 @@
 <h:body styleClass="bg">
 
 <!--    NAVIGATION MENU     -->
-
-    <h:form>
-        <p:growl id="messages" showDetail="true" sticky="true" />
-
-        <p:idleMonitor timeout="2000">
-            <p:ajax event="idle" listener="#{inConstruction.onIdle}" update="messages" />
-            <p:ajax event="active" listener="#{inConstruction.onActive}" update="messages" />
-        </p:idleMonitor>
-    </h:form>
 
 <div class="navbar navbar-expand-sm navbar-light" id="bar">
     <ul class="navbar-nav">
@@ -111,9 +113,41 @@
                                 <a class="col-1" style="color:var(--gray-dark);margin-left: 42%"><script type="text/javascript">showDate();</script></a>
                                 <h1 style="color: var(--green); margin-left: 40%">Progress</h1>
                                 <br/>
-                                <div class="graph" style="visibility: visible">
-                                    <p:chart type="line" model="#{chartTest.lineModel1}" style="height:300px" responsive="true"/>
-                                </div>
+                                <h:form>
+                                    <div class="graph" style="visibility: visible">
+                                        <p:outputPanel>
+                                            <p:chart id="chart" type="line" model="#{progressBean.lineModel}" responsive="true">
+
+                                            </p:chart>
+                                        </p:outputPanel>
+                                    </div>
+
+                                    <div class="btn-group" style="padding-left: 5%;margin-top: 3%">
+                                    	<p:commandButton update="chart type" class="btn" actionListener="#{progressBean.getLineHeight}" type="" id="option1" autocomplete="off" value="Height"/>
+                                        <p:commandButton update="chart type" class="btn" actionListener="#{progressBean.getLineWeight}" type="" id="option2" autocomplete="off" value="Weight"/>
+                                        <p:commandButton update="chart type" class="btn" actionListener="#{progressBean.getLineArm}" type="" id="option3" autocomplete="off" value="Arm"/>
+                                        <p:commandButton update="chart type" class="btn" actionListener="#{progressBean.getLineShoulder}" type="" id="option4" autocomplete="off" value="Shoulder"/>
+                                        <p:commandButton update="chart type" class="btn" actionListener="#{progressBean.getLineLeg}" type="" id="option5" autocomplete="off" value="Leg"/>
+										<p:commandButton update="chart type" class="btn" actionListener="#{progressBean.getLineChest}" type="" id="option6" autocomplete="off" value="Chest"/>
+										<p:commandButton update="chart type" class="btn" actionListener="#{progressBean.getLineAbdomen}" type="" id="option7" autocomplete="off" value="Abdomen"/>
+                                    	<p:commandButton update="chart type" class="btn" actionListener="#{progressBean.getLineWaist}" type="" id="option8" autocomplete="off" value="Waist"/>
+                                    	<p:commandButton update="chart type" class="btn" actionListener="#{progressBean.getLineHip}" type="" id="option9" autocomplete="off" value="Hip"/>
+                                    </div>
+                                    <br/>
+                                    <div style="padding-left: 5%;margin-top: 3%">
+                                        <h:outputLabel for="progress" value="Add new progress: " />
+                                        <p:inputText id="progress" value="#{progressBean.value}" style="width: 10%"/>
+                                        <p:commandButton value="Add" class="btn" update="chart type" icon="ui-icon-check" />
+                                    </div>
+
+                                    <!--<h:panelGrid columns="4" cellpadding="5">-->
+
+                                        <!--<h:outputText id="display" value="#{progressBean.value}" />-->
+                                    <!--</h:panelGrid>-->
+                                    <h:outputText id="type" value="#{progressBean.currentGraph}" style="display: none"/>
+
+                                </h:form>
+
                             </div>
 
                         </div>
