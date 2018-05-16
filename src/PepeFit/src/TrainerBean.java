@@ -4,9 +4,7 @@ import java.sql.SQLException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -20,6 +18,52 @@ public class TrainerBean {
 
     String courseTime;
     String courseCapacity;
+
+
+
+    private HashMap<ArrayList<String>, ArrayList<String>> openedCourses;
+
+    private ArrayList<String> selectedOpenedCourseArray = new ArrayList<String>();
+
+    private String selectedOpenedCourse;
+
+    public String createOpenedCoursesButtonValue(String courseId, String courseTime){
+        return (courseId.concat("/").concat(courseTime));
+    }
+
+    public String getSelectedOpenedCourse() {
+        return selectedOpenedCourse;
+    }
+
+    public void setSelectedOpenedCourse(String selectedOpenedCourse) {
+        selectedOpenedCourseArray.add(selectedOpenedCourse);
+        this.selectedOpenedCourse = selectedOpenedCourse;
+    }
+
+    public void printButtonValue(){
+        System.out.println("OLDU DE LAN");
+        System.out.println(this.selectedOpenedCourse);
+        System.out.println(this.selectedOpenedCourseArray);
+    }
+
+    public ArrayList<String> getSelectedOpenedCourseArray() {
+        return selectedOpenedCourseArray;
+    }
+
+    public void setSelectedOpenedCourseArray(ArrayList<String> selectedOpenedCourseArray) {
+        this.selectedOpenedCourseArray = selectedOpenedCourseArray;
+    }
+
+
+
+    public HashMap<ArrayList<String>, ArrayList<String>> getOpenedCourses() {
+        return openedCourses;
+    }
+
+    public void setOpenedCourses(HashMap<ArrayList<String>, ArrayList<String>> openedCourses) {
+        this.openedCourses = openedCourses;
+    }
+
 
     public String getBirthDate() {
         return birthDate;
@@ -122,7 +166,7 @@ public class TrainerBean {
     public void setError(String error) {
         this.error = error;
     }
-    
+
     public String getSuccess() {
         return success;
     }
@@ -295,12 +339,9 @@ public class TrainerBean {
 
     }
 
+    String courseDate = (String)DateTimeFormatter.ofPattern("dd.MM.yyyy").format(LocalDateTime.now());
 
     public String addCourse(int courseId,String trainerID) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String courseDate = (String)dtf.format(LocalDateTime.now());
-
-
         try {
             DatabaseBean database = new DatabaseBean();
 //            database.execute("CALL insert_course(?,?,?)", 1,courseName.toUpperCase(),courseTime,courseDate);
@@ -336,23 +377,128 @@ public class TrainerBean {
 
     }
 
-    public void deneme() {
+    public String deleteCourse(int courseId, String courseTime, String trainerID) {
 
-        Courses courses = new Courses();
-        courses.loadCourses();
-        int len = courses.courses.size();
-        int x = 0;
-        while (x < len) {
-            System.out.print("CourseId: " + courses.courses.get(x).getCourseId() + " CourseName: " + courses.courses.get(x).getCourseName() + " Description: " + courses.courses.get(x).getCourseDescription() + "\n");
-            x++;
+
+        try {
+            DatabaseBean database = new DatabaseBean();
+            database.execute("DELETE FROM GeneralSchedule WHERE C_ID=? AND C_TIME = ? AND C_DATE=? AND T_ID=?", 1, courseId, courseTime, courseDate, trainerID);
+            database.commit_trans();
+            System.out.println("SUCCESSFULLY DELETED FROM GENERALSCHEDULE!\n");
+            database.destruct_connection();
+
+            this.courseCapacity = null;
+            this.courseTime = null;
+            database.destruct_connection();
+            this.success = "Course has been deleted succesfully!";
+            database.destruct_connection();
+            return "Successfully Deleted !";
+
+        } catch (SQLException e) {
+            System.out.println("ERROR OCCURED WHILE ADDING COURSE " + e.getMessage());
+            return "Cannot do this operation right now, please try again later !";
+
+        }
+    }
+
+    /***
+     * ############################################################################################################### course delete,show
+     *
+     */
+
+    public boolean contains(Set<ArrayList<String>> keySet, String key){
+        for(ArrayList<String> unique_key:keySet){
+            if(unique_key.get(0).equals(key)){
+                return true;
+            }
+        }return false;
+    }
+
+
+    public HashMap<ArrayList<String>, ArrayList<String>> showOpenedCourses() {
+        String trainerID = ShiroAuthenticationClass.getId();
+        try {
+            // Connecting to database
+            DatabaseBean database = new DatabaseBean();
+            ArrayList<LinkedHashMap<String, Object>> results;
+            results = database.execute_fetch_all("SELECT * FROM GeneralSchedule NATURAL JOIN Trainer NATURAL JOIN Course WHERE T_ID=? AND C_DATE=? ORDER BY T_ID, C_ID", -1, trainerID, courseDate);
+
+            HashMap<ArrayList<String>, ArrayList<String>> openedCourses = new HashMap<ArrayList<String>, ArrayList<String>>();
+            if (results.size() != 0) {
+
+                for (LinkedHashMap<String, Object> row : results) {
+                    String course_name = row.get("C_NAME").toString();
+                    String course_time = row.get("C_TIME").toString();
+                    String courseID = row.get("C_ID").toString();
+
+                    ArrayList<String> course_array = new ArrayList<String>();
+                    course_array.add(courseID);
+                    course_array.add(course_name);
+                    if (contains(openedCourses.keySet(), courseID)) {
+                        openedCourses.get(course_array).add(course_time);
+                    } else {
+                        ArrayList<String> course_times = new ArrayList<String>();
+                        course_times.add(course_time);
+                        openedCourses.put(course_array, course_times);
+                    }
+
+                }
+
+
+
+            } else {
+                this.success = "THERE IS NO OPENED COURSE!";
+            }
+
+            this.openedCourses = openedCourses;
+            System.out.println(this.openedCourses);
+            database.destruct_connection();
+            return openedCourses;
+
+        } catch (SQLException e) {
+            System.out.println("ERROR OCCURED WHILE SHOWING REGISTERED COURSE " + e.getMessage());
+            this.error = "ERROR OCCURED WHILE SHOWING REGISTERED COURSE " + e.getMessage() + "\n";
+        }
+        return new HashMap<ArrayList<String>, ArrayList<String>>();
+    }
+
+
+    public void deleteCourse() {
+        HashMap<String, ArrayList<Trainer>> course_trainer_list = ListTrainerBean.course_trainer;
+        String trainerID = ShiroAuthenticationClass.getId();
+
+        for (int index = 0; index < selectedOpenedCourseArray.size(); index++) {
+            if (!selectedOpenedCourseArray.get(index).isEmpty()) {
+                ArrayList<String> selected_as_array = new ArrayList<String>(Arrays.asList(selectedOpenedCourseArray.get(index).split("/")));
+                System.out.println(selected_as_array);
+                String courseID = selected_as_array.get(0);
+                String courseTime =selected_as_array.get(1);
+                System.out.println("Course: " + courseID + " TrainerID: " + trainerID + " Time: " + courseTime + "\n");
+                this.selectedOpenedCourse = null;
+                deleteCourseDB(trainerID, courseID, courseTime);
+                return;
+            }
         }
 
 
     }
 
-    public void denemeTest() {
-        System.out.print(this.courseTime + "\n");
-        System.out.print(this.courseCapacity + "\n");
+    public String deleteCourseDB(String trainerID, String courseId, String courseTime) {
+
+        try {
+            DatabaseBean database = new DatabaseBean();
+            database.execute("DELETE FROM GeneralSchedule WHERE T_ID=? AND C_ID = ? AND C_TIME=? AND C_DATE=?", 1, trainerID, courseId, courseTime, courseDate);
+            database.commit_trans();
+            System.out.println("SUCCESSFULLY DELETED FROM GENERALSCHEDULE!\n");
+            this.success = "Course has been deleted succesfully from Trainer with ID: "+trainerID;
+            database.destruct_connection();
+            return "Successfully Deleted !";
+
+        } catch (SQLException e) {
+            System.out.println("ERROR OCCURED WHILE ADDING COURSE " + e.getMessage());
+            return "Cannot do this operation right now, please try again later !";
+
+        }
     }
 
 }

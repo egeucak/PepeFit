@@ -397,3 +397,21 @@ table input[type="radio"]:hover + label{
   white-space: nowrap;
   background-color: white;
 }
+
+.classButtonGroup{
+  width: 100%;
+}
+
+.classCapacityButtonGroup{
+  width: 100%;
+}
+
+.classButtonGroup td{
+  display: inline-block;
+  width: 16.5%;    
+}
+
+.classCapacityButtonGroup td{
+  display: inline-block;
+  width: 25%;    
+}
