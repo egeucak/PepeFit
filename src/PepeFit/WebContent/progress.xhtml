@@ -93,14 +93,7 @@
 <div class="container-fluid">
     <div class="row" style="padding-top: 8%;">
         <div class="col-2">
-            <div class="grey-bg left-menu scrollbar" id="members">
-                <ul class="list-unstyled" style="margin-top: 0px">
-                    <li id="header"><h3 style="color: var(--green)">Students</h3></li>
-                    <c:forEach items="#{listMemberBean.getUserNames()}" var="user">
-                        <li><a href="#" class="" id="#{user.getId()}" onclick="showGraphAdd('#{user.getId()}')">#{user.getName()}</a></li>
-                    </c:forEach>
-                </ul>
-            </div>
+
         </div>
 
         <div class="col-1"></div>
@@ -116,15 +109,22 @@
                                 <h:form>
                                     <div class="graph" style="visibility: visible">
                                         <p:outputPanel>
-                                            <p:chart id="chart" type="line" model="#{chartTest.lineModel}" responsive="true">
+                                            <p:chart id="chart" type="line" model="#{progressBean.lineModel}" responsive="true">
 
                                             </p:chart>
                                         </p:outputPanel>
                                     </div>
 
-                                    <div class="btn-group" style="padding-left: 5%;margin-top: -14%">
-                                        <p:commandButton update="chart" class="btn" actionListener="#{chartTest.getLineModel1}" type="" id="option1" autocomplete="off" value="Arm"/>
-                                        <p:commandButton update="chart" class="btn" actionListener="#{chartTest.getLineModel2}" type="" id="option2" autocomplete="off" value="Leg"/>
+                                    <div class="btn-group" style="padding-left: 5%;margin-top: 3%">
+                                        <p:commandButton update="chart" class="btn" actionListener="#{progressBean.getLineHeight}" type="" id="option1" autocomplete="off" value="Height"/>
+                                        <p:commandButton update="chart" class="btn" actionListener="#{progressBean.getLineWeight}" type="" id="option2" autocomplete="off" value="Weight"/>
+										<p:commandButton update="chart" class="btn" actionListener="#{progressBean.getLineArm}" type="" id="option3" autocomplete="off" value="Arm"/>
+                                        <p:commandButton update="chart" class="btn" actionListener="#{progressBean.getLineShoulder}" type="" id="option4" autocomplete="off" value="Shoulder"/>
+                                        <p:commandButton update="chart" class="btn" actionListener="#{progressBean.getLineLeg}" type="" id="option5" autocomplete="off" value="Leg"/>
+										<p:commandButton update="chart" class="btn" actionListener="#{progressBean.getLineChest}" type="" id="option6" autocomplete="off" value="Chest"/>
+										<p:commandButton update="chart" class="btn" actionListener="#{progressBean.getLineAbdomen}" type="" id="option7" autocomplete="off" value="Abdomen"/>
+                                    	<p:commandButton update="chart" class="btn" actionListener="#{progressBean.getLineWaist}" type="" id="option8" autocomplete="off" value="Waist"/>
+                                    	<p:commandButton update="chart" class="btn" actionListener="#{progressBean.getLineHip}" type="" id="option9" autocomplete="off" value="Hip"/>
                                     </div>
                                 </h:form>
 
