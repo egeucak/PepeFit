@@ -7,7 +7,7 @@ import org.primefaces.model.chart.LineChartSeries;
 
 @SuppressWarnings("serial")
 @ManagedBean
-public class LineChartBean implements Serializable {
+public class ProgressBean implements Serializable {
 
 	private LineChartModel lineModel;
 	private LineChartModel lineHeight;
@@ -24,7 +24,7 @@ public class LineChartBean implements Serializable {
 	private static String currentGraph = "";
 
 	public void setCurrentGraph(String currentGraph) {
-		LineChartBean.currentGraph = currentGraph;
+		ProgressBean.currentGraph = currentGraph;
 	}
 
 	public String getCurrentGraph() {
