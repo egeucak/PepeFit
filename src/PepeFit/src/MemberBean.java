@@ -27,7 +27,7 @@ public class MemberBean {
     private String birthDate,registirationDate;
     private static Map<String,Object> genders = new LinkedHashMap<String, Object>();
 
-    /* Register Part */
+
     private ArrayList<String> selectedCourseArray = new ArrayList<String>();
     private String selectedCourse;
     /* Deregister Part */
@@ -50,6 +50,20 @@ public class MemberBean {
     public void setSelectedDeregisterCourseArray(ArrayList<String> selectedDeregisterCourseArray) {
         this.selectedDeregisterCourseArray = selectedDeregisterCourseArray;
     }
+
+
+    public void printCourse(){
+        try{
+            System.out.println("Selam1");
+            System.out.println(this.selectedCourse);
+            System.out.println(this.selectedCourseArray);
+            System.out.println(ShiroAuthenticationClass.getId());
+        } catch(Exception e){
+            System.out.println("Selam2");
+        }
+    }
+
+
 
     public HashMap<ArrayList<String>,HashMap<ArrayList<String>,ArrayList<String>>> getRegisteredCourses(){
         return this.registeredCourses;
@@ -401,6 +415,8 @@ public class MemberBean {
 
     }
 
+
+
     public void registerCourseDB(String memberID, String courseId, String courseTime, String trainerID, String trainerName){
 
 
@@ -413,8 +429,41 @@ public class MemberBean {
             System.out.println("CAPACITY: "+capacity + "\n");
             // If it's not in our database
             if (capacity>0) {
-                results = database.execute_fetch_all("Select * from MemberSchedule WHERE TC=? AND C_ID=? AND C_TIME = ? AND C_DATE=? AND T_ID=?", -1, memberID,courseId, courseTime, courseDate, trainerID);
-                if(results.size() == 0){
+                /**
+                 * Looking for conflicts
+                 */
+                int conflict = 0;
+                String conflictTime = "";
+                results = database.execute_fetch_all("Select * from MemberSchedule WHERE TC=? AND C_DATE=?", -1, memberID,courseDate);
+                for(LinkedHashMap<String,Object> row:results){
+                    List<String> rowCourseSE = Arrays.asList(row.get("C_TIME").toString().split("-"));
+                    List<String> selectedCourseSE = Arrays.asList(courseTime.split("-"));
+                    System.out.println(rowCourseSE);
+                    System.out.println(selectedCourseSE);
+                    System.out.println(row);
+                    // Seçilen kursun diğer kurslarla çakışması
+                    if(selectedCourseSE.get(0).compareTo(rowCourseSE.get(0)) >= 0 && selectedCourseSE.get(0).compareTo(rowCourseSE.get(1)) < 0){
+                        conflict++;
+
+                    }
+                    if(selectedCourseSE.get(1).compareTo(rowCourseSE.get(0)) > 0 && selectedCourseSE.get(1).compareTo(rowCourseSE.get(1)) <= 0){
+                        conflict++;
+                    }
+
+                    if(selectedCourseSE.get(0).compareTo(rowCourseSE.get(0)) == 0 && selectedCourseSE.get(1).compareTo(rowCourseSE.get(1)) == 0){
+                        conflict++;
+                    }
+
+                    if(conflict>0){
+                        conflictTime = row.get("C_TIME").toString();
+                        break;
+                    }
+                }
+
+                /**
+                 * If there in no conflict
+                 */
+                if(conflict == 0){
                     database.execute("INSERT INTO MemberSchedule Values(?,?,?,?,?)",1, memberID, trainerID,courseId, courseTime, courseDate);
                     database.execute_fetch_all("UPDATE GeneralSchedule SET CAPACITY=CAPACITY-1 WHERE C_ID=? AND C_TIME = ? AND C_DATE=? AND T_ID=?",1, courseId, courseTime, courseDate, trainerID);
                     database.commit_trans();
@@ -423,8 +472,9 @@ public class MemberBean {
                     this.success = "Successfully Registered on Trainer: "+ trainerName +"! Course Time: " + courseTime;
 
                 }else{
+                    // Look for it already registered or not
+                    this.error =  "Your registered course on: " + conflictTime +" is conflicting with selected course on: " + courseTime;
                     database.destruct_connection();
-                    this.error =  "Member: "+ memberID + " has been already register "+ trainerName+ "'s "+ "this course on CourseTime: " + courseTime;
 
                 }
 
@@ -552,16 +602,5 @@ public class MemberBean {
             this.error =  "ERROR OCCURED WHILE SHOWING REGISTERED COURSE " + e.getMessage()+"\n";
         }
         return new HashMap<ArrayList<String>,HashMap<ArrayList<String>,ArrayList<String>>>();
-    }
-
-    public void printCourse(){
-        try{
-            System.out.println("Selam1");
-            System.out.println(this.selectedCourse);
-            System.out.println(this.selectedCourseArray);
-            System.out.println(ShiroAuthenticationClass.getId());
-        } catch(Exception e){
-            System.out.println("Selam2");
-        }
     }
 }
