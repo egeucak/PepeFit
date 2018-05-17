@@ -99,8 +99,9 @@
                 <ul class="list-unstyled" style="margin-top: 0px">
                     <li id="header"><h3 style="color: var(--green)">Students</h3></li>
                     <c:forEach items="#{listMemberBean.getUserNames()}" var="user">
+                    	<li>
                     	<p:commandLink update="chart" value="#{user.getName()}" styleClass="" actionListener="#{progressBean.buttonAction(user.getId())}" />
-						<br/>
+						</li>
                     </c:forEach>
                 </ul>
             </div>

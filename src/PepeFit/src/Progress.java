@@ -1,6 +1,18 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Progress {
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+
+@ManagedBean
+public class Progress implements Serializable{
+	public void buttonAction(String person) {
+        System.out.println("clicked on person "+ person);
+        System.out.println("clicked on person "+ person);
+        System.out.println("clicked on person "+ person);
+        System.out.println("clicked on person "+ person);
+    }
 
 	private long height;		
 	private ArrayList<Long> weights;

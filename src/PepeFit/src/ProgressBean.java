@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.DateAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 
@@ -30,7 +31,7 @@ public class ProgressBean implements Serializable {
     private LineChartModel lineAbdomen;
     private LineChartModel lineWaist;
     private LineChartModel lineHip;
-    
+    private static String MemberID;
     ArrayList<LinkedHashMap<String,Object>> result = null;
 	
     //private HashMap values = new HashMap();
@@ -63,7 +64,7 @@ public class ProgressBean implements Serializable {
 	}
 
 	public LineChartModel getLineArm() {
-		lineArm = initLinearModel("Arm", 0, 10);
+		lineArm = initLinearModel("Arm");
 		lineModel = lineArm;
 		setCurrentGraph("arm");
 		//System.out.println("In getLineModel1");
@@ -72,7 +73,7 @@ public class ProgressBean implements Serializable {
 	}
 
 	public LineChartModel getLineLeg() {
-		lineLeg = initLinearModel("Leg", 0, 10);
+		lineLeg = initLinearModel("Leg");
 		lineModel = lineLeg;
 		setCurrentGraph("leg");
 		//System.out.println("In getLineModel2");
@@ -81,60 +82,68 @@ public class ProgressBean implements Serializable {
 	}
 	
 	public LineChartModel getLineHeight() {
-		lineHeight = initLinearModel("Height", 100, 250); /* 100 olabilecek min deger, 250 olabilecek max deger */
+		lineHeight = initLinearModel("Height");
 		lineModel = lineHeight;
 		setCurrentGraph("height");
 		return lineModel;
 	}
 
 	public LineChartModel getLineWeight() {
-		lineWeight = initLinearModel("Weight", 40, 150);
+		lineWeight = initLinearModel("Weight");
 		lineModel = lineWeight;
 		setCurrentGraph("weight");
 		return lineModel;
 	}
 
 	public LineChartModel getLineShoulder() {
-		lineShoulder = initLinearModel("Shoulder", 80, 140);
+		lineShoulder = initLinearModel("Shoulder");
 		lineModel = lineShoulder;
 		setCurrentGraph("shoulder");
 		return lineModel;
 	}
 
 	public LineChartModel getLineChest() {
-		lineChest = initLinearModel("Chest", 70, 120);
+		lineChest = initLinearModel("Chest");
 		lineModel = lineChest;
 		setCurrentGraph("chest");
 		return lineModel;
 	}
 
 	public LineChartModel getLineAbdomen() {
-		lineAbdomen = initLinearModel("Abdomen", 40, 80);
+		lineAbdomen = initLinearModel("Abdomen");
 		lineModel = lineAbdomen;
 		setCurrentGraph("abdomen");
 		return lineModel;
 	}
 
 	public LineChartModel getLineWaist() {
-		lineWaist = initLinearModel("Waist", 30, 60);
+		lineWaist = initLinearModel("Waist");
 		lineModel = lineWaist;
 		setCurrentGraph("waist");
 		return lineModel;
 	}
 
 	public LineChartModel getLineHip() {
-		lineHip = initLinearModel("Hip", 40, 90);
+		lineHip = initLinearModel("Hip");
 		lineModel = lineHip;
 		setCurrentGraph("hip");
 		return lineModel;
 	}
 
-	private void createLineModels() {
-			
-		lineModel = initLinearModel("Choose Chart", 0, 1); /* ilk olarak gordugu chart */
+	public static String getMemberID() {
+		return MemberID;
 	}
 
-	private LineChartModel initLinearModel(String measure, int min, int max) {
+	public static void setMemberID(String memberID) {
+		MemberID = memberID;
+	}
+
+	private void createLineModels() {
+			
+		lineModel = initLinearModel("Choose Chart"); /* ilk olarak gordugu chart */
+	}
+
+	private LineChartModel initLinearModel(String measure) {
 
 		LineChartModel model = new LineChartModel();
 		LineChartSeries series = new LineChartSeries();
@@ -183,8 +192,10 @@ public class ProgressBean implements Serializable {
 		model.setSeriesColors("ffffff");
 		model.setShadow(false);
 		//System.out.println("1");
-		model.getAxis(AxisType.Y).setMin(min);
-		model.getAxis(AxisType.Y).setMax(max);
+        DateAxis axis = new DateAxis("Dates");
+        axis.setTickAngle(-50);
+        axis.setTickFormat("%b %#d, %y");
+        model.getAxes().put(AxisType.X, axis);
 		return model;
 	}
 	
@@ -220,12 +231,14 @@ public class ProgressBean implements Serializable {
 	}
     public void buttonAction(String person) {
         System.out.println("clicked on person "+ person);
+        setMemberID(person);
     }
 	
 	public void traverseAndSet(String measure, LineChartSeries series) {
 		
-		String measureX = measure.toUpperCase(Locale.ENGLISH) + "X";
-		String measureY = measure.toUpperCase(Locale.ENGLISH) + "Y";
+//		String measureX = measure.toUpperCase(Locale.ENGLISH) + "X";
+//		String measureY = measure.toUpperCase(Locale.ENGLISH) + "Y";
+		
 		Subject currentUser = SecurityUtils.getSubject();
 		
 		//System.out.println("measureX : " + measureX);
@@ -237,24 +250,43 @@ public class ProgressBean implements Serializable {
 			String memberID = ShiroAuthenticationClass.getId();
 			
 			for(LinkedHashMap<String, Object> memberInfo : result) {
-				if(memberInfo.get("TC").equals(memberID)) {
-					if((Number) memberInfo.get(measureX) != null && (Number) memberInfo.get(measureY) != null) {
-						series.set((Number) memberInfo.get(measureX), (Number) memberInfo.get(measureY));
+				if(memberInfo.get("TC").equals(memberID+measure.toLowerCase(Locale.ENGLISH)) && memberInfo.get("TYPE").equals(measure.toLowerCase(Locale.ENGLISH))) {
+					
+					String[] date = memberInfo.get("DATE").toString().split(",");
+					String[] value = memberInfo.get("VALUE").toString().split(",");
+					
+					for(int i = 0; i < date.length ; i++) {
+//						System.out.println(date[i]);
+//						System.out.println(value[i]);
+						series.set(date[i], Integer.parseInt(value[i]));
 					}
 				}
 			}
 		}
 		else if(currentUser.hasRole("trainer")) {
 			//System.out.println("role trainer");
-			//System.out.println("MEMBERID : " + MemberTemp.getId());
-			
-			String memberID = MemberTemp.getId();
+			System.out.println("MEMBERID : " + getMemberID());
 			
 			for(LinkedHashMap<String, Object> memberInfo : result) {
-				if(memberInfo.get("TC").equals(memberID)) {
-					if((Number) memberInfo.get(measureX) != null && (Number) memberInfo.get(measureY) != null) {
-						series.set((Number) memberInfo.get(measureX), (Number) memberInfo.get(measureY));
+				if(memberInfo.get("TC").equals(getMemberID()+measure.toLowerCase(Locale.ENGLISH)) && memberInfo.get("TYPE").equals(measure.toLowerCase(Locale.ENGLISH))) {
+					
+					String[] date = memberInfo.get("DATE").toString().split(",");
+					String[] value = memberInfo.get("VALUE").toString().split(",");
+					
+					for(int i = 0; i < date.length ; i++) {
+//						System.out.println(date[i]);
+//						System.out.println(value[i]);
+						series.set(date[i], Integer.parseInt(value[i]));
 					}
+
+					
+					
+					//System.out.println("TYPE : " + measure.toLowerCase(Locale.ENGLISH));
+					//System.out.println("DATE : " + memberInfo.get("DATE"));
+					//System.out.println("VALUE : " + memberInfo.get("VALUE"));
+//					if((Number) memberInfo.get(measureX) != null && (Number) memberInfo.get(measureY) != null) {
+//						series.set((Number) memberInfo.get(measureX), (Number) memberInfo.get(measureY));
+//					}
 				}
 			}
 		
@@ -288,7 +320,7 @@ public class ProgressBean implements Serializable {
 			
 			System.out.println("VALUE : " + getValue());
 			System.out.println("CURRENT GRAPH : " + getCurrentGraph());
-			System.out.println("MEMBER ID : " + MemberTemp.getId());
+			System.out.println("MEMBER ID : " + getMemberID());
 			
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = new Date();
@@ -299,7 +331,29 @@ public class ProgressBean implements Serializable {
 			
 			//database.execute("Insert into Progress(TC,HEIGHTX,HEIGHTY) values(" + MemberTemp.getId() + ",\"2018-01-01\"," + getValue() + ")",1);
 			//database.execute("Insert into Progress(TC,HEIGHTX,HEIGHTY) values(" + MemberTemp.getId() + ",7," + getValue() + ")",1);
-			database.execute("Insert into Progress(TC,ARMX,ARMy) values(" + MemberTemp.getId() + ",7," + getValue() + ")",1);
+			//database.execute("Insert into Progress(TC,ARMX,ARMy) values(" + getMemberID() + ",7," + getValue() + ")",1);
+			//database.execute("Insert into Progress(TC,DATE,VALUE,TYPE) values(" + getMemberID() + getCurrentGraph().toLowerCase(Locale.ENGLISH) + ",7," + getValue() + ")",1);
+			
+			for(LinkedHashMap<String, Object> memberInfo : result) {
+				if(memberInfo.get("TC").equals(getMemberID()+getCurrentGraph().toLowerCase(Locale.ENGLISH))) {
+					String current_date = memberInfo.get("DATE").toString();
+					System.out.println("BEFORE CURRENT_DATE : " + current_date);
+					current_date = current_date + "," + dateFormat.format(date).toString();
+					System.out.println("AFTER CURRENT_DATE : " + current_date);
+					
+					String current_value = memberInfo.get("VALUE").toString();
+					System.out.println("BEFORE CURRENT_VALUE : " + current_value);
+					current_value = current_value + "," + getValue();
+					System.out.println("AFTER CURRENT_VALUE : " + current_value);
+					
+
+					database.execute("UPDATE Progress SET DATE=?,VALUE=? where TC=?",1,current_date,current_value,getMemberID()+getCurrentGraph().toLowerCase(Locale.ENGLISH));
+					
+					database.commit_trans();
+					database.destruct_connection();
+				}
+			}
+			
 			
 			database.commit_trans();
 
