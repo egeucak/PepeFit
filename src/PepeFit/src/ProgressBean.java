@@ -152,7 +152,10 @@ public class ProgressBean implements Serializable {
 		if(!measure.equals("Choose Chart")) {
 			traverseAndSet(measure, series);
 		} else {
-			series.set(0, 0);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+			
+			series.set(dateFormat.format(date).toString(), 0);
 		}
 		
 
@@ -248,7 +251,7 @@ public class ProgressBean implements Serializable {
 		if (currentUser.hasRole("member")) {
 			//System.out.println("role member");
 			String memberID = ShiroAuthenticationClass.getId();
-			
+			int check = 0 ;
 			for(LinkedHashMap<String, Object> memberInfo : result) {
 				if(memberInfo.get("TC").equals(memberID+measure.toLowerCase(Locale.ENGLISH)) && memberInfo.get("TYPE").equals(measure.toLowerCase(Locale.ENGLISH))) {
 					
@@ -260,13 +263,20 @@ public class ProgressBean implements Serializable {
 //						System.out.println(value[i]);
 						series.set(date[i], Integer.parseInt(value[i]));
 					}
+					check++;
 				}
+			}
+			if(check == 0) {
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = new Date();
+				
+				series.set(dateFormat.format(date).toString(), 0);
 			}
 		}
 		else if(currentUser.hasRole("trainer")) {
 			//System.out.println("role trainer");
 			System.out.println("MEMBERID : " + getMemberID());
-			
+			int check = 0;
 			for(LinkedHashMap<String, Object> memberInfo : result) {
 				if(memberInfo.get("TC").equals(getMemberID()+measure.toLowerCase(Locale.ENGLISH)) && memberInfo.get("TYPE").equals(measure.toLowerCase(Locale.ENGLISH))) {
 					
@@ -278,38 +288,15 @@ public class ProgressBean implements Serializable {
 //						System.out.println(value[i]);
 						series.set(date[i], Integer.parseInt(value[i]));
 					}
-
-					
-					
-					//System.out.println("TYPE : " + measure.toLowerCase(Locale.ENGLISH));
-					//System.out.println("DATE : " + memberInfo.get("DATE"));
-					//System.out.println("VALUE : " + memberInfo.get("VALUE"));
-//					if((Number) memberInfo.get(measureX) != null && (Number) memberInfo.get(measureY) != null) {
-//						series.set((Number) memberInfo.get(measureX), (Number) memberInfo.get(measureY));
-//					}
+					check++;
 				}
 			}
-		
-
-			
-//	    	ArrayList<LinkedHashMap<String,Object>> members = null;
-//	    	
-//	        try {
-//	            DatabaseBean database = new DatabaseBean();
-//	            members = database.execute_fetch_all("SELECT * FROM Member",-1);
-//	            database.destruct_connection();
-//	        } catch (SQLException e) {
-//	            System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
-//	        }
-//	    	
-//	        System.out.println(members);
-//	        
-//	        for(LinkedHashMap<String, Object> member : members) {
-//	        	ListMemberBean.userNames.add(new MemberTemp(member.get("NAME") + " " + member.get("SURNAME"), (String) member.get("EMAIL")));
-//	        }
-//	        
-//	        System.out.println(ListMemberBean.userNames);
-			
+			if(check == 0) {
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = new Date();
+				
+				series.set(dateFormat.format(date).toString(), 0);
+			}
 		}
 		
 		
@@ -334,6 +321,7 @@ public class ProgressBean implements Serializable {
 			//database.execute("Insert into Progress(TC,ARMX,ARMy) values(" + getMemberID() + ",7," + getValue() + ")",1);
 			//database.execute("Insert into Progress(TC,DATE,VALUE,TYPE) values(" + getMemberID() + getCurrentGraph().toLowerCase(Locale.ENGLISH) + ",7," + getValue() + ")",1);
 			
+			int check = 0;
 			for(LinkedHashMap<String, Object> memberInfo : result) {
 				if(memberInfo.get("TC").equals(getMemberID()+getCurrentGraph().toLowerCase(Locale.ENGLISH))) {
 					String current_date = memberInfo.get("DATE").toString();
@@ -352,6 +340,15 @@ public class ProgressBean implements Serializable {
 					database.commit_trans();
 					database.destruct_connection();
 				}
+				if(memberInfo.containsKey(getMemberID()+getCurrentGraph().toLowerCase(Locale.ENGLISH))) {
+					check++;
+
+				}
+			}
+			if(check == 0) {
+				database.execute("Insert into Progress values(?,?,?,?)", 1, getMemberID()+getCurrentGraph().toLowerCase(Locale.ENGLISH),dateFormat.format(date).toString(),getValue(),getCurrentGraph().toLowerCase(Locale.ENGLISH));
+				database.commit_trans();
+				database.destruct_connection();
 			}
 			
 			
