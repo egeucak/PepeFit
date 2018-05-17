@@ -134,7 +134,7 @@
                                     </ul>
                                     <div class="form-row">
                                         <div class="col-9" style="text-align: center;vertical-align: middle;">
-                                            <h:outputText value="#{memberBean.success}" style="color: green"/>
+                                            <h:outputText escape="false" value="#{memberBean.success}&lt;br /&gt;" style="color: green"/>
                                             <h:outputText value="#{memberBean.error}" style="color: red"/>
                                         </div>
                                         <div class="col-3">
