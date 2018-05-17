@@ -128,7 +128,7 @@ public class ProgressBean implements Serializable {
 
 	private void createLineModels() {
 			
-		lineModel = initLinearModel("Choose Chart", 1, 1); /* ilk olarak gordugu chart */
+		lineModel = initLinearModel("Choose Chart", 0, 1); /* ilk olarak gordugu chart */
 	}
 
 	private LineChartModel initLinearModel(String measure, int min, int max) {
@@ -238,7 +238,23 @@ public class ProgressBean implements Serializable {
 		}
 		else if(currentUser.hasRole("trainer")) {
 			System.out.println("role trainer");
-			
+//	    	ArrayList<LinkedHashMap<String,Object>> members = null;
+//	    	
+//	        try {
+//	            DatabaseBean database = new DatabaseBean();
+//	            members = database.execute_fetch_all("SELECT * FROM Member",-1);
+//	            database.destruct_connection();
+//	        } catch (SQLException e) {
+//	            System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
+//	        }
+//	    	
+//	        System.out.println(members);
+//	        
+//	        for(LinkedHashMap<String, Object> member : members) {
+//	        	ListMemberBean.userNames.add(new MemberTemp(member.get("NAME") + " " + member.get("SURNAME"), (String) member.get("EMAIL")));
+//	        }
+//	        
+//	        System.out.println(ListMemberBean.userNames);
 			
 		}
 	}

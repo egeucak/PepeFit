@@ -17,10 +17,11 @@ import javax.xml.stream.events.StartDocument;
 
 public class ListMemberBean {
 
-    private ArrayList<MemberTemp> userNames = new ArrayList<MemberTemp>();
+    public static ArrayList<MemberTemp> userNames = new ArrayList<MemberTemp>();
 
-    public ArrayList<MemberTemp> getUserNames() {
-        userNames.add(new MemberTemp("Ege Uçak", "egeu"));
+    public static ArrayList<MemberTemp> getUserNames() {
+        
+        userNames.add(new MemberTemp("Ege Uçak", "12345"));
         userNames.add(new MemberTemp("Bahadır Adak", "baho"));
         userNames.add(new MemberTemp("Eyüpcan Bodur", "konyalı"));
         userNames.add(new MemberTemp("Berk Can Özen", "brkczn"));
