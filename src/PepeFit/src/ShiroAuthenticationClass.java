@@ -132,6 +132,5 @@ public class ShiroAuthenticationClass {
             System.out.println(results.get(0).get("T_ID"));
             id = (String) results.get(0).get("T_ID");
         }
-        database.destruct_connection();
     }
 }

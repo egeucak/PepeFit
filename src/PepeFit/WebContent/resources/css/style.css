@@ -300,7 +300,7 @@ body {
 }
 
 /*.form-control{*/
-/*width:100% !important;*/
+  /*width:100% !important;*/
 /*}*/
 
 .form-control:disabled{
@@ -378,7 +378,7 @@ table input[type="radio"]:hover + label{
 
 .scrollbar::-webkit-scrollbar {
   width: 0.4rem;
-  background-color: #4f964f40;
+  background-color: #4f964f40; 
 
 }
 
@@ -390,7 +390,7 @@ table input[type="radio"]:hover + label{
 .courseTimeLabel{
   margin-bottom:0%;
   border-radius: 0.4rem;
-  border: 1px solid var(--green);
+  border: 1px solid var(--green);  
   color: var(--green) !important;
   padding: 0.2% 0.2rem 0.2% 0.2rem;
   max-width:100% !important;
@@ -408,10 +408,10 @@ table input[type="radio"]:hover + label{
 
 .classButtonGroup td{
   display: inline-block;
-  width: 25%;
+  width: 16.5%;    
 }
 
 .classCapacityButtonGroup td{
   display: inline-block;
-  width: 33%;
+  width: 25%;    
 }

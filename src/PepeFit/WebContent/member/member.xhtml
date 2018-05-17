@@ -100,7 +100,7 @@
                                 <div class="col-4">
                                     <a id="block-func">Registered Courses</a>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-4" style="text-align: center;vertical-align: middle;">
                                     <a class="col-1" style="color:var(--gray-dark);">Today's Date:
                                         <script type="text/javascript">showDate();</script>
                                     </a>
@@ -117,10 +117,13 @@
                                         <ui:repeat value='#{memberBean.showRegisteredCourses().keySet().toArray()}' var="trainer" varStatus="trainerCounter">
                                             <ui:repeat value='#{memberBean.registeredCourses.get(trainer).keySet().toArray()}' var="course" varStatus="courseCounter">
                                                 <div class="form-row" style="padding-bottom: 2%;">
-                                                    <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                        <a>#{trainer.toArray()[1]} : #{course.toArray()[1]}</a>
+                                                    <div class="col-2" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                        <a>#{trainer.toArray()[1]}</a>
                                                     </div>
-                                                    <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                    <div class="col-2"  style="background-color: var(--white);padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                        <a>#{course.toArray()[1]}</a>
+                                                    </div>
+                                                    <div class="col-8"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                         <h:selectOneRadio styleClass="classButtonGroup" onclick="uncheckOtherButtons(this)" value="#{memberBean.selectedDeregisterCourse}" id="pickatime0#{trainerCounter.index}#{courseCounter.index}">
                                                             <f:selectItems value="#{memberBean.registeredCourses.get(trainer).get(course)}" var="coursetime" itemLabel="#{coursetime}" itemValue="#{memberBean.createRegisteredCoursesButtonValue(trainer.toArray()[0],course.toArray()[0],coursetime)}"/>
                                                         </h:selectOneRadio>
@@ -131,7 +134,7 @@
                                     </ul>
                                     <div class="form-row">
                                         <div class="col-9" style="text-align: center;vertical-align: middle;">
-                                            <h:outputText value="#{memberBean.success}" style="color: green"/>
+                                            <h:outputText escape="false" value="#{memberBean.success}&lt;br /&gt;" style="color: green"/>
                                             <h:outputText value="#{memberBean.error}" style="color: red"/>
                                         </div>
                                         <div class="col-3">
@@ -150,10 +153,10 @@
                                     <ul id="Body-Fit-List" class="scrollbar list-unstyled" style="margin-top: 0px">
                                         <ui:repeat id="courseTimeList1" value='#{listTrainerBean.loadTrainers("1")}' var="trainer" varStatus="trainerCounter">
                                             <div class="form-row" style="padding-bottom: 2%;">
-                                                <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-4" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <a>#{trainer.getTrainerName()}</a>
                                                 </div>
-                                                <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-8"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <h:selectOneRadio styleClass="classCapacityButtonGroup" onclick="uncheckOtherButtons(this)" value="#{memberBean.selectedCourse}" id="pickatime1#{trainerCounter.index}">
                                                         <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemLabel="#{listTrainerBean.getCourseTimeElement(coursetime,2)}" itemValue="#{listTrainerBean.getCourseTimeElement(coursetime,0)}"/>
                                                     </h:selectOneRadio>
@@ -178,11 +181,11 @@
                                     <ul id="Fit-Step-List" class="scrollbar list-unstyled" style="margin-top: 0px">
                                         <ui:repeat id="courseTimeList2" value='#{listTrainerBean.loadTrainers("2")}' var="trainer" varStatus="trainerCounter">
                                             <div class="form-row" style="padding-bottom: 2%;">
-                                                <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-4" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <a>#{trainer.getTrainerName()}</a>
 
                                                 </div>
-                                                <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-8"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <h:selectOneRadio styleClass="classCapacityButtonGroup" onclick="uncheckOtherButtons(this)" value="#{memberBean.selectedCourse}" id="pickatime2#{trainerCounter.index}">
                                                         <ul class="list-unstyled" style="margin-top: 0px">
                                                             <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemLabel="#{listTrainerBean.getCourseTimeElement(coursetime,2)}" itemValue="#{listTrainerBean.getCourseTimeElement(coursetime,0)}"/>
@@ -209,11 +212,11 @@
                                     <ul id="GFX-List" class="scrollbar list-unstyled" style="margin-top: 0px">
                                         <ui:repeat id="courseTimeList3" value='#{listTrainerBean.loadTrainers("3")}' var="trainer" varStatus="trainerCounter">
                                             <div class="form-row" style="padding-bottom: 2%;">
-                                                <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-4" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <a>#{trainer.getTrainerName()}</a>
 
                                                 </div>
-                                                <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-8"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <h:selectOneRadio styleClass="classCapacityButtonGroup" onclick="uncheckOtherButtons(this)" value="#{memberBean.selectedCourse}" id="pickatime3#{trainerCounter.index}">
                                                         <ul class="list-unstyled" style="margin-top: 0px">
                                                             <f:selectItems value="#{trainer.getCourseTime()}" var="coursetime" itemLabel="#{listTrainerBean.getCourseTimeElement(coursetime,2)}" itemValue="#{listTrainerBean.getCourseTimeElement(coursetime,0)}"/>

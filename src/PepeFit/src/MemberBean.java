@@ -266,7 +266,7 @@ public class MemberBean {
             ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select * from Member where TC=?",-1,this.idNumber);
 
             if(results.size() != 0){
-                this.error = "This Member (ID : " + this.idNumber + ") has been already registered!";
+                this.error = "The Member with ID Number " + this.idNumber + " has already been registered!";
                 ret = "This User has been already registered!";
                 database.destruct_connection();
                 System.out.println(ret +"\n");
@@ -284,7 +284,7 @@ public class MemberBean {
         }
 
         ret = "Successfully added Member with ID NUMBER: "+ this.idNumber +" !";
-        this.success = "Successfully added Member with ID NUMBER: "+ this.idNumber +" !";
+        this.success = "The Member with ID Number: "+ this.idNumber +" has been added successfully!";
         setNull();
         System.out.println(ret+"\n");
 
@@ -310,7 +310,7 @@ public class MemberBean {
                 ArrayList<LinkedHashMap<String, Object>> results = database.execute_fetch_all("Select * from Member where TC=?",-1,this.idNumber);
                 // If it's not in our database
                 if(results.size()==0){
-                    this.showError = "There is no Member with ID : "+ this.idNumber;
+                    this.showError = "There is no Member with ID Number : "+ this.idNumber;
                     System.out.println("THERE IS NO PERSON WITH ID : "+ this.idNumber);
                     database.destruct_connection();
                     return resultShow = "There is no person with ID : "+ this.idNumber;
@@ -355,7 +355,7 @@ public class MemberBean {
                     this.firstName,this.lastName,this.gender,this.phoneNumber,"1997-01-01",this.eMail,this.address,"1997-01-01",this.idNumber);
             database.commit_trans();
             database.destruct_connection();
-            this.updateSuccess = this.idNumber + " successfully updated !";
+            this.updateSuccess = "The Member with ID Number: " + this.idNumber + " has been updated successfully!";
         }catch(SQLException e){
             System.out.println("ERROR OCCURED WHILE UPDATING MEMBER " + e.getMessage());
         }
@@ -371,7 +371,7 @@ public class MemberBean {
             database.execute("DELETE FROM Member WHERE TC=?",1,this.idNumber);
             database.commit_trans();
             database.destruct_connection();
-            this.deleteSuccess= this.idNumber + " successfully deleted !";
+            this.deleteSuccess= "The User with " + this.idNumber + " has been deleted successfully!";
         }catch(SQLException e){
             System.out.println("ERROR OCCURED WHILE DELETING MEMBER " + e.getMessage());
         }
@@ -469,18 +469,18 @@ public class MemberBean {
                     database.commit_trans();
                     System.out.println("SUCCESSFULLY ADDED INTO MEMBERSCHEDULE! Member: "+ memberID + "\n");
                     database.destruct_connection();
-                    this.success = "Successfully Registered on Trainer: "+ trainerName +"! Course Time: " + courseTime;
+                    this.success = "Successfully registered for Trainer "+ trainerName +"\'s course at " + courseTime;
 
                 }else{
                     // Look for it already registered or not
-                    this.error =  "Your registered course on: " + conflictTime +" is conflicting with selected course on: " + courseTime;
+                    this.error =  "The selected course at " + courseTime +" conflicts with the registered course at " + conflictTime;
                     database.destruct_connection();
 
                 }
 
             } else {
                 database.destruct_connection();
-                this.error = "There is no more place in Course Number : "+ courseId + " on Trainer: " + trainerName;
+                this.error = "There is no more place in "+ trainerName + "'s course with Course Number : "+ courseId + "!";
                 System.out.println(this.error + "\n");
 
 
@@ -488,7 +488,7 @@ public class MemberBean {
 
         } catch (SQLException e) {
             System.out.println("ERROR OCCURED WHILE REGISTERING COURSE " + e.getMessage());
-            this.error =  "ERROR OCCURED WHILE REGISTERING COURSE " + e.getMessage()+"\n";
+            this.error =  "ERROR OCCURED WHILE REGISTERING FOR COURSE " + e.getMessage()+"\n";
 
         }
 
@@ -524,7 +524,7 @@ public class MemberBean {
             database.execute("UPDATE GeneralSchedule SET CAPACITY=CAPACITY+1 WHERE C_ID=? AND T_ID=? AND C_TIME = ? AND C_DATE=?", 1, courseId, trainerID,courseTime, courseDate);
             database.commit_trans();
             System.out.println("SUCCESSFULLY DROPPED FROM MEMBERSCHEDULE!\n");
-            this.success = "Course has been deleted succesfully from Member with ID: "+memberID;
+            this.success = "The course has been deleted succesfully from the Member with ID Number: "+memberID;
             database.destruct_connection();
             return "Successfully Deleted !";
 
@@ -591,7 +591,7 @@ public class MemberBean {
                 System.out.println(registeredCourses);
 
             }else{
-                this.success = "THERE IS NO REGISTERED COURSE!";
+                this.error = "THERE IS NO REGISTERED COURSE!";
             }
             this.registeredCourses = registeredCourses;
             System.out.println("Show çalıştı");
@@ -599,7 +599,7 @@ public class MemberBean {
 
         } catch(SQLException e) {
             System.out.println("ERROR OCCURED WHILE SHOWING REGISTERED COURSE " + e.getMessage());
-            this.error =  "ERROR OCCURED WHILE SHOWING REGISTERED COURSE " + e.getMessage()+"\n";
+            this.error =  "ERROR OCCURED WHILE SHOWING REGISTERED COURSES " + e.getMessage()+"\n";
         }
         return new HashMap<ArrayList<String>,HashMap<ArrayList<String>,ArrayList<String>>>();
     }

@@ -81,7 +81,7 @@
             <div class="col-2">
                 <div class="grey-bg left-menu" id="courses">
                     <ul class="list-unstyled" style="margin-top: 0px">
-                        <li><a href="#" class="active" id="Added Courses" onclick="toggleCourseSplit('Added Courses')"><strong>Added Courses</strong></a><span style="color: var(--gray-dark); display: block;font-size: 15px;padding-right: 2%;" id="Added Coursesp">You can delete the courses you've added from this page.<br/></span></li>
+                        <li><a href="#" class="active" id="Added Courses" onclick="toggleCourseSplit('Added Courses')"><strong>Added Courses</strong></a><span style="color: var(--gray-dark); display: block;font-size: 15px;padding-right: 2%;" id="Added Coursesp">You can delete the courses you've added from this page.<br/></span></li>                        
                         <c:forEach items="#{listCourseBean.getCourseNames()}" var="course" value="#{course.getCourseName()}">
                             <li><a href="#" class="" id="#{course.getCourseName()}" onclick="toggleCourseSplit('#{course.getCourseName()}')">#{course.getCourseName()}</a>
                                 <span style="color: var(--gray-dark); display: none;font-size: 15px;padding-right: 2%;"
@@ -101,8 +101,10 @@
                                 <div class="col-4">
                                     <a id="block-func">Added Courses</a>
                                 </div>
-                                <div class="col-4">
-                                    <a class="col-1" style="color:var(--gray-dark);">Today's Date: <script type="text/javascript">showDate();</script></a>
+                                <div class="col-4" style="text-align: center;vertical-align: middle;">
+                                    <a class="col-1" style="color:var(--gray-dark);">Today's Date:
+                                        <script type="text/javascript">showDate();</script>
+                                    </a>
                                 </div>
                                 <div class="col-1"/>
                                 <div class="col-3" style="padding-left: 5%;">
@@ -113,16 +115,16 @@
                                 <h:form id="Added-Courses-Form">
                                     <ul id="Added-Courses-List" class="scrollbar list-unstyled" style="margin-top: 0px">
                                         <ui:repeat value='#{trainerBean.showOpenedCourses().keySet().toArray()}' var="course" varStatus="courseCounter">
-                                            <div class="form-row" style="padding-bottom: 2%;">
-                                                <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                    <a>#{course.toArray()[1]}</a>
+                                                <div class="form-row" style="padding-bottom: 2%;">
+                                                    <div class="col-4" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                        <a>#{course.toArray()[1]}</a>
+                                                    </div>
+                                                    <div class="col-8"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                        <h:selectOneRadio styleClass="classButtonGroup" onclick="uncheckOtherButtons(this)" value="#{trainerBean.selectedOpenedCourse}" id="pickatime0#{courseCounter.index}">
+                                                            <f:selectItems value="#{trainerBean.openedCourses.get(course)}" var="coursetime" itemLabel="#{coursetime}" itemValue="#{trainerBean.createOpenedCoursesButtonValue(course.toArray()[0],coursetime)}"/>
+                                                        </h:selectOneRadio>
+                                                    </div>
                                                 </div>
-                                                <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
-                                                    <h:selectOneRadio styleClass="classButtonGroup" onclick="uncheckOtherButtons(this)" value="#{trainerBean.selectedOpenedCourse}" id="pickatime0#{courseCounter.index}">
-                                                        <f:selectItems value="#{trainerBean.openedCourses.get(course)}" var="coursetime" itemLabel="#{coursetime}" itemValue="#{trainerBean.createOpenedCoursesButtonValue(course.toArray()[0],coursetime)}"/>
-                                                    </h:selectOneRadio>
-                                                </div>
-                                            </div>
                                         </ui:repeat>
                                     </ul>
                                     <div class="form-row">
@@ -164,13 +166,13 @@
                                     <ui:repeat id="courseTimeList1" value='#{listTrainerBean.loadTrainers("1")}' var="trainer">
                                         <li style="width: 99%;">
                                             <div class="form-row" style="padding-bottom: 2%;">
-                                                <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-4" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <a>#{trainer.trainerName}</a>
                                                 </div>
-                                                <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-8"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <ul class="list-unstyled">
                                                         <ui:repeat value="#{trainer.courseTime}" var="coursetimee">
-                                                            <li style="display: inline-block;padding-bottom:1%;width:24%;"><a class="courseTimeLabel">#{listTrainerBean.getCourseTimeElement(coursetimee,0)}</a></li>
+                                                            <li style="display: inline-block;padding-bottom:1%;width:16%;"><a class="courseTimeLabel">#{listTrainerBean.getCourseTimeElement(coursetimee,0)}</a></li>
                                                         </ui:repeat>
                                                     </ul>
                                                 </div>
@@ -202,13 +204,13 @@
                                     <ui:repeat id="courseTimeList2" value='#{listTrainerBean.loadTrainers("2")}' var="trainer">
                                         <li style="width: 99%;">
                                             <div class="form-row" style="padding-bottom: 2%;">
-                                                <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-4" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <a>#{trainer.trainerName}</a>
                                                 </div>
-                                                <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-8"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <ul class="list-unstyled">
                                                         <ui:repeat value="#{trainer.courseTime}" var="coursetimee">
-                                                            <li style="display: inline-block;padding-bottom:1%;width:24%;"><a class="courseTimeLabel">#{listTrainerBean.getCourseTimeElement(coursetimee,0)}</a></li>
+                                                            <li style="display: inline-block;padding-bottom:1%;width:16%;"><a class="courseTimeLabel">#{listTrainerBean.getCourseTimeElement(coursetimee,0)}</a></li>
                                                         </ui:repeat>
                                                     </ul>
                                                 </div>
@@ -239,13 +241,13 @@
                                     <ui:repeat id="courseTimeList3" value='#{listTrainerBean.loadTrainers("3")}' var="trainer">
                                         <li style="width: 99%;">
                                             <div class="form-row" style="padding-bottom: 2%;">
-                                                <div class="col-6" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-4" style="background-color: var(--white);border-radius: 0.7rem 0rem 0rem 0.7rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <a>#{trainer.trainerName}</a>
                                                 </div>
-                                                <div class="col-6"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
+                                                <div class="col-8"  style="background-color: var(--white);border-radius: 0rem 0.7rem 0.7rem 0rem;padding-left: 2%;padding-top: 1%;padding-bottom: 1%;">
                                                     <ul class="list-unstyled">
                                                         <ui:repeat value="#{trainer.courseTime}" var="coursetimee">
-                                                            <li style="display: inline-block;padding-bottom:1%;width:24%;"><a class="courseTimeLabel">#{listTrainerBean.getCourseTimeElement(coursetimee,0)}</a></li>
+                                                            <li style="display: inline-block;padding-bottom:1%;width:16%;"><a class="courseTimeLabel">#{listTrainerBean.getCourseTimeElement(coursetimee,0)}</a></li>
                                                         </ui:repeat>
                                                     </ul>
                                                 </div>

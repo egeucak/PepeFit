@@ -41,7 +41,7 @@ function changeContainer(clickedOn) {
     console.log(clickedOn);
 }
 
-function resetForms(){
+function resetForms(){ 
     var formList = ["addMember", "updateMember1", "updateMember2", "addTrainer", "updateTrainer1", "updateTrainer2", "delete"];
     for (var i = 0; i<formList.length; i++){
         document.getElementById(formList[i].concat("Form")).reset();
@@ -88,7 +88,7 @@ function changeContainerCourses(clickedOn) {
     }
     document.getElementById(clickedOn).style.display = "contents";
     if (clickedOn )
-        document.getElementById(clickedOn.concat("List")).classList.add("active");
+    document.getElementById(clickedOn.concat("List")).classList.add("active");
     console.log(clickedOn);
 }
 
@@ -113,7 +113,7 @@ function toggleCourse(clickedOn) {
     }
 }
 
-function resetCourseForms(){
+function resetCourseForms(){ 
     var formList = ["Registered-Courses", "Body-Fit", "Fit-Step", "GFX"];
     for (var i = 0; i<formList.length; i++){
         document.getElementById(formList[i].concat("-Form")).reset();
@@ -165,7 +165,7 @@ function syncRadios(courseListIdv,radioId){
             //courseButtonslis[i].id = baseName.concat(":").concat(i);
             //courseTableEllis[i].getElementsByTagName("label")[0].htmlFor = baseName.concat(":").concat(i);
             courseTableEllis[i].style.display= "inline-block";
-            courseTableEllis[i].style.width= "25%";
+            courseTableEllis[i].style.width= "25%";    
             courseTableEllis[i].parentElement.parentElement.parentElement.style.width="100%";
         }
     }
@@ -185,7 +185,7 @@ function uncheckOtherButtons(buton){
                 courseButtonslis[i].checked=false;
             }
         }
-    }
+    }    
     /*var formRow = buton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement; For passing the trainer name from html.
     courseListEl.parentElement.getElementsByTagName("input")[1].value = formRow.getElementsByTagName("a")[0].innerHTML;*/
 }
@@ -199,7 +199,7 @@ function syncRadiosDeneme(courseListIdv,firstName,xd){ // Don't use this functio
             courseButtonslis[i].id = firstName.concat(":").concat(i+xd);
             courseButtonslis[i].parentElement.getElementsByTagName("label")[0].htmlFor = firstName.concat(":").concat(i+xd);
             courseTableEllis[i].style.display= "inline-block";
-            courseTableEllis[i].style.width= "25%";
+            courseTableEllis[i].style.width= "25%";    
             courseTableEllis[i].parentElement.parentElement.parentElement.style.width="100%";
         }
     }
