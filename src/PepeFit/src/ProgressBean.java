@@ -43,6 +43,15 @@ public class ProgressBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		
+        try {
+            DatabaseBean database = new DatabaseBean();
+            result = database.execute_fetch_all("SELECT * FROM Progress",-1);
+            database.destruct_connection();
+        } catch (SQLException e) {
+            System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
+        }
+		
 		createLineModels();
 	}
 
@@ -51,6 +60,7 @@ public class ProgressBean implements Serializable {
 	}
 
 	public LineChartModel getLineArm() {
+		lineArm = initLinearModel("Arm", 0, 10);
 		lineModel = lineArm;
 		setCurrentGraph("arm");
 		//System.out.println("In getLineModel1");
@@ -59,6 +69,7 @@ public class ProgressBean implements Serializable {
 	}
 
 	public LineChartModel getLineLeg() {
+		lineLeg = initLinearModel("Leg", 0, 10);
 		lineModel = lineLeg;
 		setCurrentGraph("leg");
 		//System.out.println("In getLineModel2");
@@ -67,60 +78,57 @@ public class ProgressBean implements Serializable {
 	}
 	
 	public LineChartModel getLineHeight() {
+		lineHeight = initLinearModel("Height", 100, 250); /* 100 olabilecek min deger, 250 olabilecek max deger */
 		lineModel = lineHeight;
 		setCurrentGraph("height");
 		return lineModel;
 	}
 
 	public LineChartModel getLineWeight() {
+		lineWeight = initLinearModel("Weight", 40, 150);
 		lineModel = lineWeight;
 		setCurrentGraph("weight");
 		return lineModel;
 	}
 
 	public LineChartModel getLineShoulder() {
+		lineShoulder = initLinearModel("Shoulder", 80, 140);
 		lineModel = lineShoulder;
 		setCurrentGraph("shoulder");
 		return lineModel;
 	}
 
 	public LineChartModel getLineChest() {
+		lineChest = initLinearModel("Chest", 70, 120);
 		lineModel = lineChest;
 		setCurrentGraph("chest");
 		return lineModel;
 	}
 
 	public LineChartModel getLineAbdomen() {
+		lineAbdomen = initLinearModel("Abdomen", 40, 80);
 		lineModel = lineAbdomen;
 		setCurrentGraph("abdomen");
 		return lineModel;
 	}
 
 	public LineChartModel getLineWaist() {
+		lineWaist = initLinearModel("Waist", 30, 60);
 		lineModel = lineWaist;
 		setCurrentGraph("waist");
 		return lineModel;
 	}
 
 	public LineChartModel getLineHip() {
+		lineHip = initLinearModel("Hip", 40, 90);
 		lineModel = lineHip;
 		setCurrentGraph("hip");
 		return lineModel;
 	}
 
 	private void createLineModels() {
-		
-		lineHeight = initLinearModel("Height", 100, 250);
-		lineWeight = initLinearModel("Weight", 40, 150);
-		lineArm = initLinearModel("Arm", 0, 10);
-		lineShoulder = initLinearModel("Shoulder", 80, 140);
-		lineLeg = initLinearModel("Leg", 0, 10);
-		lineChest = initLinearModel("Chest", 70, 120);
-		lineAbdomen = initLinearModel("Abdomen", 40, 80);
-		lineWaist = initLinearModel("Waist", 30, 60);
-		lineHip = initLinearModel("Hip", 40, 90);
-		
-		lineModel = lineHeight; /* ilk olarak gordugu chart */
+			
+		lineModel = initLinearModel("Choose Chart", 1, 1); /* ilk olarak gordugu chart */
 	}
 
 	private LineChartModel initLinearModel(String measure, int min, int max) {
@@ -129,7 +137,12 @@ public class ProgressBean implements Serializable {
 		LineChartSeries series = new LineChartSeries();
 		
 		series.setLabel(measure);
-		traverseAndSet(measure, series);
+		if(!measure.equals("Choose Chart")) {
+			traverseAndSet(measure, series);
+		} else {
+			series.set(0, 0);
+		}
+		
 
 //		if(measure.equals("Height")) {
 //			//System.out.println(result);
@@ -211,13 +224,7 @@ public class ProgressBean implements Serializable {
 		
 		//System.out.println("measureX : " + measureX);
 		//System.out.println("measureY : " + measureY);
-        try {
-            DatabaseBean database = new DatabaseBean();
-            result = database.execute_fetch_all("SELECT * FROM Progress",-1);
-            database.destruct_connection();
-        } catch (SQLException e) {
-            System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
-        }
+
 		
 		if (currentUser.hasRole("member")) {
 			//System.out.println("role member");
@@ -231,6 +238,8 @@ public class ProgressBean implements Serializable {
 		}
 		else if(currentUser.hasRole("trainer")) {
 			System.out.println("role trainer");
+			
+			
 		}
 	}
 }
