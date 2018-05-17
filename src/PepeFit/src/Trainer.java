@@ -7,19 +7,22 @@ public class Trainer extends Person {
     private String trainerName;
     private String trainerGender;
 
+    private ArrayList<ArrayList<String>> courseTime;
 
-    private ArrayList<String> courseTime;
+    public ArrayList<ArrayList<String>> getCourseTime() {
+        return courseTime;
+    }
+
+    public void setCourseTime(ArrayList<ArrayList<String>> courseTime) {
+        this.courseTime = courseTime;
+    }
+
+
 
     private String courseDate;
     private String bio;
 
-    public ArrayList<String> getCourseTime() {
-        return courseTime;
-    }
 
-    public void setCourseTime(ArrayList<String> courseTime) {
-        this.courseTime = courseTime;
-    }
 
 
     public String getCourseDate() {
@@ -65,7 +68,7 @@ public class Trainer extends Person {
 
 
 
-    Trainer(String trainerId,String trainerName, ArrayList<String> courseTime, String courseDate){
+    Trainer(String trainerId,String trainerName, ArrayList<ArrayList<String>> courseTime, String courseDate){
         setTrainerId(trainerId);
         setTrainerName(trainerName);
         setCourseTime(courseTime);
