@@ -52,18 +52,26 @@ function updateSearch(idUpdate) {
     document.getElementById(idUpdate).style.display = "contents";
 }
 
-function showGraphAdd(clickedOn){
-    var lis = document.getElementById("members").getElementsByTagName("li");
-
-    for (var i=1; i<lis.length; i++){
-        console.log(lis[i].firstChild.classList);
-        lis[i].firstChild.classList.remove("active");
-        var memberdivid = lis[i].firstChild.id;
-        if (memberdivid==clickedOn){
-            lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
+//function showGraphAdd(clickedOn){
+//    var lis = document.getElementById("members").getElementsByTagName("li");
+//
+//    for (var i=1; i<lis.length; i++){
+//        console.log(lis[i].firstChild.classList);
+//        lis[i].firstChild.classList.remove("active");
+//        var memberdivid = lis[i].firstChild.id;
+//        if (memberdivid==clickedOn){
+//            lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
+//        }
+//    }
+//}
+$(document).ready(function () {
+    $("li").click(function(){
+        for (var i = 0; i< $(this).parent().children().length; i++){
+            $($($($(this).parent()).children()[i]).children()).removeClass("active");
         }
-    }
-}
+        $(this).children().addClass("active");
+    });
+});
 
 function toggleTrainer(clickedOn) {
     var lis = document.getElementById("trainers").getElementsByTagName("li");
