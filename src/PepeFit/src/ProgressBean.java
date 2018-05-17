@@ -1,7 +1,10 @@
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 
@@ -203,7 +206,7 @@ public class ProgressBean implements Serializable {
 //		return model;
 //	}
 
-	private String value;
+	private String value = "";
 
 	public String getValue() {
 		//System.out.println("Get içinde");
@@ -232,12 +235,28 @@ public class ProgressBean implements Serializable {
 			
 			for(LinkedHashMap<String, Object> memberInfo : result) {
 				if(memberInfo.get("TC").equals(memberID)) {
-					series.set((Number) memberInfo.get(measureX), (Number) memberInfo.get(measureY));
+					if((Number) memberInfo.get(measureX) != null && (Number) memberInfo.get(measureY) != null) {
+						series.set((Number) memberInfo.get(measureX), (Number) memberInfo.get(measureY));
+					}
 				}
 			}
 		}
 		else if(currentUser.hasRole("trainer")) {
-			System.out.println("role trainer");
+			//System.out.println("role trainer");
+			//System.out.println("MEMBERID : " + MemberTemp.getId());
+			
+			String memberID = MemberTemp.getId();
+			
+			for(LinkedHashMap<String, Object> memberInfo : result) {
+				if(memberInfo.get("TC").equals(memberID)) {
+					if((Number) memberInfo.get(measureX) != null && (Number) memberInfo.get(measureY) != null) {
+						series.set((Number) memberInfo.get(measureX), (Number) memberInfo.get(measureY));
+					}
+				}
+			}
+		
+
+			
 //	    	ArrayList<LinkedHashMap<String,Object>> members = null;
 //	    	
 //	        try {
@@ -256,6 +275,32 @@ public class ProgressBean implements Serializable {
 //	        
 //	        System.out.println(ListMemberBean.userNames);
 			
+		}
+		
+		
+	}
+	
+	public void addValue() throws SQLException {
+		if(!getValue().equals("") && !getCurrentGraph().equals("")) {
+			
+			System.out.println("VALUE : " + getValue());
+			System.out.println("CURRENT GRAPH : " + getCurrentGraph());
+			System.out.println("MEMBER ID : " + MemberTemp.getId());
+			
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+			
+			DatabaseBean database = new DatabaseBean();
+			//database.execute("Insert into Progresstemp(HEIGHTX) values(\"2018-01-01\")",1);
+			//database.execute("Insert into Progresstemp(HEIGHTX) values("+ dateFormat.format(date).toString() + ")",1);
+			
+			//database.execute("Insert into Progress(TC,HEIGHTX,HEIGHTY) values(" + MemberTemp.getId() + ",\"2018-01-01\"," + getValue() + ")",1);
+			//database.execute("Insert into Progress(TC,HEIGHTX,HEIGHTY) values(" + MemberTemp.getId() + ",7," + getValue() + ")",1);
+			database.execute("Insert into Progress(TC,ARMX,ARMy) values(" + MemberTemp.getId() + ",6," + getValue() + ")",1);
+			
+			database.commit_trans();
+
+			database.destruct_connection();
 		}
 	}
 }

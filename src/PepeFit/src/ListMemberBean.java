@@ -18,32 +18,60 @@ import javax.xml.stream.events.StartDocument;
 public class ListMemberBean {
 
     public static ArrayList<MemberTemp> userNames = new ArrayList<MemberTemp>();
-
+    static ArrayList<LinkedHashMap<String,Object>> members = null;
+    static int check = 0;
+    
     public static ArrayList<MemberTemp> getUserNames() {
+    	
+    	
+    	if(check == 0) {
+            try {
+                DatabaseBean database = new DatabaseBean();
+                members = database.execute_fetch_all("SELECT * FROM Member",-1);
+                database.destruct_connection();
+            } catch (SQLException e) {
+                System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
+            }
+            
+            for(LinkedHashMap<String, Object> member : members) {
+            	//System.out.println("NAME : " + member.get("NAME").toString() + " " + member.get("SURNAME").toString());
+            	//System.out.println("MAIL : " + member.get("EMAIL"));
+            	userNames.add(new MemberTemp(member.get("NAME").toString() + " " + member.get("SURNAME").toString(), member.get("TC").toString()));
+            }
+            
+            check++;
+    	}
+
+    	
+        //System.out.println(members);
         
-        userNames.add(new MemberTemp("Ege UÃ§ak", "12345"));
-        userNames.add(new MemberTemp("BahadÄ±r Adak", "baho"));
-        userNames.add(new MemberTemp("EyÃ¼pcan Bodur", "konyalÄ±"));
-        userNames.add(new MemberTemp("Berk Can Ã–zen", "brkczn"));
-        userNames.add(new MemberTemp("Serhat SaÄŸlÄ±k", "mavi"));
-        userNames.add(new MemberTemp("Sean Green", "seangreen"));
-        userNames.add(new MemberTemp("Keegan Alvarado", "keeganalvarado"));
-        userNames.add(new MemberTemp("Nguyen","oscarnguyen"));
-        userNames.add(new MemberTemp("Carrillo","reginaldcarrillo"));
-        userNames.add(new MemberTemp("Isabelle","Strickland"));
-        userNames.add(new MemberTemp("Alaina","Willis"));
-        userNames.add(new MemberTemp("Tiffani","Phillips"));
-        userNames.add(new MemberTemp("Eugene","Miranda"));
-        userNames.add(new MemberTemp("Brenna","Chandler"));
-        userNames.add(new MemberTemp("Ryan","Wolfe"));
-        userNames.add(new MemberTemp("Caitlyn","Clarke"));
-        userNames.add(new MemberTemp("Caitlin","Lloyd"));
-        userNames.add(new MemberTemp("Graham","Zimmerman"));
-        userNames.add(new MemberTemp("Nathanael","Mclaughlin"));
-        userNames.add(new MemberTemp("Dalton","Sanchez"));
-        userNames.add(new MemberTemp("Esmeralda","Morales"));
-        userNames.add(new MemberTemp("Blake","Lyons"));
-        userNames.add(new MemberTemp("Vincent","Garcia"));
+
+        
+       
+        
+//        userNames.add(new MemberTemp("Ege Uçak", "12345"));
+//        userNames.add(new MemberTemp("Bahadýr Adak", "baho"));
+//        userNames.add(new MemberTemp("Eyüpcan Bodur", "konyalý"));
+//        userNames.add(new MemberTemp("Berk Can Özen", "brkczn"));
+//        userNames.add(new MemberTemp("Serhat Saðlýk", "mavi"));
+//        userNames.add(new MemberTemp("Sean Green", "seangreen"));
+//        userNames.add(new MemberTemp("Keegan Alvarado", "keeganalvarado"));
+//        userNames.add(new MemberTemp("Nguyen","oscarnguyen"));
+//        userNames.add(new MemberTemp("Carrillo","reginaldcarrillo"));
+//        userNames.add(new MemberTemp("Isabelle","Strickland"));
+//        userNames.add(new MemberTemp("Alaina","Willis"));
+//        userNames.add(new MemberTemp("Tiffani","Phillips"));
+//        userNames.add(new MemberTemp("Eugene","Miranda"));
+//        userNames.add(new MemberTemp("Brenna","Chandler"));
+//        userNames.add(new MemberTemp("Ryan","Wolfe"));
+//        userNames.add(new MemberTemp("Caitlyn","Clarke"));
+//        userNames.add(new MemberTemp("Caitlin","Lloyd"));
+//        userNames.add(new MemberTemp("Graham","Zimmerman"));
+//        userNames.add(new MemberTemp("Nathanael","Mclaughlin"));
+//        userNames.add(new MemberTemp("Dalton","Sanchez"));
+//        userNames.add(new MemberTemp("Esmeralda","Morales"));
+//        userNames.add(new MemberTemp("Blake","Lyons"));
+//        userNames.add(new MemberTemp("Vincent","Garcia"));
 
         return userNames;
     }

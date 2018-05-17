@@ -137,7 +137,7 @@
                                     <div style="padding-left: 5%;margin-top: 3%">
                                         <h:outputLabel for="progress" value="Add new progress: " />
                                         <p:inputText id="progress" value="#{progressBean.value}" style="width: 10%"/>
-                                        <p:commandButton value="Add" class="btn" update="chart type" icon="ui-icon-check" />
+                                        <p:commandButton value="Add" class="btn" update="chart type" icon="ui-icon-check" actionListener="#{progressBean.addValue()}" />
                                     </div>
 
                                     <!--<h:panelGrid columns="4" cellpadding="5">-->

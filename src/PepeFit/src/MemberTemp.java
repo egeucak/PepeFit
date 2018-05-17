@@ -1,6 +1,6 @@
 public class MemberTemp {
     private String name;
-    private String id;
+    public static String id;
 
     MemberTemp(String name, String id) {
         setName(name);
@@ -15,11 +15,13 @@ public class MemberTemp {
         this.name = name;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public static String getId() {
+		return id;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public static void setId(String id) {
+		MemberTemp.id = id;
+	}
+
+    
 }
