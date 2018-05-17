@@ -89,11 +89,39 @@
     </a>
 </div>
 
+    <h:outputScript>
+        $(document).ready(function () {
+            $("a").click(function(){
+                // console.log($(this));
+
+                console.log($($($($(this).parent()).siblings())).slice(1));
+                for (var i = 0; i &lt; $($($($(this).parent()).siblings())).slice(1).length; i++){
+                    $($($($($($(this).parent()).siblings())).slice(1)[i].children).slice(1)).hide(200);
+                }
+                $($(this).siblings()).toggle(800);
+            });
+        });
+    </h:outputScript>
+
 <!--    LEFT MENU   -->
 <div class="container-fluid">
     <div class="row" style="padding-top: 8%;">
         <div class="col-2">
-
+            <div class="grey-bg left-menu scrollbar" id="members trainers">
+                <ul class="list-unstyled" style="margin-top: 0px">
+                    <li id="header"><h3 style="color: var(--green)">Trainers</h3></li>
+                    <c:forEach items="#{listTrainerBean.getTrainerNames()}" var="trainer">
+                        <!--<li><a href="#" class="" id="#{user.getId()}" onclick="showGraphAdd('#{user.getId()}')">#{user.getName()}</a></li>-->
+                        <li>
+                            <a href="#" class="" id="#{trainer.getId()}">#{trainer.getName()}</a>
+                            <div style="display: none" class="bio">
+                                <p style="font-size: 15px">#{trainer.getMail()}</p>
+                                <p style="font-size: 15px">#{trainer.getBio()}</p>
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
         </div>
 
         <div class="col-1"></div>

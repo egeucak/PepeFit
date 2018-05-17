@@ -2,11 +2,21 @@ public class TrainerTemp {
     private String name;
     private String id;
     private String bio;
+    private String mail;
 
     TrainerTemp(String name, String id, String bio) {
         setName(name);
         setId(id);
         setBio(bio);
+        setMail("mail@mail.com");
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getBio() {
