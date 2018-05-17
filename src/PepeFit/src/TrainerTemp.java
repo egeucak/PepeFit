@@ -8,7 +8,6 @@ public class TrainerTemp {
         setName(name);
         setId(id);
         setBio(bio);
-        setMail("mail@mail.com");
     }
 
     public String getMail() {

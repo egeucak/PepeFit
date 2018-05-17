@@ -21,7 +21,7 @@ import javax.xml.stream.events.StartDocument;
 
 public class ListTrainerBean {
 
-
+	static DatabaseBean database;
 
     private ArrayList<TrainerTemp> trainerNames = new ArrayList<TrainerTemp>();
 
@@ -148,29 +148,50 @@ public class ListTrainerBean {
 
 
     public ArrayList<TrainerTemp> getTrainerNames() {
-        trainerNames.add(new TrainerTemp("Ege Uçak", "egeu", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Bahadýr Adak", "baho", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Eyüpcan Bodur", "konyalý", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Berk Can Özen", "brkczn", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Serhat Saðlýk", "mavi", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Sean Green", "seangreen", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Keegan Alvarado", "keeganalvarado", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Nguyen","oscarnguyen", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Carrillo","reginaldcarrillo", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Isabelle","Strickland", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Alaina","Willis", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Tiffani","Phillips", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Eugene","Miranda", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Brenna","Chandler", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Ryan","Wolfe", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Caitlyn","Clarke", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Caitlin","Lloyd", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Graham","Zimmerman", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Nathanael","Mclaughlin", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Dalton","Sanchez", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Esmeralda","Morales", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Blake","Lyons", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Vincent","Garcia", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+    	
+    	ArrayList<LinkedHashMap<String, Object>> trainers = null;
+
+		try {
+			database = new DatabaseBean();
+			trainers = database.execute_fetch_all("SELECT * FROM Trainer", -1);
+			database.destruct_connection();
+		} catch (SQLException e) {
+			System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
+		}
+
+		for (LinkedHashMap<String, Object> trainer : trainers) {
+			System.out.println("NAME : " + trainer.get("T_NAME").toString() + " " +
+					trainer.get("T_SURNAME").toString());
+			System.out.println("MAIL : " + trainer.get("T_EMAIL"));
+			System.out.println("BIO : " + trainer.get("BIO"));
+			
+			trainerNames.add(new TrainerTemp(trainer.get("T_NAME").toString() + " " + trainer.get("T_SURNAME").toString(),
+					trainer.get("T_EMAIL").toString(), trainer.get("BIO").toString()));
+		}
+    	
+//        trainerNames.add(new TrainerTemp("Ege Uçak", "egeu", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Bahadýr Adak", "baho", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Eyüpcan Bodur", "konyalý", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Berk Can Özen", "brkczn", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Serhat Saðlýk", "mavi", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Sean Green", "seangreen", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Keegan Alvarado", "keeganalvarado", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Nguyen","oscarnguyen", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Carrillo","reginaldcarrillo", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Isabelle","Strickland", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Alaina","Willis", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Tiffani","Phillips", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Eugene","Miranda", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Brenna","Chandler", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Ryan","Wolfe", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Caitlyn","Clarke", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Caitlin","Lloyd", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Graham","Zimmerman", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Nathanael","Mclaughlin", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Dalton","Sanchez", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Esmeralda","Morales", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Blake","Lyons", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+//        trainerNames.add(new TrainerTemp("Vincent","Garcia", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
 
         return trainerNames;
     }
