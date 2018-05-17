@@ -357,7 +357,7 @@ public class TrainerBean {
                 this.courseCapacity = null;
                 this.courseTime = null;
                 database.destruct_connection();
-                this.success = "Course has been added succesfully!";
+                this.success = "Course has been added successfully!";
                 return "Successfully Added !";
 
             }else{
@@ -390,7 +390,7 @@ public class TrainerBean {
             this.courseCapacity = null;
             this.courseTime = null;
             database.destruct_connection();
-            this.success = "Course has been deleted succesfully!";
+            this.success = "Course has been deleted successfully!";
             database.destruct_connection();
             return "Successfully Deleted !";
 
@@ -447,7 +447,7 @@ public class TrainerBean {
 
 
             } else {
-                this.success = "THERE IS NO OPENED COURSE!";
+                this.error = "THERE IS NO OPENED COURSE!";
             }
 
             this.openedCourses = openedCourses;
@@ -490,7 +490,7 @@ public class TrainerBean {
             database.execute("DELETE FROM GeneralSchedule WHERE T_ID=? AND C_ID = ? AND C_TIME=? AND C_DATE=?", 1, trainerID, courseId, courseTime, courseDate);
             database.commit_trans();
             System.out.println("SUCCESSFULLY DELETED FROM GENERALSCHEDULE!\n");
-            this.success = "Course has been deleted succesfully from Trainer with ID: "+trainerID;
+            this.success = "Course has been deleted successfully from Trainer with ID: "+trainerID;
             database.destruct_connection();
             return "Successfully Deleted !";
 
