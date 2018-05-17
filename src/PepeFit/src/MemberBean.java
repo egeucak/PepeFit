@@ -284,7 +284,7 @@ public class MemberBean {
         }
 
         ret = "Successfully added Member with ID NUMBER: "+ this.idNumber +" !";
-        this.success = "The Member with ID Number: "+ this.idNumber +" has been added succesfully!";
+        this.success = "The Member with ID Number: "+ this.idNumber +" has been added successfully!";
         setNull();
         System.out.println(ret+"\n");
 
