@@ -91,13 +91,16 @@
 
 <!--    LEFT MENU   -->
 <div class="container-fluid">
+<h:form>
+
     <div class="row" style="padding-top: 8%;">
         <div class="col-2">
             <div class="grey-bg left-menu scrollbar" id="members">
                 <ul class="list-unstyled" style="margin-top: 0px">
                     <li id="header"><h3 style="color: var(--green)">Students</h3></li>
                     <c:forEach items="#{listMemberBean.getUserNames()}" var="user">
-                        <li><a href="#" class="" id="#{user.getId()}" onclick="showGraphAdd('#{user.getId()}')">#{user.getName()}</a></li>
+                    	<p:commandLink update="chart" value="#{user.getName()}" styleClass="" actionListener="#{progressBean.buttonAction(user.getId())}" />
+						<br/>
                     </c:forEach>
                 </ul>
             </div>
@@ -113,7 +116,6 @@
                                 <a class="col-1" style="color:var(--gray-dark);margin-left: 42%"><script type="text/javascript">showDate();</script></a>
                                 <h1 style="color: var(--green); margin-left: 40%">Progress</h1>
                                 <br/>
-                                <h:form>
                                     <div class="graph" style="visibility: visible">
                                         <p:outputPanel>
                                             <p:chart id="chart" type="line" model="#{progressBean.lineModel}" responsive="true">
@@ -146,7 +148,6 @@
                                     <!--</h:panelGrid>-->
                                     <h:outputText id="type" value="#{progressBean.currentGraph}" style="display: none"/>
 
-                                </h:form>
 
                             </div>
 
@@ -158,6 +159,9 @@
             <!-- xd -->
         </div>
     </div>
+
+</h:form>
+
 </div>
 
     <div class="footer">

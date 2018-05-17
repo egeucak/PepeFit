@@ -218,6 +218,9 @@ public class ProgressBean implements Serializable {
 		//System.out.println(getCurrentGraph() + value);
 		//System.out.println("Set içinde");
 	}
+    public void buttonAction(String person) {
+        System.out.println("clicked on person "+ person);
+    }
 	
 	public void traverseAndSet(String measure, LineChartSeries series) {
 		
@@ -296,7 +299,7 @@ public class ProgressBean implements Serializable {
 			
 			//database.execute("Insert into Progress(TC,HEIGHTX,HEIGHTY) values(" + MemberTemp.getId() + ",\"2018-01-01\"," + getValue() + ")",1);
 			//database.execute("Insert into Progress(TC,HEIGHTX,HEIGHTY) values(" + MemberTemp.getId() + ",7," + getValue() + ")",1);
-			database.execute("Insert into Progress(TC,ARMX,ARMy) values(" + MemberTemp.getId() + ",6," + getValue() + ")",1);
+			database.execute("Insert into Progress(TC,ARMX,ARMy) values(" + MemberTemp.getId() + ",7," + getValue() + ")",1);
 			
 			database.commit_trans();
 
