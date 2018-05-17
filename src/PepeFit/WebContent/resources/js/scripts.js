@@ -41,7 +41,7 @@ function changeContainer(clickedOn) {
     console.log(clickedOn);
 }
 
-function resetForms(){ 
+function resetForms(){
     var formList = ["addMember", "updateMember1", "updateMember2", "addTrainer", "updateTrainer1", "updateTrainer2", "delete"];
     for (var i = 0; i<formList.length; i++){
         document.getElementById(formList[i].concat("Form")).reset();
@@ -52,18 +52,26 @@ function updateSearch(idUpdate) {
     document.getElementById(idUpdate).style.display = "contents";
 }
 
-function showGraphAdd(clickedOn){
-    var lis = document.getElementById("members").getElementsByTagName("li");
-
-    for (var i=1; i<lis.length; i++){
-        console.log(lis[i].firstChild.classList);
-        lis[i].firstChild.classList.remove("active");
-        var memberdivid = lis[i].firstChild.id;
-        if (memberdivid==clickedOn){
-            lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
+//function showGraphAdd(clickedOn){
+//    var lis = document.getElementById("members").getElementsByTagName("li");
+//
+//    for (var i=1; i<lis.length; i++){
+//        console.log(lis[i].firstChild.classList);
+//        lis[i].firstChild.classList.remove("active");
+//        var memberdivid = lis[i].firstChild.id;
+//        if (memberdivid==clickedOn){
+//            lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
+//        }
+//    }
+//}
+$(document).ready(function () {
+    $("li").click(function(){
+        for (var i = 0; i< $(this).parent().children().length; i++){
+            $($($($(this).parent()).children()[i]).children()).removeClass("active");
         }
-    }
-}
+        $(this).children().addClass("active");
+    });
+});
 
 function toggleTrainer(clickedOn) {
     var lis = document.getElementById("trainers").getElementsByTagName("li");
@@ -88,7 +96,7 @@ function changeContainerCourses(clickedOn) {
     }
     document.getElementById(clickedOn).style.display = "contents";
     if (clickedOn )
-    document.getElementById(clickedOn.concat("List")).classList.add("active");
+        document.getElementById(clickedOn.concat("List")).classList.add("active");
     console.log(clickedOn);
 }
 
@@ -113,13 +121,22 @@ function toggleCourse(clickedOn) {
     }
 }
 
+function resetCourseForms(){
+    var formList = ["Registered-Courses", "Body-Fit", "Fit-Step", "GFX"];
+    for (var i = 0; i<formList.length; i++){
+        document.getElementById(formList[i].concat("-Form")).reset();
+    }
+}
+
 function toggleCourseSplit(clickedOn) {
     var lis = document.getElementById("courses").getElementsByTagName("li");
     for (var i=0; i<lis.length; i++){
         lis[i].firstChild.classList.remove("active");
         var coursedivid = lis[i].firstChild.id;
         var coursepid = coursedivid.concat("p");
-        document.getElementById(coursepid).style.display = "none";
+        if(document.getElementById(coursepid)){
+            document.getElementById(coursepid).style.display = "none";
+        }
 
         courseContainerId = coursedivid; //for different containers
         if(courseContainerId.includes(" ")){
@@ -132,33 +149,70 @@ function toggleCourseSplit(clickedOn) {
         document.getElementById(courseContainerId).style.display = "none";
         if (coursedivid==clickedOn){
             lis[i].firstChild.className = lis[i].firstChild.className.concat(" active");
-            document.getElementById(coursepid).style.display = "block";
-            if(document.getElementById(courseFormId)){
-                document.getElementById(courseFormId).reset();
+            if(document.getElementById(coursepid)){
+                document.getElementById(coursepid).style.display = "block";
             }
             document.getElementById("block-func").value = coursedivid;
             document.getElementById("block-func").textContent = document.getElementById("block-func").value;
-            console.log(document.getElementById("block-func").value);
-            document.getElementById("empty-container").style.display ="none";
-            document.getElementById("addCourse").style.display ="contents";
             document.getElementById(courseContainerId).style.display = "block";
-            syncRadios(courseListId,"pickatime");
+            //syncRadios(courseListId,"pickatime");
         }
+        document.getElementById(courseFormId).reset();
     }
+    //resetCourseForms();
 }
 
 function syncRadios(courseListIdv,radioId){
     var courseButtonslis = document.getElementById(courseListIdv).getElementsByTagName("input");
+    //var baseName = courseButtonslis[courseButtonslis.length-1].name;
+    var courseTableEllis= document.getElementById(courseListIdv).getElementsByTagName("td");
+    //var courseTablelis = document.getElementById(courseListIdv).getElementsByTagName("table");
+    for(var i=0; i<courseButtonslis.length; i++){
+        if(courseButtonslis[i].getAttribute('type')=='radio'){
+            //courseButtonslis[i].name = baseName;
+            //courseButtonslis[i].id = baseName.concat(":").concat(i);
+            //courseTableEllis[i].getElementsByTagName("label")[0].htmlFor = baseName.concat(":").concat(i);
+            courseTableEllis[i].style.display= "inline-block";
+            courseTableEllis[i].style.width= "25%";
+            courseTableEllis[i].parentElement.parentElement.parentElement.style.width="100%";
+        }
+    }
+    /*for (var ii=0;ii<courseTablelis.length;ii++){
+        courseTablelis[ii].id = baseName;
+    }*/
+}
+
+function uncheckOtherButtons(buton){
+    console.log(buton.id);
+    var courseListEl = buton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
+    var courseListIdv = courseListEl.id;
+    var courseButtonslis = document.getElementById(courseListIdv).getElementsByTagName("input");
+    for(var i=0; i<courseButtonslis.length; i++){
+        if(courseButtonslis[i].getAttribute('type')=='radio'){
+            if(courseButtonslis[i].id != buton.id){
+                courseButtonslis[i].checked=false;
+            }
+        }
+    }
+    /*var formRow = buton.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement; For passing the trainer name from html.
+    courseListEl.parentElement.getElementsByTagName("input")[1].value = formRow.getElementsByTagName("a")[0].innerHTML;*/
+}
+
+function syncRadiosDeneme(courseListIdv,firstName,xd){ // Don't use this function
+    var courseButtonslis = document.getElementById(courseListIdv).getElementsByTagName("input");
     var courseTableEllis= document.getElementById(courseListIdv).getElementsByTagName("td");
     for(var i=0; i<courseButtonslis.length; i++){
         if(courseButtonslis[i].getAttribute('type')=='radio'){
-            courseButtonslis[i].name = "radioId";
+            courseButtonslis[i].name = firstName;
+            courseButtonslis[i].id = firstName.concat(":").concat(i+xd);
+            courseButtonslis[i].parentElement.getElementsByTagName("label")[0].htmlFor = firstName.concat(":").concat(i+xd);
             courseTableEllis[i].style.display= "inline-block";
-            courseTableEllis[i].style.width= "25%";    
+            courseTableEllis[i].style.width= "25%";
             courseTableEllis[i].parentElement.parentElement.parentElement.style.width="100%";
         }
     }
 }
+
 
 function toggleCourseSplitDeneme(clickedOn) { // Don't use this function
     var lis = document.getElementById("courses").getElementsByTagName("li");
@@ -193,28 +247,12 @@ function toggleCourseSplitDeneme(clickedOn) { // Don't use this function
             document.getElementById("empty-container").style.display ="none";
             document.getElementById("addCourse").style.display ="contents";
             document.getElementById(courseContainerId).style.display = "block";
-            syncRadios(courseListId,firstName,numberXD);
+            syncRadiosDeneme(courseListId,firstName,numberXD);
             numberXD=numberXD+document.getElementById(courseListId).getElementsByTagName("input").length;
 
         }
     }
 }
-
-function syncRadiosDeneme(courseListIdv,firstName,xd){ // Don't use this function
-    var courseButtonslis = document.getElementById(courseListIdv).getElementsByTagName("input");
-    var courseTableEllis= document.getElementById(courseListIdv).getElementsByTagName("td");
-    for(var i=0; i<courseButtonslis.length; i++){
-        if(courseButtonslis[i].getAttribute('type')=='radio'){
-            courseButtonslis[i].name = firstName;
-            courseButtonslis[i].id = firstName.concat(":").concat(i+xd);
-            courseButtonslis[i].parentElement.getElementsByTagName("label")[0].for = firstName.concat(":").concat(i+xd);
-            courseTableEllis[i].style.display= "inline-block";
-            courseTableEllis[i].style.width= "25%";    
-            courseTableEllis[i].parentElement.parentElement.parentElement.style.width="100%";
-        }
-    }
-}
-
 
 (function($, undefined) {
 

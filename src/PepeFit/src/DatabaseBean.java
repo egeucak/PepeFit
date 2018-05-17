@@ -240,18 +240,20 @@ public class DatabaseBean {
 //        TreeMap<String, HashMap<String, String>> selectResult =
 //                new TreeMap<String, HashMap<String, String>>();
 		ResultSet resultSet = execute(sql_query, exec_type, vars);
+		if(resultSet != null){
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			int returned_coloumn_count = rsmd.getColumnCount();
 
-		ResultSetMetaData rsmd = resultSet.getMetaData();
-		int returned_coloumn_count = rsmd.getColumnCount();
+			while (resultSet.next()) {
+				LinkedHashMap<String,Object> row = new LinkedHashMap<String, Object>();
+				for (int i = 1;i<=returned_coloumn_count;i++){
+					String column_name = rsmd.getColumnName(i).toUpperCase();
 
-		while (resultSet.next()) {
-			LinkedHashMap<String,Object> row = new LinkedHashMap<String, Object>();
-			for (int i = 1;i<=returned_coloumn_count;i++){
-				String column_name = rsmd.getColumnName(i).toUpperCase();
-
-				row.put(column_name,resultSet.getObject(i));
+					row.put(column_name,resultSet.getObject(i));
+				}
+				query_results.add(row);
 			}
-			query_results.add(row);
+
 		}
 //		int p = 0;
 //

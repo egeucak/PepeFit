@@ -21,7 +21,12 @@ import javax.xml.stream.events.StartDocument;
 
 public class ListTrainerBean {
 
-
+    public String getCourseTimeElement(ArrayList<String> time_capacity, Integer indexVal){ // 0 for time, 1 for capacity, 2 for combined
+        if (indexVal==2){
+            return ("C: "+String.format("%02d", Integer.parseInt(time_capacity.get(1)))+" | " + time_capacity.get(0));
+        }
+        return time_capacity.get(indexVal);
+    }
 
     private ArrayList<TrainerTemp> trainerNames = new ArrayList<TrainerTemp>();
 
@@ -33,8 +38,8 @@ public class ListTrainerBean {
     }
 
     public void printSelam(){
-        System.out.println("Selam");  
-  }
+        System.out.println("Selam");
+    }
 
     public ArrayList<ArrayList<Trainer>> coursesTimes = new ArrayList<ArrayList<Trainer>>();
 
@@ -56,6 +61,16 @@ public class ListTrainerBean {
         this.trainer_deneme = trainer_deneme;
     }
 
+    public static HashMap<String, ArrayList<Trainer>> getCourse_trainer() {
+        return course_trainer;
+    }
+
+    public static void setCourse_trainer(HashMap<String, ArrayList<Trainer>> course_trainer) {
+        ListTrainerBean.course_trainer = course_trainer;
+    }
+
+    static  public HashMap<String,ArrayList<Trainer>> course_trainer = new HashMap<String, ArrayList<Trainer>>();
+
 
 
 
@@ -67,7 +82,7 @@ public class ListTrainerBean {
 
     public ArrayList<Trainer> loading(String courseId) throws SQLException {
 
-       if(this.trainerX == -1){
+        if(this.trainerX == -1){
             System.out.println("FUCK1 + " + courseId+ "\n");
             this.trainerX = Integer.parseInt(courseId) - 1;
             this.trainer_deneme = (ArrayList<Trainer>) loadTrainers(courseId).clone();
@@ -107,18 +122,25 @@ public class ListTrainerBean {
             for(LinkedHashMap<String,Object> row_map:result){
                 String trainerId = row_map.get("T_ID").toString();
                 ArrayList<LinkedHashMap<String,Object>> result_times = null;
-                result_times = database.execute_fetch_all("SELECT T_NAME,C_TIME FROM Trainer NATURAL JOIN GeneralSchedule WHERE C_ID=? AND T_ID=? AND C_DATE=? ORDER BY C_TIME ASC",-1,courseId,trainerId,courseDate);
+                result_times = database.execute_fetch_all("SELECT T_NAME,C_TIME, CAPACITY FROM Trainer NATURAL JOIN GeneralSchedule WHERE C_ID=? AND T_ID=? AND C_DATE=? AND CAPACITY > 0 ORDER BY C_TIME ASC",-1,courseId,trainerId,courseDate);
                 // Trainer's course times for given c_id. It will store in Trainer's object.
                 // Store in an array for storing Trainer's object.
-                ArrayList<String> times = new ArrayList<String>();
-                for (LinkedHashMap<String, Object> result_time : result_times) {
-                    times.add(result_time.get("C_TIME").toString());
+
+                if(result_times.size() != 0){
+                    ArrayList<ArrayList<String>> times = new ArrayList<ArrayList<String>>();
+                    for (LinkedHashMap<String, Object> result_time : result_times) {
+                        ArrayList<String> time_and_capacity = new ArrayList<String>();
+                        time_and_capacity.add(result_time.get("C_TIME").toString());
+                        time_and_capacity.add(result_time.get("CAPACITY").toString());
+                        times.add(time_and_capacity);
+                    }
+                    ArrayList<Object> names_times = new ArrayList<Object>();
+                    names_times.add(trainerId); // 0
+                    names_times.add(result_times.get(0).get("T_NAME"));// 1
+                    names_times.add(times); // 2
+                    trainer_times.add(names_times);
+
                 }
-                ArrayList<Object> names_times = new ArrayList<Object>();
-                names_times.add(trainerId); // 0
-                names_times.add(result_times.get(0).get("T_NAME"));// 1
-                names_times.add(times); // 2
-                trainer_times.add(names_times);
 
             }
 
@@ -132,47 +154,50 @@ public class ListTrainerBean {
             int len = trainer_times.size();
             int x = 0;
             for(ArrayList<Object> times:trainer_times){
-                Trainer trainer = new Trainer(times.get(0).toString(),times.get(1).toString(),(ArrayList<String>) times.get(2),courseDate);
+                Trainer trainer = new Trainer(times.get(0).toString(),times.get(1).toString(),(ArrayList<ArrayList<String>>) times.get(2),courseDate);
                 trainers.add(trainer);
-                System.out.println((ArrayList<String>) times.get(2));
+                System.out.println((ArrayList<ArrayList<String>>) times.get(2));
             }
+
+            course_trainer.put(courseId,trainers);
         }
+
+        database.destruct_connection();
 
 
         return trainers;
     }
 
-
-
-
-
-
+    
     public ArrayList<TrainerTemp> getTrainerNames() {
-        trainerNames.add(new TrainerTemp("Ege Uçak", "egeu", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Bahadır Adak", "baho", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Eyüpcan Bodur", "konyalı", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Berk Can Özen", "brkczn", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Serhat Sağlık", "mavi", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Sean Green", "seangreen", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Keegan Alvarado", "keeganalvarado", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Nguyen","oscarnguyen", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Carrillo","reginaldcarrillo", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Isabelle","Strickland", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Alaina","Willis", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Tiffani","Phillips", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Eugene","Miranda", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Brenna","Chandler", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Ryan","Wolfe", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Caitlyn","Clarke", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Caitlin","Lloyd", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Graham","Zimmerman", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Nathanael","Mclaughlin", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Dalton","Sanchez", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Esmeralda","Morales", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Blake","Lyons", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
-        trainerNames.add(new TrainerTemp("Vincent","Garcia", "Lorem ipsum dolor sit amet, cetero commodo cum et, nam elit gubergren ex, cetero euripidis definitiones has"));
+        
+        ArrayList<LinkedHashMap<String, Object>> trainers = null;
 
+        try {
+            DatabaseBean database = new DatabaseBean();
+            trainers = database.execute_fetch_all("SELECT * FROM Trainer", -1);
+            database.destruct_connection();
+        } catch (SQLException e) {
+            System.out.println("ERROR OCCURED WHILE PULLING COURSES " + e.getMessage());
+        }
+
+        for (LinkedHashMap<String, Object> trainer : trainers) {
+            System.out.println("NAME : " + trainer.get("T_NAME").toString() + " " +
+                    trainer.get("T_SURNAME").toString());
+            System.out.println("MAIL : " + trainer.get("T_EMAIL"));
+            System.out.println("BIO : " + trainer.get("BIO"));
+            
+            trainerNames.add(new TrainerTemp(trainer.get("T_NAME").toString() + " " + trainer.get("T_SURNAME").toString(),
+                    trainer.get("T_EMAIL").toString(), trainer.get("BIO").toString()));
+        }
+
+
+    
         return trainerNames;
     }
+
+
+
+
 }
 
